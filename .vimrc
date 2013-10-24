@@ -4,6 +4,7 @@
 " set tagbar_autofocus = 1
 " set tagbar_compact = 1
 " set tagbar_singleclick = 1
+set completeopt=longest,menuone
 nmap <F3> :TagbarOpen fjc<CR>
 imap <F3> <Esc>:TagbarOpen fjc<CR>
 vmap <F3> <Esc>:TagbarOpen fjc<CR>
@@ -13,6 +14,17 @@ vmap <F4> <Esc>:TagbarToggle <CR>
 nmap <F5> :NERDTreeToggle <CR>
 imap <F5> <Esc>:NERDTreeToggle <CR>
 vmap <F5> <Esc>:NERDTreeToggle <CR>
+
+nmap <F7> :call OpenTerm() <CR>
+imap <F7> <Esc>:call OpenTerm()<CR>
+vmap <F7> <Esc>:call OpenTerm() <CR>
+
+func! OpenTerm()
+  exec "sp"
+  exec "resize +15"
+  exec "wincmd j"
+  exec "ConqueTerm bash"
+endfunc
 "------------------
 " for google codestyle
 "
