@@ -5,25 +5,125 @@
 " set tagbar_compact = 1
 " set tagbar_singleclick = 1
 set completeopt=longest,menuone
-nmap <F3> :TagbarOpen fjc<CR>
-imap <F3> <Esc>:TagbarOpen fjc<CR>
-vmap <F3> <Esc>:TagbarOpen fjc<CR>
-nmap <F4> :TagbarToggle <CR>
-imap <F4> <Esc>:TagbarToggle <CR>
-vmap <F4> <Esc>:TagbarToggle <CR>
+nmap <F1> :call SeeCurrentWd()<CR>
+imap <F1> <Esc>:call SeeCurrentWd()<CR>
+vmap <F1> <Esc>:call SeeCurrentWd()<CR>
+nmap <F2> :call MyTagbarSwitch()<CR>
+imap <F2> <Esc>:call MyTagbarSwitch()<CR>
+vmap <F2> <Esc>:call MyTagbarSwitch()<CR>
+nmap <F3> :call CloseOpenTermVert() <CR>
+imap <F3> <Esc>:call CloseOpenTermVert()<CR>
+vmap <F3> <Esc>:call CloseOpenTermVert() <CR>
+nmap <F4> :call SwitchTerm()<CR>
+imap <F4> <Esc>:call SwitchTerm()<CR>
+vmap <F4> <Esc>:call SwitchTerm()<CR>
 nmap <F5> :NERDTreeToggle <CR>
 imap <F5> <Esc>:NERDTreeToggle <CR>
 vmap <F5> <Esc>:NERDTreeToggle <CR>
 
-nmap <F7> :call OpenTerm() <CR>
-imap <F7> <Esc>:call OpenTerm()<CR>
-vmap <F7> <Esc>:call OpenTerm() <CR>
+nmap <F7> :call RunReplace() <CR>
+imap <F7> <Esc>:call RunReplace() <CR>
+vmap <F7> <Esc>:call RunReplace() <CR>
+nmap <F12> :call PythonPylintCheck() <CR>
+imap <F12> <Esc>:call PythonPylintCheck() <CR>
+vmap <F12> <Esc>:call PythonPylintCheck() <CR>
+autocmd FileType python compiler pylint
+func RunReplace()
+  let selected = s:get_visual_selection()
+  "exec "promptrepl \"" + selected + "\""
+  exec "promptrepl " . selected 
+endfunc
 
-func! OpenTerm()
-  exec "sp"
-  exec "resize +15"
-  exec "wincmd j"
-  exec "ConqueTerm bash"
+let g:pylint_onwrite = 0
+let g:pylint_show_rate = 0
+let g:pylint_cwindow = 0
+function! PythonPylintCheck()
+  if !exists('g:pylint_cwindow_open')
+    let g:pylint_cwindow_open = 0
+  endif
+  set makeprg=(pylint\ -r\ y\ --reports=n\ --output-format=parseable\ %)
+  set errorformat=%f:%l:%m
+  if g:pylint_cwindow_open == 1
+    exec "ccl"
+    let g:pylint_cwindow_open = 0
+  else
+    exec "make"
+    exec "cwindow"
+    let g:pylint_cwindow_open = 1
+  endif
+endfunction
+
+
+function! SeeCurrentWd()
+    exec "e! ."
+endfunction
+
+function! s:get_visual_selection()
+  " Why is this not a built-in Vim script function?!
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  return join(lines, "\n")
+endfunction
+
+func MyTagbarSwitch()
+  if @% == '__Tagbar__'
+    echo 'switching ON tagbar'
+    exec ":q"
+  else
+    echo 'switching OFF tagbar'
+    exec "TagbarOpen fjc"
+  endif
+endfunc
+
+func! SwitchTerm()
+  if matchstr(@%, 'bash - ') == 'bash - '
+    exec "wincmd h"
+    echo 'you in the bash, switch to code'
+  else
+    exec "wincmd l"
+    exec "startinsert"
+    echo 'you not in the bash, switch to bash'
+  endif
+endfunc
+
+func! SwitchToErrorWindow()
+  if matchstr(@%, ' ') == 'bash - '
+    exec "wincmd h"
+    echo 'you in the bash, switch to code'
+  else
+    exec "wincmd l"
+    exec "startinsert"
+    echo 'you not in the bash, switch to bash'
+  endif
+endfunc
+
+func! CloseOpenTermVert()
+  if !exists('g:is_term_open')
+    let g:is_term_open = 0
+  endif
+  if g:is_term_open == 0
+    exec "vsplit"
+    exec "wincmd l"
+    exec "ConqueTerm bash"
+    exec "startinsert"
+    let g:is_term_open = 1
+  else
+    if matchstr(@%, 'bash - ') == 'bash - '
+      exec ":q"
+      echo 'you in the bash, close it'
+    else
+      exec "wincmd l"
+      exec ":q"
+      echo 'you not in the bash, switch to bash, and close it!'
+    endif
+    let g:is_term_open = 0
+  endif
+endfunc
+func! InsertPythonComment()
+    "TODO
 endfunc
 "------------------
 " for google codestyle
@@ -75,14 +175,6 @@ vmap <C-s> :w<CR>
 
 vnoremap # :s#^#\##<cr>
 vnoremap -# :s#^\###<cr>
-
-" PEP8
-func! PythonAutoPEP8()
-  exec "wa"
-  exec "!autopep8 -i %"
-endfunc
-autocmd FileType python set tabstop=4 | set shiftwidth=4 |set expandtab
-map <F10> :call PythonAutoPEP8()<CR>
 
 set history=1000                    " Store a ton of history (default is 20)
 "set spell                           " Spell checking on
@@ -295,14 +387,3 @@ endfunc
 set nobackup       "no backup files
 set nowritebackup  "only in case you don't want a backup file while editing
 set noswapfile     "no swap files
-
-highlight CursorLine  cterm=NONE ctermbg=darkred ctermfg=NONE guibg=grey7 guifg=NONE
-
-func! EnableHcul()
-    hi CursorLine  cterm=NONE ctermbg=darkred ctermfg=NONE guibg=grey7 guifg=NONE
-    set cul
-endfunc
-map <F11> :call EnableHcul()<CR>
-autocmd BufWinEnter * call EnableHcul()
-autocmd InsertEnter * call EnableHcul()
-autocmd InsertLeave * call EnableHcul()
