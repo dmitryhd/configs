@@ -65,6 +65,10 @@ vmap <F4> <Esc>:call ExitRunPythonModule() <CR>
 nmap <F7> :call RunReplace() <CR>
 imap <F7> <Esc>:call RunReplace() <CR>
 vmap <F7> <Esc>:call RunReplace() <CR>
+
+nmap <C-k> :call RunShell() <CR>
+imap <C-k> <Esc>:call RunShell() <CR>
+vmap <C-k> <Esc>:call RunShell() <CR>
 func! RunReplace()
   let selected = s:get_visual_selection()
   "exec "promptrepl \"" + selected + "\""
@@ -126,6 +130,17 @@ func! RunPythonModule()
   exec "ConqueTerm python.exe -i " . expand("%")
 
   let g:is_term_open = 1
+endfunc
+
+func! RunShell()
+  exec "40sp"
+  exec "wincmd j"
+  let cwd = getcwd()
+  if has("win32") || has("win16")
+    exec 'ConqueTerm powershell.exe -NoExit -Command {cd ' . cwd . '}'
+  else
+    exec "(cd " . cwd . "; bash)"
+  endif
 endfunc
 
 func! ExitRunPythonModule()
