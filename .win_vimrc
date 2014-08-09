@@ -400,10 +400,20 @@ func! CompileGcc()
   exec "!g++ -Wall -g % -o %<"
 endfunc
 
-set nobackup       "no backup files
-set nowritebackup  "only in case you don't want a backup file while editing
-set noswapfile     "no swap files
+"set nobackup       "no backup files
+"set nowritebackup  "only in case you don't want a backup file while editing
+"set noswapfile     "no swap files
 behave xterm
+
+if has("win32") || has("win16")
+    set directory=C:\tmp\vimbackup,.
+    set backupdir=C:\tmp\vimbackup,.
+    set undodir=C:\tmp\vimbackup,.
+else
+    set directory=/tmp,.
+    set backupdir=/tmp,.
+    set undodir=/tmp,.
+endif
 
 
 "------------- vim position restore
