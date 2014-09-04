@@ -5,6 +5,8 @@
 " set tagbar_compact = 1
 " set tagbar_singleclick = 1
 
+set encoding=cp1251
+behave xterm
 source ~/.vimrc_functions
 
 "------------------
@@ -167,24 +169,60 @@ nmap <C-f> :promptr<CR>
 imap <C-f> :promptr<CR>
 vmap <C-f> :promptr<CR>
 
-map <C-A-t> :call OpenTermHoriz() <CR>
-map <C-A-v> :call OpenTermVert() <CR>
-map <C-A-r> :call ExecPythonScript() <CR>
-map <C-A-f> :call DebugPythonScriptVert() <CR>
-map <C-A-e> :call ExecPythonScriptVert() <CR>
-map <C-A-d> :call DebugPythonScript() <CR>
-map <C-A-q> :call CloseTab() <CR>
-imap <C-A-q> <Esc>:call CloseTab() <CR>
-map <C-A-h> :set cursorline!<CR>
+map <C-F1> :call OpenTermHoriz() <CR>
+map <C-F2> :call OpenTermVert() <CR>
+map <C-F3> :call ExecPythonScript() <CR>
+map <C-F4> :call DebugPythonScriptVert() <CR>
+map <C-F5> :call ExecPythonScriptVert() <CR>
+map <C-F6> :call DebugPythonScript() <CR>
+map <C-F7> :call CloseTab() <CR>
+imap <C-F7> <Esc>:call CloseTab() <CR>
+map <C-F8> :set cursorline!<CR>
 
 try
-  "colorscheme sashaDark
-  colorscheme desert
+  colorscheme sashaDark
+  "colorscheme desert
   "colorscheme sublime
   "colorscheme molokai-2
   "colorscheme koehler
 catch
-  echo "An error occurred.  Execution should be stopped . . ."
   colorscheme desert
 endtry
+
 set cursorline
+"------------------GUI-------
+if has('gui')
+  if has("win32") || has("win16")
+    try
+      "set guifont=Consolas:h10:cRUSSIAN
+      set guifont=Terminus:h12:cRUSSIAN
+    catch
+      set guifont=Consolas:h10:cRUSSIAN
+    endtry
+    set keymodel-=stopsel
+    set selection=inclusive
+    let osys="windows"
+    source $VIMRUNTIME/mswin.vim
+  else
+    try
+      set guifont=Terminus\ 10
+    catch
+      set guifont=DejaVu Sans Mono\ 10
+    endtry
+    set lines=52
+    set columns=179
+    winpos 0 20
+  endif
+  "----------------------
+  set guioptions-=T
+  set laststatus=2
+  "set showmatch
+  "======================
+  "encoding change menu
+  set wildmenu
+  set wcm=<Tab>
+  menu Encoding.CP1251   :e ++enc=cp1251<CR>
+  menu Encoding.CP866    :e ++enc=cp866<CR>
+  menu Encoding.KOI8-U   :e ++enc=koi8-u<CR>
+  menu Encoding.UTF-8    :e ++enc=utf-8<CR>
+endif
