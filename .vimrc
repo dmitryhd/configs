@@ -19,6 +19,9 @@ set tabstop=2
 set softtabstop=2
 set completeopt=longest,menuone
 
+" python pep 8!
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 foldmethod=indent
+
 "set textwidth=80
 "disable wrap of string
 set wrapmargin=0
@@ -179,6 +182,18 @@ map <C-F7> :call CloseTab() <CR>
 imap <C-F7> <Esc>:call CloseTab() <CR>
 map <C-F8> :set cursorline!<CR>
 
+" folding
+" Fold all
+map <S-F1> zM<CR>
+" UnFold all
+map <S-F2> zR<CR>
+" UnFold all
+map <S-F3> zA<CR>
+
+
+"-----------------------------------------------
+" VISUAL
+"-----------------------------------------------
 try
   colorscheme sashaDark
   "colorscheme desert

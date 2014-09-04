@@ -170,33 +170,14 @@ func! CloseTab()
 endfunc
 
 function! BufNewFile_PY()
-  0put = '#!/usr/bin/python'
-  1put = '#-*- coding: utf-8 -*-'
-  $put =
-  normal G
 endfunction
 
 function! BufNewFile_C()
-0put = '#include <stdio.h>'
-1put = '#include <stdlib.h>'
-3put = 'int main ( int argc, char *argv[])'
-$put =
-normal G
 endfunction
 
 function! BufNewFile_CPP()
-0put = '#include <iostream>'
-1put = ''
-2put = 'using namespace std;'
-3put = ''
-4put = 'int main ( int argc, char *argv[])'
-5put = '{'
-6put = '  return 0;'
-7put = '}'
-$put =
-normal G
-
 endfunction
+
 func! RunPython()
   exec "wa"
   exec "!python3 %"
