@@ -1,20 +1,25 @@
-"Vimrc by Dmitry Khodakov - 04.09.14
+"vImrc by Dmitry Khodakov - 04.09.14
 
 " for Nerdtree, Tagbar
 " set tagbar_autofocus = 1
 " set tagbar_compact = 1
 " set tagbar_singleclick = 1
 
-set encoding=cp1251
-behave xterm
+
+if has("win32") || has("win16")
+  set encoding=cp1251
+  behave xterm
+else
+  set encoding=utf-8
+endif
 source ~/.vimrc_functions
 
 "------------------
 " CODE STYLE
 "------------------
-" Р Р°Р·РјРµСЂ РѕС‚СЃС‚СѓРїРѕРІ
+" РАЗМЕР отступов
 set shiftwidth=2
-" Р Р°Р·РјРµСЂС‹ С‚Р°Р±СѓР»СЏС†РёР№
+" Размеры табуляций
 set tabstop=2
 set softtabstop=2
 set completeopt=longest,menuone
@@ -25,7 +30,7 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 foldmethod=ind
 "set textwidth=80
 "disable wrap of string
 set wrapmargin=0
-
+set foldlevelstart=99
 "highlight word under cursor
 :autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 
@@ -76,15 +81,15 @@ endif
 
 set number
 set lz 
-set nocompatible      
-" РІРєР»СЋС‡РёРј Р°РІС‚РѕРѕС‚СЃС‚СѓРїС‹ РґР»СЏ РЅРѕРІС‹С… СЃС‚СЂРѕРє
+"set nocompatible      
+" включим автоотступы для новых строк
 set ai 
-" РІРєР»СЋС‡РёРј РѕС‚СЃС‚СѓРїС‹ РІ СЃС‚РёР»Рµ РЎРё
+" включим отступы в стиле Си
 set cin 
 set nowrap
 set smarttab
 set smartindent
-" РІРєР»СЋС‡РёРј Р°РІС‚РѕР·Р°РјРµРЅСѓ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+" включим автозамену по умолчанию
 set et 
 " Show full tags when doing search completion
 set showfulltag
@@ -96,7 +101,7 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РїРµСЂРµРєР»СЋС‡РµРЅРёРµ СЂР°Р±РѕС‡РµР№ РїР°РїРєРё
+" Автоматическое переключение рабочей папки
 set autochdir 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -128,7 +133,7 @@ au BufRead,BufNewFile *.py,*.pyw,*.c  autocmd CursorMoved * silent! exe printf('
 autocmd BufNewFile *.py call BufNewFile_PY()
 autocmd BufNewFile *.c call BufNewFile_C()
 
-" РџСЂРё СЃРѕР·РґР°РЅРёРё РЅРѕРІРѕРіРѕ С„Р°Р№Р»Р° *.cpp Р±СѓРґСѓС‚ СЃСЂР°Р·Сѓ РґРѕР±Р°РІР»РµРЅС‹ РґРІР° Р·Р°РіРѕР»РѕРІРєР° СЃ
+" При создании нового файла *.cpp будут сразу добавлены два заголовка с
 
 autocmd BufNewFile *.cpp call BufNewFile_CPP()
 
@@ -166,7 +171,7 @@ map <C-tab> :tabnext<CR>
 imap <C-S-tab> <Esc>:tabprevious<CR>i
 imap <C-tab> <Esc>:tabnext<CR>i
 
-:noremap <F6> :set hlsearch! hlsearch?<CR>
+noremap <F6> :set hlsearch! hlsearch?<CR>
 inoremap <C-Space> <C
 nmap <C-f> :promptr<CR>
 imap <C-f> :promptr<CR>
@@ -195,8 +200,8 @@ map <S-F3> zA<CR>
 " VISUAL
 "-----------------------------------------------
 try
-  colorscheme sashaDark
-  "colorscheme desert
+  "colorscheme sashaDark
+  colorscheme desert
   "colorscheme sublime
   "colorscheme molokai-2
   "colorscheme koehler
@@ -240,4 +245,7 @@ if has('gui')
   menu Encoding.CP866    :e ++enc=cp866<CR>
   menu Encoding.KOI8-U   :e ++enc=koi8-u<CR>
   menu Encoding.UTF-8    :e ++enc=utf-8<CR>
+else
+  set term=ansi
 endif
+set term=ansi
