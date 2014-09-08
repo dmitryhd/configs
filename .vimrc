@@ -1,4 +1,4 @@
-"vImrc by Dmitry Khodakov - 04.09.14
+"VImrc by Dmitry Khodakov - 04.09.14
 
 " for Nerdtree, Tagbar
 " set tagbar_autofocus = 1
@@ -17,9 +17,9 @@ source ~/.vimrc_functions
 "------------------
 " CODE STYLE
 "------------------
-" РАЗМЕР отступов
+" Р РђР—РњР•Р  РѕС‚СЃС‚СѓРїРѕРІ
 set shiftwidth=2
-" Размеры табуляций
+" Р Р°Р·РјРµСЂС‹ С‚Р°Р±СѓР»СЏС†РёР№
 set tabstop=2
 set softtabstop=2
 set completeopt=longest,menuone
@@ -82,14 +82,14 @@ endif
 set number
 set lz 
 "set nocompatible      
-" включим автоотступы для новых строк
+" РІРєР»СЋС‡РёРј Р°РІС‚РѕРѕС‚СЃС‚СѓРїС‹ РґР»СЏ РЅРѕРІС‹С… СЃС‚СЂРѕРє
 set ai 
-" включим отступы в стиле Си
+" РІРєР»СЋС‡РёРј РѕС‚СЃС‚СѓРїС‹ РІ СЃС‚РёР»Рµ РЎРё
 set cin 
 set nowrap
 set smarttab
 set smartindent
-" включим автозамену по умолчанию
+" РІРєР»СЋС‡РёРј Р°РІС‚РѕР·Р°РјРµРЅСѓ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 set et 
 " Show full tags when doing search completion
 set showfulltag
@@ -101,7 +101,7 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Автоматическое переключение рабочей папки
+" РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РїРµСЂРµРєР»СЋС‡РµРЅРёРµ СЂР°Р±РѕС‡РµР№ РїР°РїРєРё
 set autochdir 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -111,9 +111,6 @@ filetype indent on
 filetype on
 filetype plugin on
 
-set nobackup       "no backup files
-set nowritebackup  "only in case you don't want a backup file while editing
-set noswapfile     "no swap files
 
 " highlight extra whitespaces!
 " highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
@@ -133,7 +130,7 @@ au BufRead,BufNewFile *.py,*.pyw,*.c  autocmd CursorMoved * silent! exe printf('
 autocmd BufNewFile *.py call BufNewFile_PY()
 autocmd BufNewFile *.c call BufNewFile_C()
 
-" При создании нового файла *.cpp будут сразу добавлены два заголовка с
+" РџСЂРё СЃРѕР·РґР°РЅРёРё РЅРѕРІРѕРіРѕ С„Р°Р№Р»Р° *.cpp Р±СѓРґСѓС‚ СЃСЂР°Р·Сѓ РґРѕР±Р°РІР»РµРЅС‹ РґРІР° Р·Р°РіРѕР»РѕРІРєР° СЃ
 
 autocmd BufNewFile *.cpp call BufNewFile_CPP()
 
@@ -249,3 +246,18 @@ else
   set term=ansi
 endif
 set term=ansi
+
+
+if has("win32") || has("win16")
+  set backup
+  set backupdir=C:\WINDOWS\Temp
+  set backupskip=C:\WINDOWS\Temp\*
+  set directory=C:\WINDOWS\Temp
+  set writebackup
+  set noundofile
+else
+  set nobackup       "no backup files
+  set nowritebackup  "only in case you don't want a backup file while editing
+  set noswapfile
+  set noundofile
+endif
