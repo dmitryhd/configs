@@ -244,10 +244,14 @@ nmap <C-f> :promptr<CR>
 imap <C-f> :promptr<CR>
 vmap <C-f> :promptr<CR>
 
-map <F1> :call OpenTerm() <CR>
-imap <F1> <Esc>:call OpenTerm() <CR>
+map <F1> :call OpenTerm(0) <CR>
+imap <F1> <Esc>:call OpenTerm(0) <CR>
+map <C-F1> :call OpenTerm(1) <CR>
+imap <C-F1> <Esc>:call OpenTerm(1) <CR>
 map <F2> :call RunMakeSequence() <CR>
 imap <F2> <Esc>:call RunMakeSequence() <CR>
+map <C-F2> :call RunCurrentTest() <CR>
+imap <C-F2> <Esc>:call RunCurrentTest() <CR>
 map <F3> :call ExecPythonScript(0) <CR>
 imap <F3> <Esc>:call ExecPythonScript(0) <CR>
 "map <C-F3> :call ExecPythonScript() <CR>

@@ -96,6 +96,12 @@ func! _CreateNewHorizBuffer()
   set nocursorline
 endfunc
 
+func! _CreateNewVertBuffer()
+  exec "vsplit"
+  exec "wincmd l"
+  set nocursorline
+endfunc
+
 func! _CreateNewConsole()
   f new_console
   let g:is_console_present=1
@@ -106,11 +112,15 @@ func! _GetRidOfConsole()
   let g:is_console_present=0
 endfunc
 
-func! OpenTerm()
+func! OpenTerm(vert)
   if g:is_console_present == 0
-    call _CreateNewHorizBuffer()
+    if a:vert == 1
+      call _CreateNewVertBuffer()
+    else
+      call _CreateNewHorizBuffer()
+    endif
     if has ("win32") || has("win16")
-      exec "ConqueTerm powershell.exe"
+      exec "ConqueTerm powershell.exe -NoLogo"
     else
       exec "ConqueTerm bash"
     endif
@@ -139,9 +149,41 @@ endfunc
 func! RunMakeSequence()
   if g:is_console_present == 0
     call _CreateNewHorizBuffer()
-    exec "ConqueTerm bash -c \'" . g:make_command . "\'"
+    if has ("win32") || has("win16")
+      exec "ConqueTerm powershell.exe -NoLogo -Command " . g:make_command . ""
+    else
+      exec "ConqueTerm bash -c \'" . g:make_command . "\'"
+    endif
     call _CreateNewConsole()
   else
+    call _GetRidOfConsole()
+  endif
+endfunc
+
+func! RunCurrentTest()
+  if g:is_console_present == 0
+    "echo 'new console'
+    let l:fn = @%
+    "echo '--------------'
+    let l:current_function = matchstr(getline('.'), 'def\s*\zs\w*\ze\s*(')
+    let l:cln = line('.')
+    while l:cln > 0
+      let l:cln -= 1
+      let l:classname=matchstr(getline(l:cln), 'class\s*\zs\w*\ze\s*(')
+      if l:classname != ""
+        break
+      endif
+    endwhile
+    let l:test_name = l:fn . ":" . l:classname . "." . l:current_function
+    call _CreateNewHorizBuffer()
+    if has ("win32") || has("win16")
+      exec "ConqueTerm powershell.exe -NoLogo -Command nosetests.exe -v --pdb " . l:test_name 
+    else
+      exec "ConqueTerm bash -c \'nosetests -v --pdb " . l:test_name . "\'"
+    endif
+    call _CreateNewConsole()
+  else
+    echo 'closing buffer'
     call _GetRidOfConsole()
   endif
 endfunc
