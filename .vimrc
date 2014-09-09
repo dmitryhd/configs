@@ -134,63 +134,6 @@ autocmd BufNewFile *.c call BufNewFile_C()
 
 autocmd BufNewFile *.cpp call BufNewFile_CPP()
 
-"------------------
-" Hotkeys
-"------------------
-nmap <F1> :call SeeCurrentWd()<CR>
-imap <F1> <Esc>:call SeeCurrentWd()<CR>
-nmap <F2> :call MyTagbarSwitch()<CR>
-imap <F2> <Esc>:call MyTagbarSwitch()<CR>
-nmap <F3> :call CloseOpenTermVert() <CR>
-imap <F3> <Esc>:call CloseOpenTermVert()<CR>
-nmap <F4> :call SwitchTerm()<CR>
-imap <F4> <Esc>:call SwitchTerm()<CR>
-nmap <F5> :NERDTreeToggle <CR>
-imap <F5> <Esc>:NERDTreeToggle <CR>
-
-map <F7> :call RunReplace() <CR>
-imap <F7> <Esc>:call RunReplace() <CR>
-nmap <F12> :call PythonPylintCheck() <CR>
-imap <F12> <Esc>:call PythonPylintCheck() <CR>
-nmap <C-s> :w<CR>
-imap <C-s> :w<CR>
-vmap <C-s> :w<CR>
-
-" tab navigation
-nmap <C-t> :tabnew<CR>
-imap <C-t> <Esc>:tabnew<CR>
-vmap <C-t> <Esc>:tabnew<CR>
-
-nmap <C-S-tab> :tabprevious<CR>
-nmap <C-tab> :tabnext<CR>
-map <C-S-tab> :tabprevious<CR>
-map <C-tab> :tabnext<CR>
-imap <C-S-tab> <Esc>:tabprevious<CR>i
-imap <C-tab> <Esc>:tabnext<CR>i
-
-noremap <F6> :set hlsearch! hlsearch?<CR>
-inoremap <C-Space> <C
-nmap <C-f> :promptr<CR>
-imap <C-f> :promptr<CR>
-vmap <C-f> :promptr<CR>
-
-map <C-F1> :call OpenTermHoriz() <CR>
-map <C-F2> :call OpenTermVert() <CR>
-map <C-F3> :call ExecPythonScript() <CR>
-map <C-F4> :call DebugPythonScriptVert() <CR>
-map <C-F5> :call ExecPythonScriptVert() <CR>
-map <C-F6> :call DebugPythonScript() <CR>
-map <C-F7> :call CloseTab() <CR>
-imap <C-F7> <Esc>:call CloseTab() <CR>
-map <C-F8> :set cursorline!<CR>
-
-" folding
-" Fold all
-map <S-F1> zM<CR>
-" UnFold all
-map <S-F2> zR<CR>
-" UnFold all
-map <S-F3> zA<CR>
 
 
 "-----------------------------------------------
@@ -245,7 +188,6 @@ if has('gui')
 else
   set term=ansi
 endif
-set term=ansi
 
 
 if has("win32") || has("win16")
@@ -261,3 +203,65 @@ else
   set noswapfile
   set noundofile
 endif
+
+"------------------
+" Hotkeys
+"------------------
+"nmap <F1> :call SeeCurrentWd()<CR>
+"imap <F1> <Esc>:call SeeCurrentWd()<CR>
+"nmap <F2> :call MyTagbarSwitch()<CR>
+"imap <F2> <Esc>:call MyTagbarSwitch()<CR>
+"nmap <F3> :call CloseOpenTermVert() <CR>
+"imap <F3> <Esc>:call CloseOpenTermVert()<CR>
+"nmap <F4> :call SwitchTerm()<CR>
+"imap <F4> <Esc>:call SwitchTerm()<CR>
+"nmap <F5> :NERDTreeToggle <CR>
+"imap <F5> <Esc>:NERDTreeToggle <CR>
+
+map <F7> :call RunReplace() <CR>
+imap <F7> <Esc>:call RunReplace() <CR>
+"nmap <F12> :call PythonPylintCheck() <CR>
+"imap <F12> <Esc>:call PythonPylintCheck() <CR>
+nmap <C-s> :w<CR>
+imap <C-s> :w<CR>
+vmap <C-s> :w<CR>
+
+" tab navigation
+nmap <C-t> :tabnew<CR>
+imap <C-t> <Esc>:tabnew<CR>
+vmap <C-t> <Esc>:tabnew<CR>
+
+nmap <C-S-tab> :tabprevious<CR>
+nmap <C-tab> :tabnext<CR>
+map <C-S-tab> :tabprevious<CR>
+map <C-tab> :tabnext<CR>
+imap <C-S-tab> <Esc>:tabprevious<CR>i
+imap <C-tab> <Esc>:tabnext<CR>i
+
+noremap <F6> :set hlsearch! hlsearch?<CR>
+inoremap <C-Space> <C
+nmap <C-f> :promptr<CR>
+imap <C-f> :promptr<CR>
+vmap <C-f> :promptr<CR>
+
+map <F1> :call OpenTerm() <CR>
+imap <F1> <Esc>:call OpenTerm() <CR>
+map <F2> :call RunMakeSequence() <CR>
+imap <F2> <Esc>:call RunMakeSequence() <CR>
+map <F3> :call ExecPythonScript(0) <CR>
+imap <F3> <Esc>:call ExecPythonScript(0) <CR>
+"map <C-F3> :call ExecPythonScript() <CR>
+"map <C-F4> :call RunMakeSequence() <CR>
+"map <C-F6> :call DebugPythonScript() <CR>
+"map <C-F2> :call OpenTermVert() <CR>
+"map <C-F4> :call DebugPythonScriptVert() <CR>
+"map <C-F5> :call ExecPythonScriptVert() <CR>
+"map <C-F8> :set cursorline!<CR>
+
+" folding
+" Fold all
+map <S-F1> zM<CR>
+" UnFold all
+map <S-F2> zR<CR>
+" UnFold all
+map <S-F3> zA<CR>

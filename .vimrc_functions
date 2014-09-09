@@ -2,6 +2,17 @@
 "
 "Here goes list of functions, written partially by me as shortcuts in work
 "
+if !exists("g:script_args")
+    let g:script_args=""
+endif
+
+if !exists("g:make_command")
+    let g:make_command="export PYTHONPATH=/home/dimert/NMS/nms_app; nosetests -xv --processes=60 --process-timeout=300 --process-restartworker"
+endif
+
+if !exists("g:is_console_present")
+    let g:is_console_present=0
+endif
 
 func! RunReplace()
   let selected = s:get_visual_selection()
@@ -79,94 +90,60 @@ func! SwitchToErrorWindow()
   endif
 endfunc
 
-func! CloseOpenTermVert()
-  if !exists('g:is_term_open')
-    let g:is_term_open = 0
-  endif
-  if g:is_term_open == 0
-    exec "vsplit"
-    exec "wincmd l"
-    exec "ConqueTerm bash"
-    exec "startinsert"
-    let g:is_term_open = 1
-  else
-    if matchstr(@%, 'bash - ') == 'bash - '
-      exec ":q"
-      echo 'you in the bash, close it'
-    else
-      exec "wincmd l"
-      exec ":q"
-      echo 'you not in the bash, switch to bash, and close it!'
-    endif
-    let g:is_term_open = 0
-  endif
-endfunc
-
-func! OpenTermHoriz()
+func! _CreateNewHorizBuffer()
   exec "40split"
   exec "wincmd j"
-    set nocursorline
-  if has ("win32") || has("win16")
-    exec "ConqueTerm powershell.exe"
+  set nocursorline
+endfunc
+
+func! _CreateNewConsole()
+  f new_console
+  let g:is_console_present=1
+endfunc
+
+func! _GetRidOfConsole()
+  bdelete new_console
+  let g:is_console_present=0
+endfunc
+
+func! OpenTerm()
+  if g:is_console_present == 0
+    call _CreateNewHorizBuffer()
+    if has ("win32") || has("win16")
+      exec "ConqueTerm powershell.exe"
+    else
+      exec "ConqueTerm bash"
+    endif
+    call _CreateNewConsole()
   else
-    exec "ConqueTerm bash"
+    call _GetRidOfConsole()
   endif
 endfunc
 
-func! OpenTermVert()
-  exec "vsplit"
-  exec "wincmd l"
-    set nocursorline
-  if has ("win32") || has("win16")
-    exec "ConqueTerm powershell.exe"
+func! ExecPythonScript(debug)
+  if g:is_console_present == 0
+    if &filetype == 'python'
+      call _CreateNewHorizBuffer()
+      if a:debug == 1
+        exec "ConqueTerm python3 -i " . expand("%") . ' ' . g:script_args
+      else
+        exec "ConqueTerm python3 -m pdb " . expand("%")
+      endif
+      call _CreateNewConsole()
+    endif
   else
-    exec "ConqueTerm bash"
+    call _GetRidOfConsole()
   endif
 endfunc
 
-if !exists("g:script_args")
-    let g:script_args=""
-endif
-
-func! ExecPythonScript()
-  "use let g:script_args='args'
-  if &filetype == 'python'
-    exec "40split"
-    exec "wincmd j"
-    set nocursorline
-    exec "ConqueTerm python3 -i " . expand("%") . ' ' . g:script_args
+func! RunMakeSequence()
+  if g:is_console_present == 0
+    call _CreateNewHorizBuffer()
+    exec "ConqueTerm bash -c \'" . g:make_command . "\'"
+    call _CreateNewConsole()
+  else
+    call _GetRidOfConsole()
   endif
-endfunc
-
-func! DebugPythonScript()
-  if &filetype == 'python'
-    exec "40split"
-    exec "wincmd j"
-    set nocursorline
-    exec "ConqueTerm python3 -m pdb " . expand("%")
-  endif
-endfunc
-
-func! ExecPythonScriptVert()
-  "use let g:script_args='args'
-  if &filetype == 'python'
-    exec "vsplit"
-    exec "wincmd l"
-    set nocursorline
-    exec "ConqueTerm python3 -i " . expand("%") . ' ' . g:script_args
-  endif
-endfunc
-
-func! DebugPythonScriptVert()
-  if &filetype == 'python'
-    exec "vsplit"
-    exec "wincmd l"
-    set nocursorline
-    exec "ConqueTerm python3 -m pdb " . expand("%")
-  endif
-endfunc
-func! CloseTab()
-  exec "q!"
 endfunc
 
 function! BufNewFile_PY()
@@ -177,11 +154,6 @@ endfunction
 
 function! BufNewFile_CPP()
 endfunction
-
-func! RunPython()
-  exec "wa"
-  exec "!python3 %"
-endfunc
 
 func! PythonAutoPEP8()
   exec "wa"
