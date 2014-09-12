@@ -9,10 +9,8 @@
 if has("win32") || has("win16")
   set encoding=cp1251
   behave xterm
-else
-  set encoding=utf-8
 endif
-source ~/.vimrc_functions
+"source ~/.vimrc_functions
 
 "------------------
 " CODE STYLE
@@ -71,7 +69,7 @@ autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.
 au FocusLost * :wa
 
 set fileencoding=utf-8
-set fileencodings=utf-8,cp1251
+"set fileencodings=utf-8,cp1251
 
 if has("win32") || has("win16")
   set ffs=dos,unix,mac
@@ -127,31 +125,23 @@ au BufEnter,BufRead *.py setlocal smartindent cinwords=if,elif,else,for,while,tr
 " highlight variable under cursor (not smart) " Python: yes " C: yes
 au BufRead,BufNewFile *.py,*.pyw,*.c  autocmd CursorMoved * silent! exe printf('match IncSearch /\<%s\>/', expand('<cword>'))
 
-autocmd BufNewFile *.py call BufNewFile_PY()
-autocmd BufNewFile *.c call BufNewFile_C()
-
-" При создании нового файла *.cpp будут сразу добавлены два заголовка с
-
-autocmd BufNewFile *.cpp call BufNewFile_CPP()
-
-
 
 "-----------------------------------------------
 " VISUAL
 "-----------------------------------------------
-try
-  "colorscheme sashaDark
-  colorscheme desert
-  "colorscheme sublime
-  "colorscheme molokai-2
-  "colorscheme koehler
-catch
-  colorscheme desert
-endtry
-
-set cursorline
 "------------------GUI-------
-if has('gui')
+if has('gui_running')
+  try
+    "colorscheme sashaDark
+    colorscheme desert
+    "colorscheme sublime
+    "colorscheme molokai-2
+    "colorscheme koehler
+  catch
+    colorscheme desert
+  endtry
+
+  set cursorline
   if has("win32") || has("win16")
     try
       "set guifont=Consolas:h10:cRUSSIAN
@@ -186,9 +176,9 @@ if has('gui')
   menu Encoding.KOI8-U   :e ++enc=koi8-u<CR>
   menu Encoding.UTF-8    :e ++enc=utf-8<CR>
 else
+  set nocursorline
   set term=ansi
 endif
-
 
 if has("win32") || has("win16")
   set backup
@@ -207,21 +197,6 @@ endif
 "------------------
 " Hotkeys
 "------------------
-"nmap <F1> :call SeeCurrentWd()<CR>
-"imap <F1> <Esc>:call SeeCurrentWd()<CR>
-"nmap <F2> :call MyTagbarSwitch()<CR>
-"imap <F2> <Esc>:call MyTagbarSwitch()<CR>
-"nmap <F3> :call CloseOpenTermVert() <CR>
-"imap <F3> <Esc>:call CloseOpenTermVert()<CR>
-"nmap <F4> :call SwitchTerm()<CR>
-"imap <F4> <Esc>:call SwitchTerm()<CR>
-"nmap <F5> :NERDTreeToggle <CR>
-"imap <F5> <Esc>:NERDTreeToggle <CR>
-
-map <F7> :call RunReplace() <CR>
-imap <F7> <Esc>:call RunReplace() <CR>
-"nmap <F12> :call PythonPylintCheck() <CR>
-"imap <F12> <Esc>:call PythonPylintCheck() <CR>
 nmap <C-s> :w<CR>
 imap <C-s> :w<CR>
 vmap <C-s> :w<CR>
@@ -254,12 +229,6 @@ map <C-F2> :call RunCurrentTest() <CR>
 imap <C-F2> <Esc>:call RunCurrentTest() <CR>
 map <F3> :call ExecPythonScript(0) <CR>
 imap <F3> <Esc>:call ExecPythonScript(0) <CR>
-"map <C-F3> :call ExecPythonScript() <CR>
-"map <C-F4> :call RunMakeSequence() <CR>
-"map <C-F6> :call DebugPythonScript() <CR>
-"map <C-F2> :call OpenTermVert() <CR>
-"map <C-F4> :call DebugPythonScriptVert() <CR>
-"map <C-F5> :call ExecPythonScriptVert() <CR>
 "map <C-F8> :set cursorline!<CR>
 
 " folding
