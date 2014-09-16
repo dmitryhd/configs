@@ -238,3 +238,4 @@ map <S-F1> zM<CR>
 map <S-F2> zR<CR>
 " UnFold all
 map <S-F3> zA<CR>
+map <F12> :e .<CR>
