@@ -58,11 +58,23 @@ func! ExecPythonScript(debug)
   if g:is_console_present == 0
     if &filetype == 'python'
       call _CreateNewHorizBuffer()
-      if a:debug == 1
+      if a:debug == 0
         exec "ConqueTerm python3 -i " . expand("%") . ' ' . g:script_args
       else
         exec "ConqueTerm python3 -m pdb " . expand("%")
       endif
+      call _CreateNewConsole()
+    endif
+  else
+    call _GetRidOfConsole()
+  endif
+endfunc
+
+func! CheckStyle()
+  if g:is_console_present == 0
+    if &filetype == 'python'
+      call _CreateNewHorizBuffer()
+      exec "ConqueTerm bash -c \"pylint -r n " . expand("%") . "; pylint " . expand("%") . " | grep 'has been rated'\""
       call _CreateNewConsole()
     endif
   else

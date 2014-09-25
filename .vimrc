@@ -24,6 +24,7 @@ set completeopt=longest,menuone
 
 " python pep 8!
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 foldmethod=indent
+autocmd Filetype html setlocal expandtab tabstop=4 shiftwidth=4 foldmethod=indent
 
 "set textwidth=80
 "disable wrap of string
@@ -231,6 +232,8 @@ imap <C-F2> <Esc>:call RunCurrentTest() <CR>
 map <F3> :call ExecPythonScript(0) <CR>
 imap <F3> <Esc>:call ExecPythonScript(0) <CR>
 "map <C-F8> :set cursorline!<CR>
+map <F4> :call CheckStyle() <CR>
+imap <F4> <Esc>:call CheckStyle() <CR>
 
 " folding
 " Fold all
