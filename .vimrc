@@ -10,7 +10,7 @@ if has("win32") || has("win16")
   set encoding=cp1251
   behave xterm
 endif
-"source ~/.vimrc_functions
+source ~/.vimrc_functions
 
 "------------------
 " CODE STYLE
@@ -238,4 +238,5 @@ map <S-F1> zM<CR>
 map <S-F2> zR<CR>
 " UnFold all
 map <S-F3> zA<CR>
+map <F11> :silent !sudo service apache2 restart<CR>
 map <F12> :e .<CR>
