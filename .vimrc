@@ -175,6 +175,7 @@ if has('gui_running')
   menu Encoding.CP866    :e ++enc=cp866<CR>
   menu Encoding.KOI8-U   :e ++enc=koi8-u<CR>
   menu Encoding.UTF-8    :e ++enc=utf-8<CR>
+  set lines=999 columns=999  " maximize window
 else
   set nocursorline
   set term=ansi
