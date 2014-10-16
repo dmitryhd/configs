@@ -2,6 +2,7 @@
 "
 "Here goes list of functions, written partially by me as shortcuts in work
 "
+let g:console_name = 'new_console'
 if !exists("g:script_args")
     let g:script_args=""
 endif
@@ -72,9 +73,14 @@ func! ExecPythonScript(debug)
   endif
 endfunc
 
+func! DeleteTrailingWhitespace()
+  :%s/\s\+$//
+endfunc
+
 func! CheckStyle()
   if g:is_console_present == 0
     if &filetype == 'python'
+      call DeleteTrailingWhitespace()
       silent write
       call _CreateNewHorizBuffer()
       exec "ConqueTerm bash -c \"pylint -r n " . expand("%") . "; pylint " . expand("%") . " | grep 'has been rated'\""
@@ -85,37 +91,40 @@ func! CheckStyle()
   endif
 endfunc
 
-func! DeleteTrailingWhitespace()
-  :%s/\s\+$//
-endfunc
-
-func! GotoConsole()
-  if g:is_console_present
-      let l:init_window = @%
-      if @% == 'new_console'
-        startinsert
-        return
-      endif
-      silent write
+func! SetFocusToWindow(window_name)
+  let l:init_window = @%
+  let l:cnt = 0
+  let l:max_cnt = 10
+  while @% != a:window_name 
+    wincmd w
+    if l:cnt == l:max_cnt
       let l:cnt = 0
-      let l:max_cnt = 10
-      while @% != 'new_console'
+      while @% != l:init_window
         wincmd w
         if l:cnt == l:max_cnt
-          let l:cnt = 0
-          while @% != l:init_window
-            wincmd w
-            if l:cnt == l:max_cnt
-              break
-            endif
-          endwhile
           break
         endif
-        let l:cnt = l:cnt + 1
       endwhile
-      if @% == 'new_console'
-        startinsert
+      break
+    endif
+    let l:cnt = l:cnt + 1
+  endwhile
+  if @% == g:console_name
+    startinsert
+  endif
+endfunc
+
+func! SwitchConsole()
+  if g:is_console_present
+    if @% != g:console_name
+      let g:last_window_name = @%
+      silent write
+      call SetFocusToWindow(g:console_name)
+    else
+      if exists("g:last_window_name")
+        call SetFocusToWindow(g:last_window_name)
       endif
+    endif
   endif
 endfunc
 

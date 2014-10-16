@@ -237,8 +237,8 @@ imap <F3> <Esc>:call ExecPythonScript(0) <CR>
 "map <C-F8> :set cursorline!<CR>
 map <F4> :call CheckStyle() <CR>
 imap <F4> <Esc>:call CheckStyle() <CR>
-map <F5> :call GotoConsole() <CR>
-imap <F5> <Esc>:call GotoConsole() <CR>
+map <F5> :call SwitchConsole() <CR>
+imap <F5> <Esc>:call SwitchConsole() <CR>
 
 " folding
 " Fold all
