@@ -38,6 +38,7 @@ endfunc
 
 func! OpenTerm(vert)
   if g:is_console_present == 0
+    silent write
     if a:vert == 1
       call _CreateNewVertBuffer()
     else
@@ -56,6 +57,7 @@ endfunc
 
 func! ExecPythonScript(debug)
   if g:is_console_present == 0
+    silent write
     if &filetype == 'python'
       call _CreateNewHorizBuffer()
       if a:debug == 0
@@ -73,12 +75,47 @@ endfunc
 func! CheckStyle()
   if g:is_console_present == 0
     if &filetype == 'python'
+      silent write
       call _CreateNewHorizBuffer()
       exec "ConqueTerm bash -c \"pylint -r n " . expand("%") . "; pylint " . expand("%") . " | grep 'has been rated'\""
       call _CreateNewConsole()
     endif
   else
     call _GetRidOfConsole()
+  endif
+endfunc
+
+func! DeleteTrailingWhitespace()
+  :%s/\s\+$//
+endfunc
+
+func! GotoConsole()
+  if g:is_console_present
+      let l:init_window = @%
+      if @% == 'new_console'
+        startinsert
+        return
+      endif
+      silent write
+      let l:cnt = 0
+      let l:max_cnt = 10
+      while @% != 'new_console'
+        wincmd w
+        if l:cnt == l:max_cnt
+          let l:cnt = 0
+          while @% != l:init_window
+            wincmd w
+            if l:cnt == l:max_cnt
+              break
+            endif
+          endwhile
+          break
+        endif
+        let l:cnt = l:cnt + 1
+      endwhile
+      if @% == 'new_console'
+        startinsert
+      endif
   endif
 endfunc
 

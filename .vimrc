@@ -141,8 +141,11 @@ if has('gui_running')
   catch
     colorscheme desert
   endtry
+  highlight ColorColumn guibg=#3f3f3f
+  set colorcolumn=80
 
-  set cursorline
+  "set cursorline
+  set nocursorline
   if has("win32") || has("win16")
     try
       "set guifont=Consolas:h10:cRUSSIAN
@@ -234,6 +237,8 @@ imap <F3> <Esc>:call ExecPythonScript(0) <CR>
 "map <C-F8> :set cursorline!<CR>
 map <F4> :call CheckStyle() <CR>
 imap <F4> <Esc>:call CheckStyle() <CR>
+map <F5> :call GotoConsole() <CR>
+imap <F5> <Esc>:call GotoConsole() <CR>
 
 " folding
 " Fold all
