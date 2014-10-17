@@ -80,7 +80,6 @@ endfunc
 func! CheckStyle()
   if g:is_console_present == 0
     if &filetype == 'python'
-      call DeleteTrailingWhitespace()
       silent write
       call _CreateNewHorizBuffer()
       exec "ConqueTerm bash -c \"pylint -r n " . expand("%") . "; pylint " . expand("%") . " | grep 'has been rated'\""

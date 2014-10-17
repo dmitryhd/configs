@@ -5,13 +5,32 @@
 " set tagbar_compact = 1
 " set tagbar_singleclick = 1
 
+set nocompatible
+filetype off  "обязательно!
 
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+"Bundle 'Lokaltog/vim-powerline'
+Plugin 'bling/vim-airline'
+Bundle 'tpope/vim-fugitive'
+Plugin 'majutsushi/tagbar'
+Plugin 'kien/ctrlp.vim'
 if has("win32") || has("win16")
   set encoding=cp1251
   behave xterm
 endif
 source ~/.vimrc_functions
 
+" ------------------ Airline
+let g:airline_theme='solarized'
+
+"let loaded_nerd_tree=1
+"set NERDTreeShowBookmarks=1
+"
+
+" тут будем добавлять наши расширения
+
+filetype plugin indent on
 "------------------
 " CODE STYLE
 "------------------
@@ -21,7 +40,6 @@ set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 set completeopt=longest,menuone
-
 " python pep 8!
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 foldmethod=indent
 autocmd Filetype html setlocal expandtab tabstop=4 shiftwidth=4 foldmethod=indent
@@ -247,5 +265,11 @@ map <S-F1> zM<CR>
 map <S-F2> zR<CR>
 " UnFold all
 map <S-F3> zA<CR>
+map <F9> :T<CR>
+imap <F9> <Esc> :TagbarToggle<CR>
+map <F9> :TagbarToggle<CR>
+imap <F10> <Esc> :NERDTreeToggle<CR>
 map <F11> :silent !sudo service apache2 restart<CR>
 map <F12> :e .<CR>
+
+highlight ColorColumn guibg=#3f3f3f
