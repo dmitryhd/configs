@@ -265,8 +265,7 @@ map <S-F1> zM<CR>
 map <S-F2> zR<CR>
 " UnFold all
 map <S-F3> zA<CR>
-map <F9> :T<CR>
-imap <F9> <Esc> :TagbarToggle<CR>
+map <F8> :!autopep8 -i @%<CR>
 map <F9> :TagbarToggle<CR>
 imap <F10> <Esc> :NERDTreeToggle<CR>
 map <F11> :silent !sudo service apache2 restart<CR>
