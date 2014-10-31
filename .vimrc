@@ -267,8 +267,10 @@ map <S-F2> zR<CR>
 map <S-F3> zA<CR>
 map <F8> :!autopep8 -i %<CR>
 map <F9> :TagbarToggle<CR>
+map <F10> :NERDTreeToggle<CR>
 imap <F10> <Esc> :NERDTreeToggle<CR>
 map <F11> :silent !sudo service apache2 restart<CR>
 map <F12> :e .<CR>
 
 highlight ColorColumn guibg=#3f3f3f
+set cursorline

@@ -385,5 +385,5 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
--- awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
--- awful.util.spawn_with_shell("nm-applet")
+awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
+awful.util.spawn_with_shell("nm-applet")
