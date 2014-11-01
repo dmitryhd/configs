@@ -8,7 +8,7 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper_cmd = { "awsetbg /home/dimert/wallpapers/1413828325204.jpg" }
+theme.wallpaper_cmd = { "feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/" }
 -- }}}
 
 -- {{{ Styles

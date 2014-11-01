@@ -6,6 +6,8 @@ require("awful.rules")
 require("beautiful")
 -- Notification library
 require("naughty")
+require("wicked")
+require("vicious")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -78,7 +80,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 'browser', 'vim', 'console', 'other' }, s, layouts[1])
+    tags[s] = awful.tag({ 'browser', 'vim', 'console', 'other' }, s, layouts[2])
 end
 -- }}}
 
@@ -94,8 +96,13 @@ myawesomemenu = {
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "Debian", debian.menu.Debian_menu.Debian },
                                     { "open terminal", terminal },
+                                    { "nautilus", 'nautilus --no-desktop'},
+                                    { "random-wp", 'feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/'},
                                     { "chrome", 'google-chrome' },
-                                    { "gvim", 'gvim' }
+                                    { "logoff", awesome.quit },
+                                    { "reboot", 'sudo reboot' },
+                                    { "suspend", 'dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend'},
+                                    { "shutdown", 'sudo shutdown -h now' },
                                   }
                         })
 
@@ -106,9 +113,28 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
-
+-- Инициализация виджета
+memwidget = widget({ type = "textbox" })
+-- Регистрация виджета
+vicious.register(memwidget, vicious.widgets.mem, "mem: $1%", 13)
 -- Create a systray
 mysystray = widget({ type = "systray" })
+
+-- --------------------------------------------------------
+-- {{{ Battery state
+-- Initialize widget
+batwidget = awful.widget.progressbar()
+batwidget:set_width(8)
+batwidget:set_height(14)
+batwidget:set_vertical(true)
+batwidget:set_background_color("#000000")
+batwidget:set_border_color(nil)
+batwidget:set_color("#00bfff")
+
+-- {{{ Battery state
+-- Initialize widget
+vicious.register(batwidget, vicious.widgets.bat, "$2", 120, "BAT0")
+-- --------------------------------------------------------
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -186,6 +212,7 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,
+        memwidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
@@ -349,10 +376,16 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
+    { rule = { class = "Google-chrome" },
+      properties = { tag = tags[1][1] } },
+    { rule = { class = "Gvim" },
+      properties = { tag = tags[1][2] } },
+    { rule = { class = "Terminator" },
+      properties = { tag = tags[1][3] } },
+}
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
-}
 -- }}}
 
 -- {{{ Signals
@@ -386,4 +419,8 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
-awful.util.spawn_with_shell("nm-applet")
+--awful.util.spawn_with_shell("nm-applet")
+--awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/")
+--awful.util.spawn_with_shell("google-chrome")
+--awful.util.spawn_with_shell("gvim")
+--awful.util.spawn_with_shell("terminator")
