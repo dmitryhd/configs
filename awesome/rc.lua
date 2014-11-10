@@ -54,22 +54,19 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
-
-
-
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
+    --awful.layout.suit.tile.left,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.tile.top,
+    --awful.layout.suit.fair,
+    --awful.layout.suit.fair.horizontal,
+    --awful.layout.suit.spiral,
+    --awful.layout.suit.spiral.dwindle,
+    --awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
@@ -92,17 +89,35 @@ myawesomemenu = {
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
+awesome_dir = '/home/dimert/.config/awesome/'
+iconpath = awesome_dir .. 'themes/zenburn-wp/icons/'
+wallpaper_path = awesome_dir .. 'themes/zenburn-wp/wp/'
+gvim_icon = iconpath .. 'vim-2.png'
+folder_icon = iconpath .. 'folder-close-icon.png'
+chrome_icon = iconpath .. 'chrome.png'
+logoff_icon = iconpath .. 'logoff.png'
+reboot_icon = iconpath .. 'reboot.png'
+suspend_icon = iconpath .. 'suspend.png'
+shutdown_icon = iconpath .. 'shutdown.png'
+terminal_icon = iconpath .. 'terminal.png'
+wallpaper_icon = iconpath .. 'wp.png'
+
+reboot_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart'
+shutdown_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop'
+suspend_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend'
+set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "open terminal", terminal },
-                                    { "nautilus", 'nautilus --no-desktop'},
-                                    { "random-wp", 'feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/'},
-                                    { "chrome", 'google-chrome' },
-                                    { "logoff", awesome.quit },
-                                    { "reboot", 'sudo reboot' },
-                                    { "suspend", 'dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend'},
-                                    { "shutdown", 'sudo shutdown -h now' },
+                                    { "open terminal", terminal, terminal_icon},
+                                    { "gvim", 'gvim', gvim_icon },
+                                    { "nautilus", 'nautilus --no-desktop', folder_icon},
+                                    { "random-wp", set_random_wp_command, wallpaper_icon },
+                                    { "chrome", 'google-chrome',chrome_icon },
+                                    { "logoff", awesome.quit, logoff_icon },
+                                    { "reboot", reboot_command, reboot_icon },
+                                    { "suspend", suspend_command, suspend_icon},
+                                    { "shutdown", shutdown_command, shutdown_icon },
                                   }
                         })
 
@@ -116,10 +131,13 @@ mytextclock = awful.widget.textclock({ align = "right" })
 -- Инициализация виджета
 memwidget = widget({ type = "textbox" })
 -- Регистрация виджета
-vicious.register(memwidget, vicious.widgets.mem, "mem: $1%", 13)
+vicious.register(memwidget, vicious.widgets.mem, "$1%", 60)
 -- Create a systray
 mysystray = widget({ type = "systray" })
-
+memimg = widget({ type = "imagebox" })
+memimg.image = image("/home/dimert/.config/awesome/themes/zenburn-wp/icons/widget_mem.png")
+batimg = widget({ type = "imagebox" })
+batimg.image = image("/home/dimert/.config/awesome/themes/zenburn-wp/icons/laptopbattery.png")
 -- --------------------------------------------------------
 -- {{{ Battery state
 -- Initialize widget
@@ -213,6 +231,8 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         memwidget,
+        memimg,
+        batimg,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
@@ -419,8 +439,8 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
---awful.util.spawn_with_shell("nm-applet")
---awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/")
---awful.util.spawn_with_shell("google-chrome")
---awful.util.spawn_with_shell("gvim")
---awful.util.spawn_with_shell("terminator")
+awful.util.spawn_with_shell("nm-applet")
+awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/")
+awful.util.spawn_with_shell("google-chrome")
+awful.util.spawn_with_shell("gvim")
+awful.util.spawn_with_shell("terminator")
