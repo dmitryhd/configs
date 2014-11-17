@@ -7,7 +7,8 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="tonotdo"
-ZSH_THEME="bureau"
+#ZSH_THEME="bureau"
+ZSH_THEME="dimert2"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -80,3 +81,5 @@ export PATH="/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias pylintlocal="pylint -rn *.py | grep -v 'Locally disabling' "
+alias pylintscore="pylint *.py | grep 'our code has been rated' "
