@@ -83,3 +83,4 @@ export PATH="/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias pylintlocal="pylint -rn *.py | grep -v 'Locally disabling' "
 alias pylintscore="pylint *.py | grep 'our code has been rated' "
+export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/

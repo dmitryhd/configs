@@ -94,7 +94,7 @@ func! SetFocusToWindow(window_name)
   let l:init_window = @%
   let l:cnt = 0
   let l:max_cnt = 10
-  while @% != a:window_name 
+  while @% != a:window_name
     wincmd w
     if l:cnt == l:max_cnt
       let l:cnt = 0
@@ -122,10 +122,20 @@ func! SwitchConsole()
     else
       if exists("g:last_window_name")
         call SetFocusToWindow(g:last_window_name)
+      else
+        wincmd w
       endif
     endif
   endif
 endfunc
+
+func! SwitchConsoleAndRunLastCommand()
+  call SwitchConsole()
+  if @% == g:console_name
+    call feedkeys("\<Up>\<CR>")
+  endif
+endfunc
+
 
 func! RunMakeSequence()
   if g:is_console_present == 0
@@ -158,7 +168,7 @@ func! RunCurrentTest()
     let l:test_name = l:fn . ":" . l:classname . "." . l:current_function
     call _CreateNewHorizBuffer()
     if has ("win32") || has("win16")
-      exec "ConqueTerm powershell.exe -NoLogo -Command nosetests.exe -v --pdb " . l:test_name 
+      exec "ConqueTerm powershell.exe -NoLogo -Command nosetests.exe -v --pdb " . l:test_name
     else
       exec "ConqueTerm bash -c \'nosetests -v --pdb " . l:test_name . "\'"
     endif
@@ -168,6 +178,23 @@ func! RunCurrentTest()
     call _GetRidOfConsole()
   endif
 endfunc
+
+function! StripTrailingWhitespacePython()
+  if &filetype == 'python'
+    call StripTrailingWhitespace()
+  endif
+endfunction
+
+function! StripTrailingWhitespace()
+  if !&binary && &filetype != 'diff'
+    normal mz
+    normal Hmy
+    %s/\s\+$//e
+    normal 'yz<CR>
+    normal `z
+  endif
+endfunction
+
 
 function! BufNewFile_PY()
 endfunction

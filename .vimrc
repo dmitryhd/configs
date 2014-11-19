@@ -1,4 +1,4 @@
-"VImrc by Dmitry Khodakov - 04.09.14
+"Vimrc by Dmitry Khodakov - 19.11.14
 
 " for Nerdtree, Tagbar
 " set tagbar_autofocus = 1
@@ -15,6 +15,7 @@ Plugin 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
 if has("win32") || has("win16")
   set encoding=cp1251
   behave xterm
@@ -23,11 +24,21 @@ source ~/.vimrc_functions
 
 " ------------------ Airline
 let g:airline_theme='solarized'
+let g:airline_powerline_fonts = 1
+let g:airline_enable_syntastic=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
 
-"let loaded_nerd_tree=1
-"set NERDTreeShowBookmarks=1
-"
+let NERDTreeShowBookmarks=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeDirArrows=1
+let NERDTreeShowHidden=1
 
+set makeprg=python3\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+
+let g:syntastic_python_python_exec = '/usr/bin/python3'
 " тут будем добавлять наши расширения
 
 filetype plugin indent on
@@ -94,23 +105,23 @@ if has("win32") || has("win16")
   set ffs=dos,unix,mac
 else
   set ffs=unix,dos,mac
-endif  
+endif
 
 set number
-set lz 
-"set nocompatible      
+set lz
+"set nocompatible
 " включим автоотступы для новых строк
-set ai 
+set ai
 " включим отступы в стиле Си
-set cin 
+set cin
 set nowrap
 set smarttab
 set smartindent
 " включим автозамену по умолчанию
-set et 
+set et
 " Show full tags when doing search completion
 set showfulltag
-set showcmd		
+set showcmd
 
 " sound
 set noerrorbells
@@ -119,7 +130,7 @@ set t_vb=
 set tm=500
 
 " Автоматическое переключение рабочей папки
-set autochdir 
+set autochdir
 " Set to auto read when a file is changed from the outside
 set autoread
 
@@ -140,7 +151,7 @@ filetype plugin on
 let python_highlight_all=1
 " autocmd FileType python set omnifunc=pythoncomplete#te
 au BufEnter,BufRead *.py setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-"set foldmethod=indent " Folding based on indentation: 
+"set foldmethod=indent " Folding based on indentation:
 " highlight variable under cursor (not smart) " Python: yes " C: yes
 au BufRead,BufNewFile *.py,*.pyw,*.c  autocmd CursorMoved * silent! exe printf('match IncSearch /\<%s\>/', expand('<cword>'))
 
@@ -151,8 +162,8 @@ au BufRead,BufNewFile *.py,*.pyw,*.c  autocmd CursorMoved * silent! exe printf('
 "------------------GUI-------
 if has('gui_running')
   try
-    "colorscheme sashaDark
-    colorscheme desert
+    colorscheme sashaDark
+    "colorscheme desert
     "colorscheme sublime
     "colorscheme molokai-2
     "colorscheme koehler
@@ -177,9 +188,10 @@ if has('gui_running')
     source $VIMRUNTIME/mswin.vim
   else
     try
-      set guifont=Terminus\ 10
+      set guifont=Terminess\ Powerline\ 10
     catch
-      set guifont=DejaVu Sans Mono\ 10
+      set guifont=Terminus\ 10
+      "set guifont=DejaVu Sans Mono\ 10
     endtry
     set lines=52
     set columns=179
@@ -200,7 +212,7 @@ if has('gui_running')
   set lines=999 columns=999  " maximize window
 else
   set nocursorline
-  set term=ansi
+  set term=xterm
 endif
 
 if has("win32") || has("win16")
@@ -252,11 +264,13 @@ map <C-F2> :call RunCurrentTest() <CR>
 imap <C-F2> <Esc>:call RunCurrentTest() <CR>
 map <F3> :call ExecPythonScript(0) <CR>
 imap <F3> <Esc>:call ExecPythonScript(0) <CR>
-"map <C-F8> :set cursorline!<CR>
+map <C-F8> :set cursorline!<CR>
 map <F4> :call CheckStyle() <CR>
 imap <F4> <Esc>:call CheckStyle() <CR>
 map <F5> :call SwitchConsole() <CR>
 imap <F5> <Esc>:call SwitchConsole() <CR>
+map <F6> :call SwitchConsoleAndRunLastCommand() <CR>
+imap <F6> <Esc>:call SwitchConsoleAndRunLastCommand() <CR>
 
 " folding
 " Fold all
@@ -267,10 +281,12 @@ map <S-F2> zR<CR>
 map <S-F3> zA<CR>
 map <F8> :!autopep8 -i %<CR>
 map <F9> :TagbarToggle<CR>
-imap <F9> <Esc> :TagbarToggle<CR>
-map <F10> :NERDTreeToggle<CR>
-imap <F10> <Esc> :NERDTreeToggle<CR>
+map <F10> :NERDTreeFind<CR>
+imap <F10> <Esc> :NERDTreeFind<CR>
 map <F11> :silent !sudo service apache2 restart<CR>
 map <F12> :e .<CR>
 
+" delete all trailing whitespaces in python!
+autocmd BufWritePre * call StripTrailingWhitespacePython()
 highlight ColorColumn guibg=#3f3f3f
+"set cursorline
