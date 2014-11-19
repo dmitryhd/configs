@@ -57,7 +57,7 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    --awful.layout.suit.floating,
+    awful.layout.suit.floating,
     awful.layout.suit.tile,
     --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
@@ -66,9 +66,9 @@ layouts =
     --awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
+    --awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.magnifier
+    awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -89,7 +89,6 @@ myawesomemenu = {
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
-run_once_script = '/home/dimert/.config/awesome/scripts/run-once.sh '
 awesome_dir = '/home/dimert/.config/awesome/'
 iconpath = awesome_dir .. 'themes/zenburn-wp/icons/'
 wallpaper_path = awesome_dir .. 'themes/zenburn-wp/wp/'
@@ -103,9 +102,9 @@ shutdown_icon = iconpath .. 'shutdown.png'
 terminal_icon = iconpath .. 'terminal.png'
 wallpaper_icon = iconpath .. 'wp.png'
 
-reboot_command = 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.Reboot" boolean:true'
-shutdown_command = 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.PowerOff" boolean:true'
-suspend_command = 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.Suspend" boolean:true'
+reboot_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart'
+shutdown_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop'
+suspend_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend'
 set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
@@ -401,8 +400,8 @@ awful.rules.rules = {
       properties = { tag = tags[1][1] } },
     { rule = { class = "Gvim" },
       properties = { tag = tags[1][2] } },
-    --{ rule = { class = "Terminator" },
-    --  properties = { tag = tags[1][3] } },
+    { rule = { class = "Terminator" },
+      properties = { tag = tags[1][3] } },
 }
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
@@ -439,9 +438,9 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
-awful.util.spawn_with_shell(run_once_script .. "nm-applet")
+-- awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
+awful.util.spawn_with_shell("nm-applet")
 awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/")
-awful.util.spawn_with_shell(run_once_script .. "google-chrome")
-awful.util.spawn_with_shell(run_once_script .. "gvim")
-awful.util.spawn_with_shell(run_once_script .. "terminator")
+awful.util.spawn_with_shell("google-chrome")
+awful.util.spawn_with_shell("gvim")
+awful.util.spawn_with_shell("terminator")

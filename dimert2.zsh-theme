@@ -78,7 +78,7 @@ else
   _LIBERTY="%{$fg[green]%}$"
 fi
 _USERNAME="$_USERNAME@%m%{$reset_color%}"
-_LIBERTY="$_LIBERTY%{$reset_color%}"
+_LIBERTY="$_LIBERTY%{$reset_color%}%"
 
 
 get_space () {
