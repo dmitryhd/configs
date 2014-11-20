@@ -83,4 +83,12 @@ export PATH="/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias pylintlocal="pylint -rn *.py | grep -v 'Locally disabling' "
 alias pylintscore="pylint *.py | grep 'our code has been rated' "
+alias usbmount="sudo mount /media/usb01"
+alias usbumount="sudo umount /media/usb01"
+alias gvimr="gvim --remote-tab"
+
+hash -d nms=~/NMS/nms_app/
+hash -d usb=/media/usb01
+hash -d data=/media/data_drive/
+
 export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/

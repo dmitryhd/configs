@@ -13,6 +13,9 @@ alias gitlog='git log -10 --pretty=format:"%h - %an, %ar : %s" --graph'
 alias gitdiff='git diff | kompare - > /dev/null'
 alias pylintlocal="pylint -rn *.py | grep -v 'Locally disabling' "
 alias pylintscore="pylint *.py | grep 'our code has been rated' "
+alias usbmount="mount /media/usb01"
+alias usbumount="umount /media/usb01"
+alias gvimr="gvim --remote-tab"
 PS1='$(__git_ps1)\[\e[0;32m\][\t]\u\[\e[m\]\[\e[1;34m\]\w\[\e[m\]\[\e[1;32m\]\$\[\e[m\]:\[\e[0;37m' 
 HISTFILESIZE=1000000
 HISTSIZE=1000000
