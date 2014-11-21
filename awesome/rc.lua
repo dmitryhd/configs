@@ -77,7 +77,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 'browser', 'vim', 'console', 'other' }, s, layouts[2])
+    tags[s] = awful.tag({ 'browser', 'vim', 'console', 'files', 'other01', 'other02' }, s, layouts[2])
 end
 -- }}}
 
@@ -111,7 +111,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "Debian", debian.menu.Debian_menu.Debian },
                                     { "open terminal", terminal, terminal_icon},
                                     { "gvim", 'gvim', gvim_icon },
-                                    { "nautilus", 'nautilus --no-desktop', folder_icon},
+                                    { "thunar", 'thunar', folder_icon},
                                     { "random-wp", set_random_wp_command, wallpaper_icon },
                                     { "chrome", 'google-chrome',chrome_icon },
                                     { "logoff", awesome.quit, logoff_icon },
@@ -286,6 +286,8 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "v",  function () awful.util.spawn_with_shell("gvim") end),
+    awful.key({ modkey,           }, "e",  function () awful.util.spawn_with_shell("thunar") end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -400,8 +402,8 @@ awful.rules.rules = {
       properties = { tag = tags[1][1] } },
     { rule = { class = "Gvim" },
       properties = { tag = tags[1][2] } },
-    { rule = { class = "Terminator" },
-      properties = { tag = tags[1][3] } },
+    --{ rule = { class = "Terminator" },
+    --  properties = { tag = tags[1][3] } },
 }
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
@@ -438,9 +440,9 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
--- awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
-awful.util.spawn_with_shell("nm-applet")
+awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
+awful.util.spawn_with_shell("run-once.sh nm-applet")
 awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/")
-awful.util.spawn_with_shell("google-chrome")
-awful.util.spawn_with_shell("gvim")
-awful.util.spawn_with_shell("terminator")
+--awful.util.spawn_with_shell("run-once.sh google-chrome")
+awful.util.spawn_with_shell("run-once.sh gvim")
+-- awful.util.spawn_with_shell("terminator")
