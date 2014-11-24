@@ -10,3 +10,4 @@ $copy_command ~/.zshrc .
 $copy_command ~/.oh-my-zsh/themes/dimert2.zsh-theme .
 $copy_command ~/.config/awesome ./awesome
 $copy_command ~/.vim/ .
+$copy_command ~/.config/awesome .

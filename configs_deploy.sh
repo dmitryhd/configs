@@ -14,3 +14,4 @@ $copy_command .vimrc ~/
 $copy_command .vimrc_functions ~/
 $copy_command .zshrc ~/
 $copy_command .vim/ ~/
+$copy_command awesome ~/.config/
