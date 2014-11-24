@@ -64,11 +64,11 @@ layouts =
     --awful.layout.suit.tile.top,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
+    awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
-    --awful.layout.suit.max,
+    awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    --awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -153,6 +153,27 @@ batwidget:set_color("#00bfff")
 -- Initialize widget
 vicious.register(batwidget, vicious.widgets.bat, "$2", 120, "BAT0")
 -- --------------------------------------------------------
+-- KEYBOARD LAYOUT
+-- Keyboard map indicator and changer
+  kbdcfg = {}
+  kbdcfg.cmd = "setxkbmap"
+  kbdcfg.layout = { "us", "ru" }
+  kbdcfg.current = 1  -- us is our default layout
+  kbdcfg.widget = widget({ type = "textbox", align = "right" })
+  kbdcfg.widget.text = " " .. kbdcfg.layout[kbdcfg.current] .. " "
+  kbdcfg.switch = function ()
+     kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
+     local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
+     kbdcfg.widget.text = t
+     os.execute( kbdcfg.cmd .. t )
+  end
+  
+  -- Mouse bindings
+  kbdcfg.widget:buttons(awful.util.table.join(
+      awful.button({ }, 1, function () kbdcfg.switch() end)
+  ))
+-- --------------------------------------------------------
+
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -233,6 +254,7 @@ for s = 1, screen.count() do
         memwidget,
         memimg,
         batimg,
+        kbdcfg.widget,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
@@ -283,7 +305,9 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-
+    
+    -- Alt + Right Shift switches the current keyboard layout
+    awful.key({ 'Mod1' }, "Shift_L", function () kbdcfg.switch() end),
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey,           }, "v",  function () awful.util.spawn_with_shell("gvim") end),
@@ -437,10 +461,11 @@ client.add_signal("manage", function (c, startup)
     end
 end)
 
+
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
+--awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
 awful.util.spawn_with_shell("run-once.sh nm-applet")
 awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/")
 --awful.util.spawn_with_shell("run-once.sh google-chrome")
