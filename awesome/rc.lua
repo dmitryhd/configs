@@ -114,6 +114,9 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "thunar", 'thunar', folder_icon},
                                     { "random-wp", set_random_wp_command, wallpaper_icon },
                                     { "chrome", 'google-chrome',chrome_icon },
+                                    { "rhythmbox", 'rhythmbox'},
+                                    { "firefox", 'firefox'},
+                                    { "VirtualBox", 'VirtualBox'},
                                     { "logoff", awesome.quit, logoff_icon },
                                     { "reboot", reboot_command, reboot_icon },
                                     { "suspend", suspend_command, suspend_icon},
@@ -470,4 +473,5 @@ awful.util.spawn_with_shell("run-once.sh nm-applet")
 awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/")
 --awful.util.spawn_with_shell("run-once.sh google-chrome")
 awful.util.spawn_with_shell("run-once.sh gvim")
+awful.util.spawn_with_shell("thunar --daemon")
 -- awful.util.spawn_with_shell("terminator")

@@ -199,6 +199,8 @@ if has('gui_running')
   endif
   "----------------------
   set guioptions-=T
+  "set guioptions-=m  "remove menu bar
+  set guioptions-=m  "remove menu bar
   set laststatus=2
   "set showmatch
   "======================
