@@ -15,6 +15,8 @@ Plugin 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
+" Code checker, pylint
+" help: :SyntasticToggleMode , :SyntasticCheck
 Plugin 'scrooloose/syntastic'
 if has("win32") || has("win16")
   set encoding=cp1251
@@ -292,3 +294,9 @@ map <F12> :e .<CR>
 autocmd BufWritePre * call StripTrailingWhitespacePython()
 highlight ColorColumn guibg=#3f3f3f
 "set cursorline
+"
+
+"copy this word to register b for replacing with go and gp
+noremap gz lb"bye
+"replace word with register b WITH SPACE AFTER word
+noremap gp heli x<Esc>bPldwxbyw

@@ -90,5 +90,6 @@ alias gvimr="gvim --remote-tab"
 hash -d nms=~/NMS/nms_app/
 hash -d usb=/media/usb01
 hash -d data=/media/data_drive/
+hash -d conf=~/repos/configs/
 
 export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
