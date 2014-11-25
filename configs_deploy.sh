@@ -7,6 +7,7 @@ then
   copy_command="cp -vr"
 fi
 
+git pull
 $copy_command .bashrc ~/
 $copy_command dimert2.zsh-theme ~/.oh-my-zsh/themes/dimert2.zsh-theme
 $copy_command .gitconfig ~/ 

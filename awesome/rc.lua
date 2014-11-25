@@ -474,4 +474,5 @@ awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awe
 --awful.util.spawn_with_shell("run-once.sh google-chrome")
 awful.util.spawn_with_shell("run-once.sh gvim")
 awful.util.spawn_with_shell("thunar --daemon")
+awful.util.spawn_with_shell("conky")
 -- awful.util.spawn_with_shell("terminator")
