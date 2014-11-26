@@ -11,3 +11,4 @@ $copy_command ~/.oh-my-zsh/themes/dimert2.zsh-theme .
 $copy_command ~/.vim/ .
 $copy_command ~/.config/awesome .
 $copy_command ~/.conkyrc .
+$copy_command ~/.oh-my-zsh .

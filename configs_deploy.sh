@@ -17,3 +17,4 @@ $copy_command .zshrc ~/
 $copy_command .vim/ ~/
 $copy_command awesome ~/.config/
 $copy_command .conkyrc ~/
+$copy_command .oh-my-zsh ~/
