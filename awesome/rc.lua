@@ -93,6 +93,10 @@ myawesomemenu = {
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
+vncmenu = {
+   { "Server", 'bash -c "echo 111111 | vncviewer -autopass dim-work-server::5900"' },
+   { "Win2012", 'bash -c "echo 111111 | vncviewer -autopass 10.0.0.36::5900"' },
+}
 awesome_dir = '/home/dimert/.config/awesome/'
 iconpath = awesome_dir .. 'themes/zenburn-wp/icons/'
 wallpaper_path = awesome_dir .. 'themes/zenburn-wp/wp/'
@@ -112,6 +116,7 @@ suspend_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedes
 set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "VNC", vncmenu, beautiful.awesome_icon },
                                     { "chrome", 'google-chrome',chrome_icon },
                                     { "rhythmbox", 'rhythmbox'},
                                     { "VirtualBox", 'VirtualBox'},
@@ -433,8 +438,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
-    { rule = { class = "Google-chrome" },
-      properties = { tag = tags[1][1] } },
+    --{ rule = { class = "Google-chrome" },
+    --  properties = { tag = tags[1][1] } },
     { rule = { class = "Gvim" },
       properties = { tag = tags[1][2] } },
     --{ rule = { class = "Terminator" },

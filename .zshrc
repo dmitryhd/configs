@@ -91,5 +91,8 @@ hash -d nms=~/NMS/nms_app/
 hash -d usb=/media/usb01
 hash -d data=/media/data_drive/
 hash -d conf=~/repos/configs/
+hash -d vac=~/repos/vacancy_analysis
 
 export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
+
+zssh() ssh "$@" -t zsh

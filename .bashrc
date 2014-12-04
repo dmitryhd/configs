@@ -24,3 +24,6 @@ HISTIGNORE='ls:bg:fg:history'
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
+
+export NVM_DIR="/home/dimert/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

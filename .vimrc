@@ -11,8 +11,8 @@ filetype off  "обязательно!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 "Bundle 'Lokaltog/vim-powerline'
-Plugin 'bling/vim-airline'
-Bundle 'tpope/vim-fugitive'
+"Plugin 'bling/vim-airline'
+"Bundle 'tpope/vim-fugitive'
 Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
 " Code checker, pylint
@@ -25,22 +25,22 @@ endif
 source ~/.vimrc_functions
 
 " ------------------ Airline
-let g:airline_theme='solarized'
-let g:airline_powerline_fonts = 1
-let g:airline_enable_syntastic=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
+"let g:airline_theme='solarized'
+"let g:airline_powerline_fonts = 1
+"let g:airline_enable_syntastic=1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#syntastic#enabled = 1
+"let g:airline#extensions#tagbar#enabled = 1
 
 let NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1
 let NERDTreeDirArrows=1
 let NERDTreeShowHidden=1
 
-set makeprg=python3\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+"set makeprg=python3\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+"set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
-let g:syntastic_python_python_exec = '/usr/bin/python3'
+"let g:syntastic_python_python_exec = '/usr/bin/python3'
 " тут будем добавлять наши расширения
 
 filetype plugin indent on
@@ -48,16 +48,15 @@ filetype plugin indent on
 " CODE STYLE
 "------------------
 " РАЗМЕР отступов
-set shiftwidth=2
+set shiftwidth=4
 " Размеры табуляций
-set tabstop=2
-set softtabstop=2
+set tabstop=4
+set softtabstop=4
 set completeopt=longest,menuone
 " python pep 8!
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 foldmethod=indent
 autocmd Filetype html setlocal expandtab tabstop=4 shiftwidth=4 foldmethod=indent
 
-"set textwidth=80
 "disable wrap of string
 set wrapmargin=0
 set foldlevelstart=99
@@ -69,7 +68,6 @@ vnoremap -# :s#^\###<cr>
 
 set viminfo='200,h,%
 set history=1000                    " Store a ton of history (default is 20)
-"set spell                           " Spell checking on
 set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
 if has('persistent_undo')
     set undofile                " So is persistent undo ...
@@ -101,7 +99,6 @@ autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.
 au FocusLost * :wa
 
 set fileencoding=utf-8
-"set fileencodings=utf-8,cp1251
 
 if has("win32") || has("win16")
   set ffs=dos,unix,mac
@@ -111,7 +108,6 @@ endif
 
 set number
 set lz
-"set nocompatible
 " включим автоотступы для новых строк
 set ai
 " включим отступы в стиле Си
@@ -140,15 +136,6 @@ syntax on
 filetype indent on
 filetype on
 filetype plugin on
-
-
-" highlight extra whitespaces!
-" highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-" match ExtraWhitespace /\s\+$/
-" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-" autocmd BufWinLeave * call clearmatches()
 
 let python_highlight_all=1
 " autocmd FileType python set omnifunc=pythoncomplete#te
@@ -201,18 +188,10 @@ if has('gui_running')
   endif
   "----------------------
   set guioptions-=T
-  "set guioptions-=m  "remove menu bar
   set guioptions-=m  "remove menu bar
   set laststatus=2
   "set showmatch
   "======================
-  "encoding change menu
-  set wildmenu
-  set wcm=<Tab>
-  menu Encoding.CP1251   :e ++enc=cp1251<CR>
-  menu Encoding.CP866    :e ++enc=cp866<CR>
-  menu Encoding.KOI8-U   :e ++enc=koi8-u<CR>
-  menu Encoding.UTF-8    :e ++enc=utf-8<CR>
   set lines=999 columns=999  " maximize window
 else
   set nocursorline
