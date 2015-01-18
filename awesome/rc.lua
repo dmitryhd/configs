@@ -110,14 +110,14 @@ shutdown_icon = iconpath .. 'shutdown.png'
 terminal_icon = iconpath .. 'terminal.png'
 wallpaper_icon = iconpath .. 'wp.png'
 
-reboot_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart'
-shutdown_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop'
+reboot_command = 'sudo reboot'
+shutdown_command = 'sudo shutdown -h now'
 suspend_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend'
 set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "VNC", vncmenu, beautiful.awesome_icon },
-                                    { "chrome", 'google-chrome',chrome_icon },
+                                    { "chrome", 'chromium-browser',chrome_icon },
                                     { "rhythmbox", 'rhythmbox'},
                                     { "VirtualBox", 'VirtualBox'},
                                     { "random-wp", set_random_wp_command, wallpaper_icon },
