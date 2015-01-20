@@ -42,9 +42,9 @@ set noundofile
 " ----------------------
 " Section: Keymaps
 " ----------------------
-nmap <C-s> :w<CR>
-imap <C-s> :w<CR>
-vmap <C-s> :w<CR>
+nmap <C-s> :wa<CR>
+imap <C-s> :wa<CR>
+vmap <C-s> :wa<CR>
 
 " tab navigation
 nmap <C-t> :tabnew<CR>
@@ -78,7 +78,8 @@ autocmd VimLeave * nested if (!isdirectory($HOME . "/.vim")) |
 autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.vim") |
     \ execute "source " . $HOME . "/.vim/Session.vim"
 
-
+" Highlight word under cursor
+autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 " ----------------------
 " Section: Plugins
 " ----------------------

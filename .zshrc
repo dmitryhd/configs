@@ -81,6 +81,11 @@ export PATH="/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+DIRSTACKSIZE=8
+setopt autopushd pushdminus pushdsilent pushdtohome
+alias dh='dirs -v'
+
 alias pylintlocal="pylint -rn *.py | grep -v 'Locally disabling' "
 alias pylintscore="pylint *.py | grep 'our code has been rated' "
 alias usbmount="sudo mount /media/usb01"
