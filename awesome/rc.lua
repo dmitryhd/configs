@@ -117,7 +117,7 @@ set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "VNC", vncmenu, beautiful.awesome_icon },
-                                    { "chrome", 'chromium-browser',chrome_icon },
+                                    { "chrome", 'google-chrome',chrome_icon },
                                     { "rhythmbox", 'rhythmbox'},
                                     { "VirtualBox", 'VirtualBox'},
                                     { "random-wp", set_random_wp_command, wallpaper_icon },
@@ -484,7 +484,7 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 --awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
 awful.util.spawn_with_shell("run-once.sh nm-applet")
 awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/")
---awful.util.spawn_with_shell("run-once.sh google-chrome")
+awful.util.spawn_with_shell("run-once.sh google-chrome")
 awful.util.spawn_with_shell("run-once.sh gvim")
 awful.util.spawn_with_shell("run-once.sh thunar --daemon")
 awful.util.spawn_with_shell("run-once.sh conky")
