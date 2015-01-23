@@ -8,7 +8,6 @@ require("beautiful")
 require("naughty")
 require("wicked")
 require("vicious")
-
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -488,4 +487,5 @@ awful.util.spawn_with_shell("run-once.sh google-chrome")
 awful.util.spawn_with_shell("run-once.sh gvim")
 awful.util.spawn_with_shell("run-once.sh thunar --daemon")
 awful.util.spawn_with_shell("run-once.sh conky")
+awful.util.spawn_with_shell("xdg-mime default Thunar.desktop inode/directory")
 -- awful.util.spawn_with_shell("terminator")
