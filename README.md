@@ -7,6 +7,9 @@ This repo contains configs for:
 - **Vim**
 - **Zsh**
 - **Bash**
+- **Git**
+- **Conky**
+
 
 To install all configs on you system execute:
 
