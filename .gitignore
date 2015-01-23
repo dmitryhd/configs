@@ -1,1 +1,8 @@
 Session.vim
+*.pyc
+*.tgz
+.RData
+.Rhistory
+__pycache__
+.coverage
+profile.out

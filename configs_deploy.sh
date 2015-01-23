@@ -17,3 +17,5 @@ $copy_command_v dmitryhd.zsh-theme ~/.oh-my-zsh/themes/dmitryhd.zsh-theme
 $copy_command .vim/ ~/
 $copy_command awesome ~/.config/
 $copy_command_v .conkyrc ~/
+$copy_command_v .gitignore ~/
+$copy_command_v .gitconfig ~/
