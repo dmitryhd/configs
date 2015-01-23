@@ -122,6 +122,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "random-wp", set_random_wp_command, wallpaper_icon },
                                     { "firefox", 'firefox'},
                                     { "Debian", debian.menu.Debian_menu.Debian },
+                                    { "Параметры системы", "gnome-control-center"},
                                     { "open terminal", terminal, terminal_icon},
                                     { "gvim", 'gvim', gvim_icon },
                                     { "thunar", 'thunar', folder_icon},
@@ -488,4 +489,5 @@ awful.util.spawn_with_shell("run-once.sh gvim")
 awful.util.spawn_with_shell("run-once.sh thunar --daemon")
 awful.util.spawn_with_shell("run-once.sh conky")
 awful.util.spawn_with_shell("xdg-mime default Thunar.desktop inode/directory")
+awful.util.spawn_with_shell("gnome-settings-daemon")
 -- awful.util.spawn_with_shell("terminator")
