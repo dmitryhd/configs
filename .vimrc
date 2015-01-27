@@ -108,3 +108,15 @@ if has('gui_running')
     set colorcolumn=80
     highlight ColorColumn guibg=#3f3f3f
 endif
+
+" ----------------------
+" Section: Scripts
+" ----------------------
+function! InsertPythonTest() 
+    r~/.vim/templates/python_test.py
+endfunction
+
+function! InsertPythonMain() 
+    r~/.vim/templates/python_main.py
+endfunction
+

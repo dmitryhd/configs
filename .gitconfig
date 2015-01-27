@@ -7,5 +7,3 @@
 	default = simple
 [color]
 	ui = true
-[core]
-	excludesfile = /home/dimert/.gitignore
