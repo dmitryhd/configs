@@ -57,9 +57,15 @@ alias pylintscore="pylint *.py | grep 'our code has been rated' "
 alias usbmount="sudo mount /media/usb01"
 alias usbumount="sudo umount /media/usb01"
 alias gvimr="gvim --remote-tab"
+
+# GIT alias
 alias gist="git status"
 alias gid="git diff"
+alias gico="git commit -a -m "
 alias gitlog="git log --oneline"
+
+# 
+alias cfgchange="cd ~conf && ./configs_upload.sh && git commit -a -m 'changed' && git push && cd ~1"
 
 hash -d nms=~/NMS/
 hash -d usb=/media/usb01
