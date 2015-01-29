@@ -65,7 +65,9 @@ alias gico="git commit -a -m "
 alias gitlog="git log --oneline"
 
 # 
-alias cfgchange="cd ~conf && ./configs_upload.sh && git commit -a -m 'changed' && git push && cd ~1"
+alias confchange="cd ~conf && ./configs_upload.sh && git commit -a -m 'changed' && git push && git push github master && cd ~1"
+
+alias zsh-reload="source ~/.zshrc"
 
 hash -d nms=~/NMS/
 hash -d usb=/media/usb01
