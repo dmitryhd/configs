@@ -21,6 +21,10 @@ set number
 set autochdir
 set autoread
 
+set ruler	" Show row and column ruler information
+set autowriteall	# Auto-write all file changes
+
+ 
 " Folding
 set foldmethod=indent
 set foldlevelstart=99
