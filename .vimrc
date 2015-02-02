@@ -46,6 +46,11 @@ set noundofile
 " ----------------------
 " Section: Keymaps
 " ----------------------
+let mapleader=','
+
+nnoremap <leader>q :q <CR>
+nnoremap <leader>w :w <CR>
+
 nmap <C-s> :wa<CR>
 imap <C-s> :wa<CR>
 vmap <C-s> :wa<CR>
