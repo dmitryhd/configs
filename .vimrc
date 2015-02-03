@@ -22,7 +22,7 @@ set autochdir
 set autoread
 
 set ruler	" Show row and column ruler information
-set autowriteall	# Auto-write all file changes
+set autowriteall	" Auto-write all file changes
 
  
 " Folding
@@ -50,6 +50,7 @@ let mapleader=','
 
 nnoremap <leader>q :q <CR>
 nnoremap <leader>w :w <CR>
+nnoremap <leader>v :vspit . <CR>
 
 nmap <C-s> :wa<CR>
 imap <C-s> :wa<CR>

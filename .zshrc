@@ -59,10 +59,12 @@ alias usbumount="sudo umount /media/usb01"
 alias gvimr="gvim --remote-tab"
 
 # GIT alias
-alias gist="git status"
-alias gid="git diff"
-alias gico="git commit -a -m "
-alias gitlog="git log --oneline"
+alias gitst="git diff --stat"
+alias gitdi="git diff"
+alias gitci="git commit -a -m "
+alias gitlo="git log"
+alias gitbr="git branch -v"
+alias githist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 
 # 
 alias confchange="cd ~conf && ./configs_upload.sh && git commit -a -m 'changed' && git push && git push github master && cd ~1"
