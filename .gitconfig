@@ -2,7 +2,7 @@
 	email = dmitryhd@gmail.com
 	name = Dmitriy Khodakov
 [credential]
-	helper = cache --timeout=360000
+	helper = cache --timeout=360000000
 [push]
 	default = simple
 [color]
