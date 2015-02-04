@@ -3,6 +3,9 @@
 " ----------------------
 " Section: Essential
 " ----------------------
+set noerrorbells
+set noeb vb t_vb=
+set novisualbell
 
 " tabsize
 set shiftwidth=4
@@ -117,6 +120,7 @@ if has('gui_running')
     " Highlight last column
     set colorcolumn=80
     highlight ColorColumn guibg=#3f3f3f
+    autocmd GUIEnter * set vb t_vb=
 endif
 
 " ----------------------

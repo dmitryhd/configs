@@ -1,15 +1,15 @@
 -- Standard awesome library
-require("awful")
-require("awful.autofocus")
-require("awful.rules")
+awful = require("awful")
+awful.autofocus = require("awful.autofocus")
+awful.rules = require("awful.rules")
 -- Theme handling library
-require("beautiful")
+beautiful = require("beautiful")
 -- Notification library
-require("naughty")
-require("wicked")
-require("vicious")
+naughty = require("naughty")
+wicked = require("wicked")
+vicious = require("vicious")
 -- Load Debian menu entries
-require("debian.menu")
+debian.menu = require("debian.menu")
 
 
 -- {{{ Error handling
@@ -24,7 +24,7 @@ end
 -- Handle runtime errors after startup
 do
     local in_error = false
-    awesome.add_signal("debug::error", function (err)
+    awesome.connect_signal("debug::error", function (err)
         -- Make sure we don't go into an endless error loop
         if in_error then return end
         in_error = true
@@ -141,29 +141,9 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
 -- Инициализация виджета
-memwidget = widget({ type = "textbox" })
--- Регистрация виджета
-vicious.register(memwidget, vicious.widgets.mem, "$1%", 60)
 -- Create a systray
 mysystray = widget({ type = "systray" })
-memimg = widget({ type = "imagebox" })
-memimg.image = image("/home/dimert/.config/awesome/themes/zenburn-wp/icons/widget_mem.png")
-batimg = widget({ type = "imagebox" })
-batimg.image = image("/home/dimert/.config/awesome/themes/zenburn-wp/icons/laptopbattery.png")
 -- --------------------------------------------------------
--- {{{ Battery state
--- Initialize widget
-batwidget = awful.widget.progressbar()
-batwidget:set_width(8)
-batwidget:set_height(14)
-batwidget:set_vertical(true)
-batwidget:set_background_color("#000000")
-batwidget:set_border_color(nil)
-batwidget:set_color("#00bfff")
-
--- {{{ Battery state
--- Initialize widget
-vicious.register(batwidget, vicious.widgets.bat, "$2", 120, "BAT0")
 -- --------------------------------------------------------
 -- KEYBOARD LAYOUT
 -- Keyboard map indicator and changer
