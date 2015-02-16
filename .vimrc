@@ -17,6 +17,8 @@ set nowrap
 set smarttab
 set smartindent
 
+autocmd BufRead,BufNewFile *.lua,*.c,*.cpp,*.h setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
 set ffs=unix,dos,mac
 set fileencoding=utf-8
 set number
@@ -115,7 +117,6 @@ if has('gui_running')
     set guioptions-=m  "remove menu bar
     set guioptions-=r  "remove right scroll bar
     set guioptions-=L  "remove right scroll bar
-    set lines=999 columns=999  " maximize window
     set showtabline=2 "always show tabline 
     " Highlight last column
     set colorcolumn=80

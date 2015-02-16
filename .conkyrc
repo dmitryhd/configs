@@ -49,22 +49,14 @@ color7 FFFFFF
 color8 FFFFFF
 
 TEXT
-$nodename - $sysname $kernel on $machine
+$nodename - $sysname $kernel
 $hr
-${color grey}Uptime:$color $uptime
 ${color grey}RAM Usage:$color $mem/$memmax - $memperc% ${membar 4}
-${color grey}Swap Usage:$color $swap/$swapmax - $swapperc% ${swapbar 4}
+${color grey}FS: $color${fs_used /}/${fs_size /} ${fs_bar 6 /}
 $hr
-${color grey}File systems:
- / $color${fs_used /}/${fs_size /} ${fs_bar 6 /}
-
-# Battery
-Battery remaining: ${execi 60 acpi -b} 
-$hr
+${color grey}${execi 60 acpi -b} 
 
 # Cpu, memory and disk IO
-\
-${voffset 20}
 ${goto 40}${cpugraph 26,190 FFFFFF FFFFFF -l}
 ${goto 40}Cpu:${alignr 39}${cpu}%
 
@@ -73,16 +65,3 @@ ${goto 40}Mem:${alignr 39}${memperc}%
 
 ${goto 40}${diskiograph 26,190 FFFFFF FFFFFF -l}
 ${goto 40}Disk I/O:${alignr 39}${diskio}
-# Network
-\
-${if_existing /proc/net/route wlan0}
-${goto 40}${upspeedgraph wlan0 26,80 FFFFFF FFFFFF}${goto 150}${downspeedgraph wlan0 26,80 FFFFFF FFFFFF}
-${goto 40}${color5}Up: ${color2}${upspeed wlan0}${color5}${goto 150}Down: ${color2}${downspeed wlan0}
-${goto 40}${color5}Sent: ${color2}${totalup wlan0}${color5}${goto 150}Received: ${color2}${totaldown wlan0}
-${endif}
-${if_existing /proc/net/route eth0}
-${goto 40}${upspeedgraph eth0 26,80 FFFFFF FFFFFF}${goto 150}${downspeedgraph eth0 26,80 FFFFFF FFFFFF}
-${goto 40}${color5}Up: ${color2}${upspeed eth0}${color5}${goto 150}Down: ${color2}${downspeed eth0}
-${goto 40}${color5}Sent: ${color2}${totalup eth0}${color5}${goto 150}Received: ${color2}${totaldown eth0}
-${endif}
-${hr 2}

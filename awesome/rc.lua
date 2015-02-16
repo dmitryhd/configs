@@ -10,7 +10,6 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -41,16 +40,10 @@ end
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 -- beautiful.init("/home/dimert/.config/awesome/themes/zenburn-wp/theme.lua")
 
--- This is used later as the default terminal and editor to run.
 terminal = "terminator"
 editor = os.getenv("vim") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -58,16 +51,7 @@ local layouts =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
-    --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    --awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -78,28 +62,26 @@ if beautiful.wallpaper then
     end
 end
 -- }}}
+--
+layout = {}
+layout.float = awful.layout.suit.floating
+layout.tile = awful.layout.suit.tile
+layout.max = awful.layout.suit.max
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
+tag_layout = {layout.max, layout.tile, layout.float, layout.tile, layout.float, layout.float}
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 'browser', 'vim', 'console', 'files', 'remote', 'mus'}, s, layouts[3])
+    tags[s] = awful.tag({ 'browser', 'work', 'work', 'files', 'other', 'mus'}, s, tag_layout)
 end
 -- }}}
 
--- {{{ Menu
--- Create a laucher widget and a main menu
-myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
-}
 
 awesome_dir = '/home/dmitryhd/.config/awesome/'
 iconpath = awesome_dir .. 'themes/zenburn-wp/icons/'
-wallpaper_path = awesome_dir .. 'themes/zenburn-wp/wp/'
+wallpaper_path = '/home/dmitryhd/wallpapers/'
 gvim_icon = iconpath .. 'vim-2.png'
 folder_icon = iconpath .. 'folder-close-icon.png'
 chrome_icon = iconpath .. 'chrome.png'
@@ -110,25 +92,30 @@ shutdown_icon = iconpath .. 'shutdown.png'
 terminal_icon = iconpath .. 'terminal.png'
 wallpaper_icon = iconpath .. 'wp.png'
 
-reboot_command = 'sudo reboot'
-shutdown_command = 'sudo shutdown -h now'
-suspend_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend'
+filemanager = 'nautilus --no-desktop'
+reboot_command = 'shutdown -r now'
+shutdown_command = 'shutdown -h now'
+suspend_command = 'sudo suspend'
 set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "chrome", 'google-chrome'},
-                                    { "rhythmbox", 'rhythmbox'},
-                                    { "VirtualBox", 'VirtualBox'},
-                                    { "random-wp", set_random_wp_command},
-                                    { "firefox", 'firefox'},
-                                    { "Параметры системы", "gnome-control-center"},
-                                    { "open terminal", terminal},
-                                    { "gvim", 'gvim'},
-                                    { "thunar", 'thunar'},
-                                    { "logoff", awesome.quit},
-                                    { "reboot", reboot_command},
-                                    { "suspend", suspend_command},
-                                    { "shutdown", shutdown_command},
+other_programs = {
+    { "random-wp", set_random_wp_command, wallpaper_icon},
+    { "GnomeCP", "gnome-control-center"},
+    { "Rhythmbox", 'rhythmbox'},
+    { "Terminator", terminal},
+}
+
+mymainmenu = awful.menu({ items = { { "Chrome", 'google-chrome', chrome_icon},
+                                    { "Firefox", 'firefox', beautiful.awesome_icon},
+                                    { "Vim", 'gvim', gvim_icon},
+                                    { "FileManager", filemanager, folder_icon},
+                                    { "Others", other_programs, beautiful.awesome_icon },
+                                    { '-----------------', nil},
+                                    { "Restart WM", awesome.restart, reboot_icon},
+                                    { "Quit", awesome.quit, logoff_icon}, 
+                                    { "Reboot", reboot_command, reboot_icon},
+                                    { "Suspend", suspend_command, suspend_icon},
+                                    { "Shutdown", shutdown_command, shutdown_icon},
                                   }
                         })
 
@@ -138,14 +125,17 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 -- --------------------------------------------------------
 -- KEYBOARD LAYOUT
 -- Keyboard map indicator and changer
+  keyboardwidget = wibox.widget.textbox()
   kbdcfg = {}
   kbdcfg.cmd = "setxkbmap"
   kbdcfg.layout = { "us", "ru" }
   kbdcfg.current = 1  -- us is our default layout
+  keyboardwidget:set_markup(" | <b><big>us</big></b> ")
   kbdcfg.switch = function ()
      kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
      local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
      os.execute( kbdcfg.cmd .. t )
+     keyboardwidget:set_markup(" | <b><big>" .. t .. "</big></b> ")
   end
   
 -- --------------------------------------------------------
@@ -156,6 +146,40 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
+
+-- CPU and Memory widget
+cpuwidget = wibox.widget.textbox()
+cpuwidget:set_markup(" | <tt>Cpu: <b><big>0</big></b></tt>%")    
+separatorwidget = wibox.widget.textbox()
+separatorwidget:set_text("|")
+statwidgettimer = timer({ timeout = 5 })    
+memwidget = wibox.widget.textbox()
+memwidget:set_markup(" | Memory: <b><big>0</big></b>%")
+statwidgettimer:connect_signal("timeout",    
+  function()    
+     fh = assert(io.popen("top -bn 2 -d 0.01 | grep '^%Cpu' | tail -n 1 | gawk '{printf \"%3.0f\", $2+$4+$6}'", "r"))    
+     cpuwidget:set_markup("<tt> | Cpu: <b>" .. fh:read("*l") .. "</b>%</tt>")    
+     fh:close()    
+     fh = assert(io.popen("free | grep Mem | gawk '{printf \"%3.0f\", $3/$2 * 100.0}'", "r"))    
+     memwidget:set_markup("<tt> | Memory: <b>" .. fh:read("*l") .. "</b>%</tt>")    
+     fh:close()    
+  end    
+)    
+statwidgettimer:start()
+
+-- Battery widget
+batterywidget = wibox.widget.textbox()
+batterywidget:set_text("")
+batterywidget:set_text(" | Battery ")    
+batterywidgettimer = timer({ timeout = 5 })    
+batterywidgettimer:connect_signal("timeout",    
+  function()    
+    -- fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))    
+    -- batterywidget:set_text(" |" .. fh:read("*l") .. " | ")    
+    -- fh:close()    
+  end    
+)    
+batterywidgettimer:start()
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -234,6 +258,11 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(cpuwidget)
+    right_layout:add(memwidget)
+    right_layout:add(batterywidget)
+    right_layout:add(keyboardwidget)
+    right_layout:add(separatorwidget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -295,6 +324,9 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "v", function () awful.util.spawn('gvim') end),
+    awful.key({ modkey,           }, "c", function () awful.util.spawn('google-chrome') end),
+    awful.key({ modkey,           }, "e", function () awful.util.spawn(filemanager) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -482,7 +514,29 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
-awful.util.spawn_with_shell("run-once.sh nm-applet")
-awful.util.spawn_with_shell("feh --bg-scale --randomize /home/dimert/.config/awesome/themes/zenburn-wp/wp/")
-awful.util.spawn_with_shell("gnome-settings-daemon")
+function run_once(prg, arg_string, pname, screen)
+    if not prg then
+        do return nil end
+    end
+
+    if not pname then
+       pname = prg
+    end
+
+    if not arg_string then 
+        awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. "' || (" .. prg .. ")",screen)
+    else
+        awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."' || (" .. prg .. " " .. arg_string .. ")",screen)
+    end
+end
+
+--run_once("google-chrome", nil, nil, 1)
+--run_once(terminal, nil, nil, 3)
+--run_once("gvim", nil, nil, 3)
+run_once("conky", nil, nil)
+run_once("nm-applet", nil, nil, 3)
+
+-- awful.util.spawn_with_shell("run-once.sh nm-applet")
+-- awful.util.spawn_with_shell("run-once.sh conky")
+awful.util.spawn_with_shell(set_random_wp_command)
 -- }}}
