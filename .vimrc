@@ -1,11 +1,10 @@
 " Vimrc by Dmitry Khodakov - 19.01.2015
 
+" snipmate is great!
+
 " ----------------------
 " Section: Essential
 " ----------------------
-set noerrorbells
-set noeb vb t_vb=
-set novisualbell
 
 " tabsize
 set shiftwidth=4
@@ -15,9 +14,9 @@ set expandtab  " always insert spaces
 set autoindent
 set nowrap
 set smarttab
-set smartindent
 
-autocmd BufRead,BufNewFile *.lua,*.c,*.cpp,*.h setlocal shiftwidth=2 tabstop=2 softtabstop=2
+" for python
+set nosmartindent
 
 set ffs=unix,dos,mac
 set fileencoding=utf-8
@@ -55,7 +54,8 @@ let mapleader=','
 
 nnoremap <leader>q :q <CR>
 nnoremap <leader>w :w <CR>
-nnoremap <leader>v :vspit . <CR>
+nnoremap <leader>e :e .<CR>
+nnoremap <leader>v :vsplit .<CR>
 
 nmap <C-s> :wa<CR>
 imap <C-s> :wa<CR>
@@ -117,11 +117,11 @@ if has('gui_running')
     set guioptions-=m  "remove menu bar
     set guioptions-=r  "remove right scroll bar
     set guioptions-=L  "remove right scroll bar
+    set lines=999 columns=999  " maximize window
     set showtabline=2 "always show tabline 
     " Highlight last column
     set colorcolumn=80
     highlight ColorColumn guibg=#3f3f3f
-    autocmd GUIEnter * set vb t_vb=
 endif
 
 " ----------------------
