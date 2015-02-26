@@ -28,7 +28,6 @@ set autoread
 set ruler	" Show row and column ruler information
 set autowriteall	" Auto-write all file changes
 
- 
 " Folding
 set foldmethod=indent
 set foldlevelstart=99
@@ -52,8 +51,9 @@ set noundofile
 " ----------------------
 let mapleader=','
 
-nnoremap <leader>q :q <CR>
-nnoremap <leader>w :w <CR>
+nnoremap <leader>q :wq <CR>
+nnoremap <leader>a :wqa <CR>
+nnoremap <leader>w :wa <CR>
 nnoremap <leader>e :e .<CR>
 nnoremap <leader>v :vsplit .<CR>
 
@@ -108,7 +108,18 @@ let NERDTreeShowHidden=1
 " ----------------------
 if has('gui_running')
     try
-        colorscheme sashaDark
+        "colorscheme BusyBee  
+        "colorscheme solarized  
+        "colorscheme badwolf  
+        
+        "colorscheme sashaDark
+        "colorscheme gruvbox  
+        "colorscheme hybrid
+        colorscheme molokai  
+        "colorscheme railscasts  
+        "colorscheme sublime  
+        "colorscheme codeschool  
+        "colorscheme zenburn
     catch
         colorscheme desert
     endtry

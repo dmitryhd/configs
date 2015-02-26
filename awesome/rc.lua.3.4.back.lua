@@ -1,3 +1,5 @@
+-- Dmitryhd config for awesome 3.4
+
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
@@ -59,15 +61,6 @@ layouts =
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.max,
-    --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
-    --awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -77,28 +70,25 @@ tags = {}
 for s = 1, screen.count() do
   -- Each screen has its own tag table.
   --  tags[s] = awful.tag({ 'browser', 'vim', 'console', 'files', 'other01', 'other02' }, s, layouts[2])
-  tags[s] = awful.tag({ 'browser', 'vim', 'console', 'files', 
-                        'VM', 'remote', 'other' }, s,
-                      { layouts[1], layouts[2], layouts[2], layouts[1],
-                        layouts[1], layouts[1], layouts[1]})
+  tags[s] = awful.tag({ 'browser', 'work', 'work', 'files', 'files', 
+                        'mus' }, s,
+                      { layouts[3], layouts[2], layouts[2], layouts[2],
+                        layouts[2], layouts[1] })
 end
 -- }}}
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
 }
 vncmenu = {
    { "Server", 'bash -c "echo 111111 | vncviewer -autopass dim-work-server::5900"' },
    { "Win2012", 'bash -c "echo 111111 | vncviewer -autopass 10.0.0.36::5900"' },
 }
+home_dir = '/home/dimert/'
 awesome_dir = '/home/dimert/.config/awesome/'
 iconpath = awesome_dir .. 'themes/zenburn-wp/icons/'
-wallpaper_path = awesome_dir .. 'themes/zenburn-wp/wp/'
+wallpaper_path = home_dir .. 'wallpapers/abstract/'
 gvim_icon = iconpath .. 'vim-2.png'
 folder_icon = iconpath .. 'folder-close-icon.png'
 chrome_icon = iconpath .. 'chrome.png'
@@ -114,22 +104,20 @@ shutdown_command = 'sudo shutdown -h now'
 suspend_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend'
 set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "VNC", vncmenu, beautiful.awesome_icon },
-                                    { "chrome", 'google-chrome',chrome_icon },
-                                    { "rhythmbox", 'rhythmbox'},
-                                    { "VirtualBox", 'VirtualBox'},
-                                    { "random-wp", set_random_wp_command, wallpaper_icon },
+mymainmenu = awful.menu({ items = { { "chrome", 'google-chrome', chrome_icon },
                                     { "firefox", 'firefox'},
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "Параметры системы", "gnome-control-center"},
-                                    { "open terminal", terminal, terminal_icon},
-                                    { "gvim", 'gvim', gvim_icon },
-                                    { "thunar", 'thunar', folder_icon},
-                                    { "logoff", awesome.quit, logoff_icon },
-                                    { "reboot", reboot_command, reboot_icon },
-                                    { "suspend", suspend_command, suspend_icon},
-                                    { "shutdown", shutdown_command, shutdown_icon },
+                                    { "rhythmbox", 'rhythmbox'},
+                                    { "Control Center", "gnome-control-center"},
+                                    { "gVim", 'gvim', gvim_icon },
+                                    { "FileManager", 'thunar', folder_icon},
+                                    { "random-wp", set_random_wp_command, wallpaper_icon },
+                                    { "VNC", vncmenu },
+                                    { "-------------", nil},
+                                    { "Restart WM", awesome.restart, beautiful.awesome_icon },
+                                    { "Logout", awesome.quit, logoff_icon },
+                                    { "Reboot", reboot_command, reboot_icon },
+                                    { "Suspend", suspend_command, suspend_icon},
+                                    { "Shutdown", shutdown_command, shutdown_icon },
                                   }
                         })
 
@@ -140,30 +128,9 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
--- Инициализация виджета
-memwidget = widget({ type = "textbox" })
--- Регистрация виджета
-vicious.register(memwidget, vicious.widgets.mem, "$1%", 60)
 -- Create a systray
 mysystray = widget({ type = "systray" })
-memimg = widget({ type = "imagebox" })
-memimg.image = image("/home/dimert/.config/awesome/themes/zenburn-wp/icons/widget_mem.png")
-batimg = widget({ type = "imagebox" })
-batimg.image = image("/home/dimert/.config/awesome/themes/zenburn-wp/icons/laptopbattery.png")
 -- --------------------------------------------------------
--- {{{ Battery state
--- Initialize widget
-batwidget = awful.widget.progressbar()
-batwidget:set_width(8)
-batwidget:set_height(14)
-batwidget:set_vertical(true)
-batwidget:set_background_color("#000000")
-batwidget:set_border_color(nil)
-batwidget:set_color("#00bfff")
-
--- {{{ Battery state
--- Initialize widget
-vicious.register(batwidget, vicious.widgets.bat, "$2", 120, "BAT0")
 -- --------------------------------------------------------
 -- KEYBOARD LAYOUT
 -- Keyboard map indicator and changer
@@ -185,7 +152,6 @@ vicious.register(batwidget, vicious.widgets.bat, "$2", 120, "BAT0")
       awful.button({ }, 1, function () kbdcfg.switch() end)
   ))
 -- --------------------------------------------------------
-
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -263,9 +229,6 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,
-        memwidget,
-        memimg,
-        batimg,
         kbdcfg.widget,
         s == 1 and mysystray or nil,
         mytasklist[s],
