@@ -1,4 +1,4 @@
-" Vimrc by Dmitry Khodakov - 19.01.2015
+" Vimrc by Dmitry Khodakov - 02.03.2015
 
 " snipmate is great!
 
@@ -53,7 +53,7 @@ set noundofile
 let mapleader=','
 
 nnoremap <leader>q :q <CR>
-nnoremap <leader>w :w <CR>
+nnoremap <leader>w :wa <CR>
 nnoremap <leader>e :e .<CR>
 nnoremap <leader>v :vsplit .<CR>
 
@@ -108,7 +108,8 @@ let NERDTreeShowHidden=1
 " ----------------------
 if has('gui_running')
     try
-        colorscheme sashaDark
+        "colorscheme sashaDark
+        colorscheme molokai
     catch
         colorscheme desert
     endtry
