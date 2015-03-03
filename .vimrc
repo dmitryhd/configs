@@ -1,4 +1,4 @@
-" Vimrc by Dmitry Khodakov - 19.01.2015
+" Vimrc by Dmitry Khodakov - 02.03.2015
 
 " snipmate is great!
 
@@ -21,13 +21,22 @@ set nosmartindent
 set ffs=unix,dos,mac
 set fileencoding=utf-8
 set number
-
+set showcmd 
 set autochdir
 set autoread
 
 set ruler	" Show row and column ruler information
 set autowriteall	" Auto-write all file changes
 
+set cursorline
+
+set wildmenu " visual autocomplete for command menu
+set lazyredraw          " redraw only when we need to.
+set showmatch           " highlight matching [{()}]
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+
+ 
 " Folding
 set foldmethod=indent
 set foldlevelstart=99
