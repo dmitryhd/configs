@@ -142,6 +142,7 @@ if has('gui_running')
     " Highlight last column
     set colorcolumn=80
     highlight ColorColumn guibg=#3f3f3f
+    set cursorline
 endif
 
 " ----------------------
