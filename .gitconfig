@@ -2,7 +2,7 @@
 	email = dmitryhd@gmail.com
 	name = Dmitriy Khodakov
 [credential]
-	helper = cache
+	helper = store
 [push]
 	default = simple
 [color]
