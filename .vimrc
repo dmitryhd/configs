@@ -36,6 +36,8 @@ set showmatch           " highlight matching [{()}]
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 
+set novisualbell
+
  
 " Folding
 set foldmethod=indent

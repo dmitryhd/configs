@@ -64,7 +64,7 @@ alias gvimr="gvim --remote-tab"
 alias gitst="git diff --stat"
 alias gitdi="git diff"
 alias gitci="git commit -a -m "
-alias gitlo="git log"
+alias gitlo="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short"
 alias gitbr="git branch -v"
 alias githist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 

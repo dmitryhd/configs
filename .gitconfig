@@ -7,3 +7,7 @@
 	default = simple
 [color]
 	ui = true
+[diff]
+	tool = gvimdiff
+[format]
+	pretty = short
