@@ -12,3 +12,5 @@
     interactive = true
     ui = true
     pager = true
+[core]
+	pager = cat
