@@ -2,12 +2,19 @@
 	email = dmitryhd@gmail.com
 	name = Dmitriy Khodakov
 [credential]
-	helper = cache
+	helper = store
 [push]
 	default = simple
-[color]
-	ui = true
 [diff]
 	tool = gvimdiff
 [format]
 	pretty = short
+[color]
+	ui = true
+    diff = true
+    status = true
+    branch = true
+    interactive = true
+    ui = true
+[core]
+	pager = cat

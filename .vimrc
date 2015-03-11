@@ -62,7 +62,8 @@ set noundofile
 " ----------------------
 let mapleader=','
 
-nnoremap <leader>q :q <CR>
+nnoremap <leader>q :wq <CR>
+nnoremap <leader>a :wqa <CR>
 nnoremap <leader>w :wa <CR>
 nnoremap <leader>e :e .<CR>
 nnoremap <leader>v :vsplit .<CR>
@@ -118,8 +119,18 @@ let NERDTreeShowHidden=1
 " ----------------------
 if has('gui_running')
     try
+        "colorscheme BusyBee  
+        "colorscheme solarized  
+        "colorscheme badwolf  
+        
         "colorscheme sashaDark
-        colorscheme molokai
+        "colorscheme gruvbox  
+        "colorscheme hybrid
+        colorscheme molokai  
+        "colorscheme railscasts  
+        "colorscheme sublime  
+        "colorscheme codeschool  
+        "colorscheme zenburn
     catch
         colorscheme desert
     endtry
@@ -133,6 +144,7 @@ if has('gui_running')
     " Highlight last column
     set colorcolumn=80
     highlight ColorColumn guibg=#3f3f3f
+    set cursorline
 endif
 
 " ----------------------
