@@ -5,12 +5,16 @@
 	helper = store
 [push]
 	default = simple
+[diff]
+	tool = gvimdiff
+[format]
+	pretty = short
 [color]
+	ui = true
     diff = true
     status = true
     branch = true
     interactive = true
     ui = true
-    pager = true
 [core]
 	pager = cat
