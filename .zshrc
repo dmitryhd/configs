@@ -47,15 +47,7 @@ alias gvimr="gvim --remote-tab"
 alias gitst="git diff --stat"
 alias gitdi="git diff"
 alias gitci="git commit -a -m "
-<<<<<<< HEAD
-alias gitco="git checkout"
-=======
-<<<<<<< HEAD
-alias gitlo="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short"
-=======
->>>>>>> fd68d861d3574ecc05ff7e32a54e81146d7e75cd
 alias gitlo="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short -40"
->>>>>>> b64db768ebabeac0f0d1d1d07ebe2596fef5d0ba
 alias gitbr="git branch -v"
 alias githist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 
