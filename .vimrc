@@ -63,10 +63,16 @@ set noundofile
 let mapleader=','
 
 nnoremap <leader>q :wq <CR>
+nnoremap <leader>t <C-w><C-w>
 nnoremap <leader>a :wqa <CR>
 nnoremap <leader>w :wa <CR>
 nnoremap <leader>e :e .<CR>
 nnoremap <leader>v :vsplit .<CR>
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 nmap <C-s> :wa<CR>
 imap <C-s> :wa<CR>
