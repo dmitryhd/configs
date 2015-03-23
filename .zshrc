@@ -37,7 +37,7 @@ DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
 alias dh='dirs -v'
 
-alias "pylint -rn --output-format=colorized"
+alias pylint="pylint -rn --output-format=colorized"
 alias pylintlocal="pylint -rn *.py | grep -v 'Locally disabling' "
 alias pylintscore="pylint *.py | grep 'our code has been rated' "
 alias usbmount="sudo mount /media/usb01"
@@ -66,5 +66,9 @@ hash -d conf=~/repos/configs/
 hash -d vac=~/repos/vacancy_analysis
 
 export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
+
+# aliases
+#pylint() pylint -rn --output-format=colorized "$@" | grep -v 'Locally disabling'
+
 
 zssh() ssh "$@" -t zsh
