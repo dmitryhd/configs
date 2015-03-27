@@ -164,3 +164,6 @@ function! InsertPythonMain()
     r~/.vim/templates/python_main.py
 endfunction
 
+function! InsertPythonColorPrint() 
+    r~/.vim/templates/python_color_print.py
+endfunction

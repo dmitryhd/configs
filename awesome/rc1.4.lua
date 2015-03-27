@@ -99,6 +99,8 @@ set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
 mymainmenu = awful.menu({ items = { { "chrome", 'google-chrome', chrome_icon },
                                     { "firefox", 'firefox'},
                                     { "MusicPlayer", "banshee"},
+                                    { "screenshot", "shutter"},
+                                    { "mysqlworkbench", "mysql-workbench"},
                                     { "Control Center", "gnome-control-center"},
                                     { "gVim", 'gvim', gvim_icon },
                                     { "FileManager", 'thunar', folder_icon},
