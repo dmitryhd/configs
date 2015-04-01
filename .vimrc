@@ -98,6 +98,7 @@ map <F12> :e .<CR>
 " ----------------------
 " Section: Actions
 " ----------------------
+au BufRead,BufNewFile *.md set filetype=markdown
 " Save on losing window focus
 au FocusLost * :wa
 

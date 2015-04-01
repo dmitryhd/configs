@@ -80,7 +80,8 @@ home_dir = '/home/dimert/'
 awesome_dir = '/home/dimert/.config/awesome/'
 iconpath = awesome_dir .. 'themes/zenburn-wp/icons/'
 wallpaper_path = home_dir .. 'wallpapers/abstract/'
-current_wp = wallpaper_path .. 'dark_aurora-wide.jpg'
+-- current_wp = wallpaper_path .. 'dark_aurora-wide.jpg'
+current_wp = wallpaper_path .. 'deep_within_2-wallpaper-1920x1080.jpg'
 gvim_icon = iconpath .. 'vim-2.png'
 folder_icon = iconpath .. 'folder-close-icon.png'
 chrome_icon = iconpath .. 'chrome.png'
@@ -95,6 +96,7 @@ reboot_command = 'sudo reboot'
 shutdown_command = 'sudo shutdown -h now'
 suspend_command = '/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend'
 set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
+set_specific_wp = 'feh --bg-scale ' .. current_wp
 
 mymainmenu = awful.menu({ items = { { "chrome", 'google-chrome', chrome_icon },
                                     { "firefox", 'firefox'},
@@ -105,6 +107,7 @@ mymainmenu = awful.menu({ items = { { "chrome", 'google-chrome', chrome_icon },
                                     { "gVim", 'gvim', gvim_icon },
                                     { "FileManager", 'thunar', folder_icon},
                                     { "random-wp", set_random_wp_command, wallpaper_icon },
+                                    { "specific-wp", set_specific_wp, wallpaper_icon },
                                     { "VNC", vncmenu },
                                     { "-------------", nil},
                                     { "Restart WM", awesome.restart, beautiful.awesome_icon },
@@ -440,11 +443,11 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 --awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -variant ',winkeys,winkeys' -option grp:alt_shift_toggle -option grp_led:caps -option terminate:ctrl_alt_bksp")
 awful.util.spawn_with_shell("run-once.sh nm-applet")
-awful.util.spawn_with_shell("feh --bg-scale " .. current_wp)
 awful.util.spawn_with_shell("run-once.sh google-chrome")
 awful.util.spawn_with_shell("run-once.sh gvim")
 awful.util.spawn_with_shell("run-once.sh thunar --daemon")
 awful.util.spawn_with_shell("run-once.sh conky")
 awful.util.spawn_with_shell("xdg-mime default Thunar.desktop inode/directory")
 awful.util.spawn_with_shell("gnome-settings-daemon")
+awful.util.spawn_with_shell(set_specific_wp)
 -- awful.util.spawn_with_shell("terminator")
