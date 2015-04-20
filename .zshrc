@@ -66,8 +66,11 @@ hash -d data=/media/data_drive/
 hash -d conf=~/repos/configs/
 hash -d vac=~/repos/vacancy_analysis
 
-export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
+#export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
 
+alias fuck='$(thefuck $(fc -ln -1))'
+# You can use whatever you want as an alias, like for mondays:
+alias FUCK='fuck'
 # aliases
 #pylint() pylint -rn --output-format=colorized "$@" | grep -v 'Locally disabling'
 

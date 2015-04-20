@@ -88,3 +88,7 @@ HISTCONTROL=ignoreboth
 HISTIGNORE='ls:bg:fg:history'
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
+alias fuck='$(thefuck $(fc -ln -1))'
+# You can use whatever you want as an alias, like for mondays:
+alias FUCK='fuck'
