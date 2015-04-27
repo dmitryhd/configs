@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="dmitryhd"
 
 DISABLE_AUTO_UPDATE="true"
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -66,7 +66,7 @@ hash -d data=/media/data_drive/
 hash -d conf=~/repos/configs/
 hash -d vac=~/repos/vacancy_analysis
 
-#export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
+export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
 
 alias fuck='$(thefuck $(fc -ln -1))'
 # You can use whatever you want as an alias, like for mondays:
