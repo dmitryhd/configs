@@ -122,10 +122,14 @@ let NERDTreeShowHidden=1
 
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
-
+let g:SuperTabMappingForward = 'c-n'
+let g:SuperTabMappingBackward = 'c-N' "(default value: '<s-tab>')
+        
 nnoremap <leader>t :CommandT <CR>
 map <leader>j :RopeGotoDefinition<CR>
 map <leader>r :RopeRename<CR>
+
+map <leader>c :RunTest<CR>
 " ----------------------
 " Section: GVIM
 " ----------------------
