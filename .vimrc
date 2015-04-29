@@ -16,7 +16,7 @@ set nowrap
 set smarttab
 
 " for python
-set nosmartindent
+"set nosmartindent
 
 set ffs=unix,dos,mac
 set fileencoding=utf-8
@@ -48,8 +48,8 @@ set scrolloff=3   " Minimum lines to keep above and below cursor
 set sidescrolloff=2
 
 syntax on
-filetype on
-filetype plugin on
+filetype on                          " try to detect filetypes
+filetype plugin indent on    " enable loading indent file for filetype
 
 " no special files
 set nobackup       "no backup files
@@ -167,4 +167,8 @@ endfunction
 
 function! InsertPythonColorPrint() 
     r~/.vim/templates/python_color_print.py
+endfunction
+
+function! TrailingSpaces()
+    %s/\s\+$//
 endfunction
