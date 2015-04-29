@@ -63,7 +63,6 @@ set noundofile
 let mapleader=','
 
 nnoremap <leader>q :wq <CR>
-nnoremap <leader>t <C-w><C-w>
 nnoremap <leader>a :wqa <CR>
 nnoremap <leader>w :wa <CR>
 nnoremap <leader>e :e .<CR>
@@ -121,6 +120,12 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeDirArrows=1
 let NERDTreeShowHidden=1
 
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+
+nnoremap <leader>t :CommandT <CR>
+map <leader>j :RopeGotoDefinition<CR>
+map <leader>r :RopeRename<CR>
 " ----------------------
 " Section: GVIM
 " ----------------------
