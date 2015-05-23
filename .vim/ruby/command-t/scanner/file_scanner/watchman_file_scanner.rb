@@ -18,10 +18,10 @@ module CommandT
         WatchmanError = Class.new(::RuntimeError)
 
         def paths!
-          sockname = Watchman::Utils.load(
-            %x{watchman --output-encoding=bser get-sockname}
-          )['sockname']
-          raise WatchmanError, 'get-sockname failed' unless $?.exitstatus.zero?
+          sockname = extract_value(
+            Watchman::Utils.load(get_raw_sockname),
+            'sockname'
+          )
 
           UNIXSocket.open(sockname) do |socket|
             root = Pathname.new(@path).realpath.to_s
@@ -32,7 +32,7 @@ module CommandT
 
               # root_restrict_files setting may prevent Watchman from working
               # or enforce_root_files/root_files (>= version 3.1)
-              raise WatchmanError, result['error'] if result.has_key?('error')
+              extract_value(result)
             end
 
             query = ['query', root, {
@@ -42,13 +42,24 @@ module CommandT
             paths = Watchman::Utils.query(query, socket)
 
             # could return error if watch is removed
-            raise WatchmanError, paths['error'] if paths.has_key?('error')
-
-            paths['files']
+            extract_value(paths, 'files')
           end
         rescue Errno::ENOENT, WatchmanError
           # watchman executable not present, or unable to fulfil request
           super
+        end
+
+      private
+
+        def extract_value(object, key = nil)
+          raise WatchmanError, object['error'] if object.has_key?('error')
+          object[key]
+        end
+
+        def get_raw_sockname
+          raw_sockname = %x{watchman --output-encoding=bser get-sockname}
+          raise WatchmanError, 'get-sockname failed' if !$?.exitstatus.zero?
+          raw_sockname
         end
       end # class WatchmanFileScanner
     end # class FileScanner

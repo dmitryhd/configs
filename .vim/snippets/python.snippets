@@ -25,6 +25,14 @@ snippet cl
 			${5:super($1, self).__init__()}
 			self.$4 = $4
 			${6}
+# New Class
+snippet test
+	class ${1:ClassName}(${2:unittest.TestCase}):
+		"""${3:Test case: $1}"""
+
+		def test_(self):
+			""" test case """
+			self.assertTrue(False)
 # New Function
 snippet def
 	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):

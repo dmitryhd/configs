@@ -1,7 +1,6 @@
 " Vimrc by Dmitry Khodakov - 02.03.2015
 
 " snipmate is great!
-
 " ----------------------
 " Section: Essential
 " ----------------------
