@@ -53,6 +53,7 @@ alias gitco="git checkout "
 alias gitlo="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short -40"
 alias gitbr="git branch -v"
 alias githist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+alias gittags='git tag -n'
 
 alias h="history | tail -30"
 # 
@@ -68,9 +69,6 @@ hash -d vac=~/repos/vacancy_analysis
 
 export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
 
-alias fuck='$(thefuck $(fc -ln -1))'
-# You can use whatever you want as an alias, like for mondays:
-alias FUCK='fuck'
 # aliases
 #pylint() pylint -rn --output-format=colorized "$@" | grep -v 'Locally disabling'
 
