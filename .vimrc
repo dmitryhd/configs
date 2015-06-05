@@ -162,6 +162,9 @@ if has('gui_running')
     set colorcolumn=80
     highlight ColorColumn guibg=#3f3f3f
     set cursorline
+
+else
+    colorscheme molokai
 endif
 
 " ----------------------
