@@ -20,7 +20,7 @@ snippet for
 # New Class
 snippet cl
 	class ${1:ClassName}(${2:object}):
-		"""${3:docstring for $1}"""
+		""" ${3:$1: .} """
 		def __init__(self, ${4:arg}):
 			${5:super($1, self).__init__()}
 			self.$4 = $4
@@ -36,7 +36,7 @@ snippet test
 # New Function
 snippet def
 	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
-		"""${3:docstring for $1}"""
+		""" ${3:$1:} """
 		${4:pass}
 snippet deff
 	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
@@ -99,3 +99,55 @@ snippet ""
 # pylint disable
 snippet pylint
 	# pylint: disable=${1}
+
+snippet TestCase
+	#!/usr/bin/env python3
+
+	import unittest
+
+
+	class TestS(unittest.TestCase):
+		def test_smth(self):
+			self.assertTrue(True)
+
+
+	if __name__ == '__main__':
+		unittest.main()
+
+snippet color_print
+    from colorama import init, Fore;
+
+	def color_print(message, color):
+		color_const = None
+		colors = {'red': Fore.RED, 'yellow': Fore.YELLOW, 'blue': Fore.BLUE,
+				  'green': Fore.GREEN}
+		print(colors[color], message, Fore.RESET)
+	
+snippet main 
+	#!/usr/bin/env python3
+
+	import argparse
+
+
+	def parse_args():
+		""" Process command line arguments. """
+		parser = argparse.ArgumentParser()
+		parser.add_argument("-d", "--db_name", type=str,
+							default='data/vac.db',
+							help="database name")
+		parser.add_argument("-c", "--compress",
+							help="do compression",
+							action="store_true")
+		args = parser.parse_args()
+		if args.compress:
+			args.db_name = 'xxx'
+		return args
+
+
+	def main():
+		""" """
+		pass
+
+	if __name__ == '__main__':
+		main()
+

@@ -33,6 +33,8 @@ set wildmenu " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
 set incsearch           " search as characters are entered
+set ignorecase 
+set smartcase
 set hlsearch            " highlight matches
 
 set novisualbell
@@ -61,7 +63,7 @@ set noundofile
 " ----------------------
 let mapleader=','
 
-nnoremap <leader>q :wq <CR>
+nnoremap <leader>q :call Quit() <CR>
 nnoremap <leader>a :wqa <CR>
 nnoremap <leader>w :wa <CR>
 nnoremap <leader>e :e .<CR>
@@ -180,3 +182,13 @@ endfunction
 function! TrailingSpaces()
     %s/\s\+$//
 endfunction
+
+function! Quit()
+    try
+        wq!
+    catch
+        q
+    endtry
+endfunction
+
+set viminfo='10,<1000,s100,:200,n~/.vim/viminfo
