@@ -81,9 +81,9 @@ end
 -- }}}
 
 
-awesome_dir = '/home/dmitryhd/.config/awesome/'
+awesome_dir = '/home/dimert/.config/awesome/'
 iconpath = awesome_dir .. 'themes/zenburn-wp/icons/'
-wallpaper_path = '/home/dmitryhd/wallpapers/'
+wallpaper_path = '/home/dimert/wallpapers/abstract/'
 gvim_icon = iconpath .. 'vim-2.png'
 folder_icon = iconpath .. 'folder-close-icon.png'
 chrome_icon = iconpath .. 'chrome.png'
@@ -297,6 +297,11 @@ globalkeys = awful.util.table.join(
     awful.key({ 'Mod1', 'Control' }, "Up",     awful.tag.viewnext       ),
 
     awful.key({ modkey,           }, "j",
+        function ()
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ 'Mod1',           }, "Tab",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
@@ -535,10 +540,13 @@ end
 --run_once("google-chrome", nil, nil, 1)
 --run_once(terminal, nil, nil, 3)
 --run_once("gvim", nil, nil, 3)
-run_once("conky", nil, nil)
-run_once("nm-applet", nil, nil, 3)
+--run_once("conky", nil, nil)
+--run_once("nm-applet", nil, nil, 3)
 
 -- awful.util.spawn_with_shell("run-once.sh nm-applet")
 -- awful.util.spawn_with_shell("run-once.sh conky")
 awful.util.spawn_with_shell(set_random_wp_command)
+awful.util.spawn_with_shell("run-once.sh nm-applet")
+awful.util.spawn_with_shell("run-once.sh conky")
+awful.util.spawn_with_shell("gnome-settings-daemon")
 -- }}}

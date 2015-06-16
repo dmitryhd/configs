@@ -1,4 +1,9 @@
 " Vimrc by Dmitry Khodakov - 02.03.2015
+"
+" install:
+" cd ~/.vim/ruby/command-t
+" ruby extconf.rb 
+" make 
 
 " snipmate is great!
 " ----------------------
@@ -162,8 +167,9 @@ if has('gui_running')
     set colorcolumn=80
     highlight ColorColumn guibg=#3f3f3f
     set cursorline
-
 else
+    " console color scheme
+    set t_Co=256
     colorscheme molokai
 endif
 

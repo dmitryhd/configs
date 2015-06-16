@@ -1,6 +1,8 @@
 Session.vim
 *.pyc
 *.tgz
+.vim/ruby/*
+.vim/ruby/command-t/*
 .RData
 .Rhistory
 __pycache__
