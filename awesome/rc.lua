@@ -83,7 +83,7 @@ end
 
 awesome_dir = '/home/dimert/.config/awesome/'
 iconpath = awesome_dir .. 'themes/zenburn-wp/icons/'
-wallpaper_path = '/home/dimert/wallpapers/abstract/'
+wallpaper_path = '/home/dimert/wallpapers/'
 gvim_icon = iconpath .. 'vim-2.png'
 folder_icon = iconpath .. 'folder-close-icon.png'
 chrome_icon = iconpath .. 'chrome.png'
@@ -97,7 +97,7 @@ wallpaper_icon = iconpath .. 'wp.png'
 filemanager = 'nautilus --no-desktop'
 reboot_command = 'shutdown -r now'
 shutdown_command = 'shutdown -h now'
-suspend_command = 'sudo suspend'
+suspend_command = 'sudo pm-suspend'
 set_random_wp_command = 'feh --bg-scale --randomize ' .. wallpaper_path
 
 other_programs = {
@@ -107,11 +107,61 @@ other_programs = {
     { "Terminator", terminal},
 }
 
+lfs = require"lfs"
+themes_dir = awesome_dir .. 'themes/'
+
+function isdir(fn)
+    return (lfs.attributes(fn,"mode") == "directory")
+end
+
+-- Return list of number, directory name 
+function scandir(directory)
+    local i, t, popen = 0, {}, io.popen
+    for filename in popen('ls -a "'..directory..'"'):lines() do
+        if isdir(directory .. filename) and filename ~= '..' and filename ~= '.' then
+            i = i + 1
+            t[i] = filename
+        end
+    end
+    return t
+end
+
+-- Return list of files, directory name 
+function ls(directory)
+    local i, t, popen = 0, {}, io.popen
+    for filename in popen('ls -a "'..directory..'"'):lines() do
+        if filename ~= '..' and filename ~= '.' then
+            i = i + 1
+            t[i] = filename
+        end
+    end
+    return t
+end
+
+themes_menu = {}
+themes = scandir(themes_dir)
+for i, theme in pairs( themes )
+do
+    themes_menu[i] = {theme, function () beautiful.init(themes_dir .. theme .. '/theme.lua') end}
+end
+
+wp_menu = {}
+wps = ls(wallpaper_path)
+for i, wp in pairs( wps )
+do
+    wp_menu[i] = {wp, 'feh --bg-scale ' .. wallpaper_path .. wp}
+end
+
+
+
+
 mymainmenu = awful.menu({ items = { { "Chrome", 'google-chrome', chrome_icon},
                                     { "Firefox", 'firefox', beautiful.awesome_icon},
                                     { "Vim", 'gvim', gvim_icon},
                                     { "FileManager", filemanager, folder_icon},
-                                    { "Others", other_programs, beautiful.awesome_icon },
+                                    { "Others", other_programs, beautiful.awesome_icon},
+                                    { 'themes', themes_menu},
+                                    { 'wallpapers', wp_menu},
                                     { '-----------------', nil},
                                     { "Restart WM", awesome.restart, reboot_icon},
                                     { "Quit", awesome.quit, logoff_icon}, 
