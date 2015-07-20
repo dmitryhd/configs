@@ -107,7 +107,7 @@ other_programs = {
     { "Terminator", terminal},
 }
 
-lfs = require"lfs"
+-- lfs = require"lfs"
 themes_dir = awesome_dir .. 'themes/'
 
 function isdir(fn)
@@ -138,19 +138,20 @@ function ls(directory)
     return t
 end
 
-themes_menu = {}
-themes = scandir(themes_dir)
-for i, theme in pairs( themes )
-do
-    themes_menu[i] = {theme, function () beautiful.init(themes_dir .. theme .. '/theme.lua') end}
-end
 
-wp_menu = {}
-wps = ls(wallpaper_path)
-for i, wp in pairs( wps )
-do
-    wp_menu[i] = {wp, 'feh --bg-scale ' .. wallpaper_path .. wp}
-end
+-- themes_menu = {}
+-- themes = scandir(themes_dir)
+-- for i, theme in pairs( themes )
+-- do
+--     themes_menu[i] = {theme, function () beautiful.init(themes_dir .. theme .. '/theme.lua') end}
+-- end
+-- 
+-- wp_menu = {}
+-- wps = ls(wallpaper_path)
+-- for i, wp in pairs( wps )
+-- do
+--     wp_menu[i] = {wp, 'feh --bg-scale ' .. wallpaper_path .. wp}
+-- end
 
 
 
@@ -160,7 +161,7 @@ mymainmenu = awful.menu({ items = { { "Chrome", 'google-chrome', chrome_icon},
                                     { "Vim", 'gvim', gvim_icon},
                                     { "FileManager", filemanager, folder_icon},
                                     { "Others", other_programs, beautiful.awesome_icon},
-                                    { 'themes', themes_menu},
+--                                    { 'themes', themes_menu},
                                     { 'wallpapers', wp_menu},
                                     { '-----------------', nil},
                                     { "Restart WM", awesome.restart, reboot_icon},
