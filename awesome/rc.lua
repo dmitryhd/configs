@@ -51,8 +51,9 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
-    awful.layout.suit.floating,
+    awful.layout.suit.max.fullscreen,
     awful.layout.suit.tile,
+    awful.layout.suit.floating,
     awful.layout.suit.max,
 }
 -- }}}
@@ -81,9 +82,9 @@ end
 -- }}}
 
 
-awesome_dir = '/home/dimert/.config/awesome/'
+awesome_dir = os.getenv ( "HOME" ) .. '/.config/awesome/'
 iconpath = awesome_dir .. 'themes/zenburn-wp/icons/'
-wallpaper_path = '/home/dimert/wallpapers/'
+wallpaper_path = os.getenv ( "HOME" ) .. '/wallpapers/'
 gvim_icon = iconpath .. 'vim-2.png'
 folder_icon = iconpath .. 'folder-close-icon.png'
 chrome_icon = iconpath .. 'chrome.png'
@@ -107,6 +108,7 @@ other_programs = {
     { "Terminator", terminal},
 }
 
+--[[
 -- lfs = require"lfs"
 themes_dir = awesome_dir .. 'themes/'
 
@@ -138,7 +140,6 @@ function ls(directory)
     return t
 end
 
-
 -- themes_menu = {}
 -- themes = scandir(themes_dir)
 -- for i, theme in pairs( themes )
@@ -152,23 +153,23 @@ end
 -- do
 --     wp_menu[i] = {wp, 'feh --bg-scale ' .. wallpaper_path .. wp}
 -- end
+--]]
 
 
 
 
-mymainmenu = awful.menu({ items = { { "Chrome", 'google-chrome', chrome_icon},
-                                    { "Firefox", 'firefox', beautiful.awesome_icon},
-                                    { "Vim", 'gvim', gvim_icon},
-                                    { "FileManager", filemanager, folder_icon},
-                                    { "Others", other_programs, beautiful.awesome_icon},
---                                    { 'themes', themes_menu},
-                                    { 'wallpapers', wp_menu},
+mymainmenu = awful.menu({ items = { { "Chrome", 'google-chrome-stable'},
+                                    { "terminal", 'terminator'},
+                                    { "Firefox", 'firefox'},
+                                    { "Vim", 'gvim'},
+                                    { "FileManager", filemanager},
+                                    { "Others", other_programs},
                                     { '-----------------', nil},
-                                    { "Restart WM", awesome.restart, reboot_icon},
-                                    { "Quit", awesome.quit, logoff_icon}, 
-                                    { "Reboot", reboot_command, reboot_icon},
-                                    { "Suspend", suspend_command, suspend_icon},
-                                    { "Shutdown", shutdown_command, shutdown_icon},
+                                    { "Restart WM", awesome.restart},
+                                    { "Quit", awesome.quit}, 
+                                    { "Reboot", reboot_command},
+                                    { "Suspend", suspend_command},
+                                    { "Shutdown", shutdown_command},
                                   }
                         })
 

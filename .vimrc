@@ -201,3 +201,5 @@ function! Quit()
 endfunction
 
 set viminfo='10,<1000,s100,:200,n~/.vim/viminfo
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=

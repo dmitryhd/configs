@@ -8,3 +8,5 @@ Session.vim
 __pycache__
 .coverage
 profile.out
+.vim/ruby/command-t/*.so
+.vim/ruby/command-t/Makefile
