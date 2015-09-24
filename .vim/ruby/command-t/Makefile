@@ -2,7 +2,7 @@
 SHELL = /bin/sh
 
 # V=0 quiet, V=1 verbose.  other values don't work.
-V = 1
+V = 0
 Q1 = $(V:1=)
 Q = $(Q1:0=@)
 ECHO1 = $(V:1=@:)
@@ -11,29 +11,28 @@ ECHO = $(ECHO1:0=@echo)
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /usr/include
-hdrdir = /usr/include
-arch_hdrdir = /usr/include
+topdir = /usr/include/ruby-2.1.0
+hdrdir = $(topdir)
+arch_hdrdir = /usr/include/x86_64-linux-gnu/ruby-2.1.0
 PATH_SEPARATOR = :
 VPATH = $(srcdir):$(arch_hdrdir)/ruby:$(hdrdir)/ruby
 prefix = $(DESTDIR)/usr
 rubysitearchprefix = $(sitearchlibdir)/$(RUBY_BASE_NAME)
-rubyarchprefix = $(libdir)/$(RUBY_BASE_NAME)
-rubylibprefix = $(exec_prefix)/share/$(RUBY_BASE_NAME)
+rubyarchprefix = $(archlibdir)/$(RUBY_BASE_NAME)
+rubylibprefix = $(libdir)/$(RUBY_BASE_NAME)
 exec_prefix = $(prefix)
-vendorarchhdrdir = $(vendorhdrdir)/$(arch)
-sitearchhdrdir = $(sitehdrdir)/$(arch)
-rubyarchhdrdir = $(DESTDIR)/usr/include
+vendorarchhdrdir = $(sitearchincludedir)/$(RUBY_VERSION_NAME)/vendor_ruby
+sitearchhdrdir = $(sitearchincludedir)/$(RUBY_VERSION_NAME)/site_ruby
+rubyarchhdrdir = $(archincludedir)/$(RUBY_VERSION_NAME)
 vendorhdrdir = $(rubyhdrdir)/vendor_ruby
 sitehdrdir = $(rubyhdrdir)/site_ruby
-rubyhdrdir = $(DESTDIR)/usr/include
-rubygemsdir = $(DESTDIR)/usr/share/rubygems
-vendorarchdir = $(DESTDIR)/usr/lib64/ruby/vendor_ruby
+rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
+vendorarchdir = $(rubysitearchprefix)/vendor_ruby/$(ruby_version)
 vendorlibdir = $(vendordir)/$(ruby_version)
-vendordir = $(DESTDIR)/usr/share/ruby/vendor_ruby
-sitearchdir = $(DESTDIR)/usr/local/lib64/ruby/site_ruby
+vendordir = $(rubylibprefix)/vendor_ruby
+sitearchdir = $(DESTDIR)/usr/local/lib/x86_64-linux-gnu/site_ruby
 sitelibdir = $(sitedir)/$(ruby_version)
-sitedir = $(DESTDIR)/usr/local/share/ruby/site_ruby
+sitedir = $(DESTDIR)/usr/local/lib/site_ruby
 rubyarchdir = $(rubyarchprefix)/$(ruby_version)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
 sitearchincludedir = $(includedir)/$(sitearch)
@@ -41,24 +40,24 @@ archincludedir = $(includedir)/$(arch)
 sitearchlibdir = $(libdir)/$(sitearch)
 archlibdir = $(libdir)/$(arch)
 ridir = $(datarootdir)/$(RI_BASE_NAME)
-mandir = $(DESTDIR)/usr/share/man
+mandir = $(prefix)/share/man
 localedir = $(datarootdir)/locale
-libdir = $(exec_prefix)/lib64
+libdir = $(exec_prefix)/lib
 psdir = $(docdir)
 pdfdir = $(docdir)
 dvidir = $(docdir)
 htmldir = $(docdir)
-infodir = $(DESTDIR)/usr/share/info
+infodir = $(prefix)/share/info
 docdir = $(datarootdir)/doc/$(PACKAGE)
 oldincludedir = $(DESTDIR)/usr/include
-includedir = $(DESTDIR)/usr/include
+includedir = $(prefix)/include
 localstatedir = $(DESTDIR)/var
-sharedstatedir = $(DESTDIR)/var/lib
+sharedstatedir = $(prefix)/com
 sysconfdir = $(DESTDIR)/etc
-datadir = $(DESTDIR)/usr/share
+datadir = $(datarootdir)
 datarootdir = $(prefix)/share
-libexecdir = $(DESTDIR)/usr/libexec
-sbindir = $(DESTDIR)/usr/sbin
+libexecdir = $(prefix)/lib/ruby2.1
+sbindir = $(exec_prefix)/sbin
 bindir = $(exec_prefix)/bin
 archdir = $(rubyarchdir)
 
@@ -79,38 +78,38 @@ optflags = -O3 -fno-fast-math
 debugflags = -ggdb3
 warnflags = -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration
 CCDLFLAGS = -fPIC
-CFLAGS   = $(CCDLFLAGS) -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC $(ARCH_FLAG)
+CFLAGS   = $(CCDLFLAGS) -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -fPIC $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
 DEFS     =  -DWATCHMAN_BUILD
-CPPFLAGS = -DHAVE_FCNTL_H -DHAVE_STDINT_H -DHAVE_SYS_ERRNO_H -DHAVE_SYS_SOCKET_H -DHAVE_RUBY_ST_H -DHAVE_ST_H  $(DEFS) $(cppflags)
-CXXFLAGS = $(CCDLFLAGS) -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic $(ARCH_FLAG)
-ldflags  = -L. -Wl,-z,relro -fstack-protector -rdynamic -Wl,-export-dynamic
+CPPFLAGS = -DHAVE_FCNTL_H -DHAVE_STDINT_H -DHAVE_SYS_ERRNO_H -DHAVE_SYS_SOCKET_H -DHAVE_RUBY_ST_H -DHAVE_ST_H -D_FORTIFY_SOURCE=2 $(DEFS) $(cppflags)
+CXXFLAGS = $(CCDLFLAGS) -g -O2 -fstack-protector-strong -Wformat -Werror=format-security $(ARCH_FLAG)
+ldflags  = -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -L/build/buildd/ruby2.1-2.1.2/debian/lib -fstack-protector -rdynamic -Wl,-export-dynamic
 dldflags =  
-ARCH_FLAG = -m64
+ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
 LDSHARED = $(CC) -shared
 LDSHAREDXX = $(CXX) -shared
 AR = ar
 EXEEXT = 
 
-RUBY_INSTALL_NAME = ruby
-RUBY_SO_NAME = ruby
+RUBY_INSTALL_NAME = ruby2.1
+RUBY_SO_NAME = ruby-2.1
 RUBYW_INSTALL_NAME = 
 RUBY_VERSION_NAME = $(RUBY_BASE_NAME)-$(ruby_version)
 RUBYW_BASE_NAME = rubyw
 RUBY_BASE_NAME = ruby
 
-arch = x86_64-linux
+arch = x86_64-linux-gnu
 sitearch = $(arch)
-ruby_version = 
-ruby = $(bindir)/ruby
+ruby_version = 2.1.0
+ruby = $(bindir)/ruby2.1
 RUBY = $(ruby)
-ruby_headers = $(hdrdir)/ruby.h $(hdrdir)/ruby/defines.h $(arch_hdrdir)/ruby/config.h
+ruby_headers = $(hdrdir)/ruby.h $(hdrdir)/ruby/ruby.h $(hdrdir)/ruby/defines.h $(hdrdir)/ruby/missing.h $(hdrdir)/ruby/intern.h $(hdrdir)/ruby/st.h $(hdrdir)/ruby/subst.h $(arch_hdrdir)/ruby/config.h
 
 RM = rm -f
 RM_RF = $(RUBY) -run -e rm -- -rf
 RMDIRS = rmdir --ignore-fail-on-non-empty -p
-MAKEDIRS = /usr/bin/mkdir -p
+MAKEDIRS = /bin/mkdir -p
 INSTALL = /usr/bin/install -c
 INSTALL_PROG = $(INSTALL) -m 0755
 INSTALL_DATA = $(INSTALL) -m 644
@@ -121,8 +120,8 @@ TOUCH = exit >
 
 preload = 
 
-libpath = . $(libdir)
-LIBPATH =  -L. -L$(libdir)
+libpath = . $(archlibdir)
+LIBPATH =  -L. -L$(archlibdir)
 DEFFILE = 
 
 CLEANFILES = mkmf.log
@@ -133,11 +132,11 @@ extout =
 extout_prefix = 
 target_prefix = 
 LOCAL_LIBS = 
-LIBS = $(LIBRUBYARG_SHARED) -lpthread  -lpthread -lrt -ldl -lcrypt -lm   -lc
-ORIG_SRCS = ext.c match.c matcher.c watchman.c
+LIBS = $(LIBRUBYARG_SHARED) -lpthread  -lpthread -lgmp -ldl -lcrypt -lm   -lc
+ORIG_SRCS = ext.c watchman.c match.c matcher.c
 SRCS = $(ORIG_SRCS) 
-OBJS = ext.o match.o matcher.o watchman.o
-HDRS = $(srcdir)/ext.h $(srcdir)/match.h $(srcdir)/matcher.h $(srcdir)/ruby_compat.h $(srcdir)/watchman.h
+OBJS = ext.o watchman.o match.o matcher.o
+HDRS = $(srcdir)/match.h $(srcdir)/ruby_compat.h $(srcdir)/matcher.h $(srcdir)/ext.h $(srcdir)/watchman.h
 TARGET = ext
 TARGET_NAME = ext
 TARGET_ENTRY = Init_$(TARGET_NAME)
@@ -145,6 +144,7 @@ DLLIB = $(TARGET).so
 EXTSTATIC = 
 STATIC_LIB = 
 
+TIMESTAMP_DIR = .
 BINDIR        = $(bindir)
 RUBYCOMMONDIR = $(sitedir)$(target_prefix)
 RUBYLIBDIR    = $(sitelibdir)$(target_prefix)
@@ -180,7 +180,7 @@ distclean: clean distclean-so distclean-static distclean-rb-default distclean-rb
 realclean: distclean
 install: install-so install-rb
 
-install-so: $(DLLIB) ./.RUBYARCHDIR.time
+install-so: $(DLLIB) $(TIMESTAMP_DIR)/.RUBYARCHDIR.time
 	$(INSTALL_PROG) $(DLLIB) $(RUBYARCHDIR)
 clean-static::
 	-$(Q)$(RM) $(STATIC_LIB)
@@ -190,8 +190,8 @@ pre-install-rb: Makefile
 pre-install-rb-default: Makefile
 pre-install-rb-default:
 	$(ECHO) installing default ext libraries
-./.RUBYARCHDIR.time:
-	$(Q) $(MAKEDIRS) $(RUBYARCHDIR)
+$(TIMESTAMP_DIR)/.RUBYARCHDIR.time:
+	$(Q) $(MAKEDIRS) $(@D) $(RUBYARCHDIR)
 	$(Q) $(TOUCH) $@
 
 site-install: site-install-so site-install-rb

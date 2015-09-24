@@ -156,7 +156,9 @@ if has('gui_running')
     catch
         colorscheme desert
     endtry
-    set guifont=Terminus\ 10
+    "set guifont=Terminus\ 10
+    set guifont=Terminus\ \(TTF\)\ 12
+
     set guioptions-=T
     set guioptions-=m  "remove menu bar
     set guioptions-=r  "remove right scroll bar

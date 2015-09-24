@@ -60,14 +60,15 @@ alias h="history | tail -30"
 alias confchange="cd ~conf && ./configs_upload.sh && git commit -a -m 'changed' && git push && git push github master && cd ~1"
 
 alias zsh-reload="source ~/.zshrc"
-
+alias nose-full="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --cover-inclusive -v"
+alias nose="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --failed --cover-inclusive -vx"
 hash -d nms=~/NMS/
 hash -d usb=/media/usb01
 hash -d data=/media/data_drive/
 hash -d conf=~/repos/configs/
 hash -d vac=~/repos/vacancy_analysis
 
-export PYTHONPATH=/home/dimert/NMS/nms_app:/home/dimert/NMS/
+export PYTHONPATH=/home/dkhodakov/repos/avito-crm/
 
 # aliases
 #pylint() pylint -rn --output-format=colorized "$@" | grep -v 'Locally disabling'
