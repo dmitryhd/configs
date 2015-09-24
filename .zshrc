@@ -61,7 +61,7 @@ alias confchange="cd ~conf && ./configs_upload.sh && git commit -a -m 'changed' 
 
 alias zsh-reload="source ~/.zshrc"
 alias nose-full="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --cover-inclusive -v"
-alias nose="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --failed --cover-inclusive -vx"
+alias nose="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --failed --cover-inclusive -vx tests"
 hash -d nms=~/NMS/
 hash -d usb=/media/usb01
 hash -d data=/media/data_drive/
