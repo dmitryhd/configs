@@ -94,3 +94,4 @@ export CRMDATA=/var/local/crm/data/
 export ARSPATH=~/repos/avito-recommendations/
 export crmcred=slauncher@analytic-crm
 alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/; bash'"
+alias launchcrm="cd ~/repos/avito-crm/; ./bin/crm.server -m testing"
