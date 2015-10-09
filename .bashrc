@@ -27,6 +27,7 @@ alias ..='cd ..'
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 
+alias crmdir='cd /var/local/crm/'
 
 alias du='du -kh'    # Makes a more readable output.
 alias df='df -kTh'
@@ -89,6 +90,10 @@ HISTIGNORE='ls:bg:fg:history'
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
-alias fuck='$(thefuck $(fc -ln -1))'
-# You can use whatever you want as an alias, like for mondays:
-alias FUCK='fuck'
+# Avito files
+
+export CRMSOURCE=/var/local/crm/avito-crm/
+export CRMDATA=/var/local/crm/data/
+export ARSPATH=~/repos/avito-recommendations/
+export crmcred=slauncher@analytic-crm
+alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/; bash'"

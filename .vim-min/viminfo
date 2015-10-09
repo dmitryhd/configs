@@ -1,0 +1,153 @@
+# Этот файл viminfo автоматически создан Vim 7.4.
+# Его можно (осторожно!) редактировать.
+
+# Значение опции 'encoding' в момент записи файла
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+~H
+# Командная строка, история (начиная от свежего к старому):
+:wq
+:e .bashrc
+:w
+:sp .bashrc
+:q
+:q!
+
+# Строка поиска, история (начиная от свежего к старому):
+
+# Выражение, история (начиная от свежего к старому):
+
+# Строка ввода, история (начиная от свежего к старому):
+
+# Строка ввода, история (начиная от свежего к старому):
+
+# Регистры:
+"0	LINE	0
+	export crmcred=slauncher@analytic-crm
+""1	LINE	0
+	export cred=slauncher@analytic-crm
+"2	LINE	0
+	export crmcred=slauncher@analytic-crm
+"3	LINE	0
+	alias recssh="ssh slauncher@ -t 'cd /var/local/crm/; bash'"
+"4	LINE	0
+	
+"5	LINE	0
+	export CRMSOURCE=/var/local/crm/avito-crm/
+	export CRMDATA=/var/local/crm/data/
+"6	LINE	0
+	alias crmssh="ssh slauncher@analytic-crm"
+"-	CHAR	0
+	analytic-crm
+
+# Глобальные отметки:
+'0  98  0  ~/.bashrc
+'1  99  0  ~/.bashrc
+'2  96  0  ~/.zshrc
+'3  96  0  ~/.zshrc
+'4  95  14  ~/.zshrc
+'5  1  0  ~/todo
+
+# Список прыжков (сначала более свежие):
+-'  98  0  ~/.bashrc
+-'  1  0  ~/.bashrc
+-'  95  9  ~/.zshrc
+-'  1  0  ~/.zshrc
+-'  99  0  ~/.bashrc
+-'  92  0  ~/.zshrc
+-'  96  0  ~/.zshrc
+-'  94  44  ~/.zshrc
+-'  91  0  ~/.zshrc
+-'  88  0  ~/.zshrc
+-'  85  0  ~/.zshrc
+-'  82  0  ~/.zshrc
+-'  79  0  ~/.zshrc
+-'  76  0  ~/.zshrc
+-'  69  0  ~/.zshrc
+-'  62  0  ~/.zshrc
+-'  58  0  ~/.zshrc
+-'  46  0  ~/.zshrc
+-'  39  0  ~/.zshrc
+-'  34  0  ~/.zshrc
+-'  31  0  ~/.zshrc
+-'  26  0  ~/.zshrc
+-'  24  0  ~/.zshrc
+-'  22  0  ~/.zshrc
+-'  18  0  ~/.zshrc
+-'  13  0  ~/.zshrc
+-'  10  0  ~/.zshrc
+-'  7  0  ~/.zshrc
+-'  4  0  ~/.zshrc
+-'  2  0  ~/.zshrc
+-'  16  0  ~/.zshrc
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  1  0  ~/todo
+-'  97  70  ~/.zshrc
+
+# История местных отметок (от более свежих к старым):
+
+> ~/.zshrc
+	"	95	9
+	^	95	10
+	.	95	9
+	+	95	14
+	+	96	8
+	+	95	7
+	+	96	40
+	+	96	0
+	+	97	0
+	+	95	9
+
+> ~/.bashrc
+	"	98	0
+	.	98	0
+	+	95	0
+	+	95	0
+	+	100	0
+	+	98	0
+
+> ~/todo
+	"	1	0

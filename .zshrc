@@ -54,6 +54,7 @@ alias gitlo="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%
 alias gitbr="git branch -v"
 alias githist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 alias gittags='git tag -n'
+alias gitdiff='git diff'
 
 alias h="history | tail -30"
 # 
@@ -62,11 +63,17 @@ alias confchange="cd ~conf && ./configs_upload.sh && git commit -a -m 'changed' 
 alias zsh-reload="source ~/.zshrc"
 alias nose-full="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --cover-inclusive -v"
 alias nose="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --failed --cover-inclusive -vx tests"
-hash -d nms=~/NMS/
 hash -d usb=/media/usb01
 hash -d data=/media/data_drive/
 hash -d conf=~/repos/configs/
+
+# projects aliases
 hash -d vac=~/repos/vacancy_analysis
+hash -d nms=~/NMS/
+hash -d crm=~/repos/avito-crm/
+hash -d crmdir=/var/local/crm/
+hash -d rec=~/repos/avito-recommendations/
+
 
 export PYTHONPATH=/home/dkhodakov/repos/avito-crm/
 
@@ -75,3 +82,15 @@ export PYTHONPATH=/home/dkhodakov/repos/avito-crm/
 
 
 zssh() ssh "$@" -t zsh
+
+CRMPATH=/var/local/crm/avito-crm
+alias cdcrm="cd $CRMPATH"
+
+
+# Avito files
+
+export CRMSOURCE=/var/local/crm/avito-crm/
+export CRMDATA=/var/local/crm/data/
+export ARSPATH=~/repos/avito-recommendations/
+export crmcred=slauncher@analytic-crm
+alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/; bash'"
