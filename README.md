@@ -18,3 +18,9 @@ To install all configs on you system execute:
 To commit all configs this repo execute:
 
 **`$ ./config_upload.sh`**
+
+
+Ubuntu python essentials
+
+``g++ gcc libssl-dev libsqlite3-dev libbz2-dev zlib1g zlib1g-dev libncurses5-dev libreadline6-dev ncurses-doc``
+``libblas-dev liblapack-dev libatlas-base-dev gfortran pygments``

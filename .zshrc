@@ -63,6 +63,7 @@ alias confchange="cd ~conf && ./configs_upload.sh && git commit -a -m 'changed' 
 alias zsh-reload="source ~/.zshrc"
 alias nose-full="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --cover-inclusive -v"
 alias nose="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --failed --cover-inclusive -vx tests"
+alias deploy="make deploy"
 hash -d usb=/media/usb01
 hash -d data=/media/data_drive/
 hash -d conf=~/repos/configs/
@@ -72,7 +73,8 @@ hash -d vac=~/repos/vacancy_analysis
 hash -d nms=~/NMS/
 hash -d crm=~/repos/avito-crm/
 hash -d crmdir=/var/local/crm/
-hash -d rec=~/repos/avito-recommendations/
+hash -d rec=~/repos/avito-recommendations/research
+hash -d carrec=~/repos/avito-recommendations/research/cars_recommendations
 
 
 export PYTHONPATH=/home/dkhodakov/repos/avito-crm/
@@ -93,5 +95,17 @@ export CRMSOURCE=/var/local/crm/avito-crm/
 export CRMDATA=/var/local/crm/data/
 export ARSPATH=~/repos/avito-recommendations/
 export crmcred=slauncher@analytic-crm
-alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/; bash'"
+alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
+alias atrssh="ssh slauncher@avi-training01 -t 'bash'"
 alias launchcrm="cd ~/repos/avito-crm/; ./bin/crm.server -m testing"
+alias ripython="cd ~/repos/pynb; ipython notebook"
+
+ODBCDIR=/var/local/dbconnect
+export ODBCSYSINI=$ODBCDIR
+export ODBCINI=$ODBCDIR/odbc.ini
+export VERTICAINI=$ODBCDIR/odbc.ini
+
+PATH=/home/dkhodakov/repos/avito-recommendations/service_manger:$PATH
+export PATH
+alias startvertica="sudo -u dbadmin /opt/vertica/bin/admintools -t start_db -d vert_test"
+alias avito.backup="cd /home/ && tar -czf - ./dkhodakov | (pv -p --timer --rate --bytes > /media/dkhodakov/backup/avito_laptop/dkhodakov-$(date +"%Y.%d.%m-%H.%M").tgz); echo /media/dkhodakov/backup/avito_laptop/dkhodakov-$(date +"%Y.%d.%m-%H.%M").tgz"

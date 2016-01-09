@@ -76,7 +76,7 @@ complete -A directory  mkdir rmdir
 complete -A directory   -o default cd
 
 export HISTSIZE=500000
-PATH=/common/runmvs/bin:/media/nfs/intel_cluster/impi/4.0.0.028/intel64/bin:$PATH
+PATH=/home/dkhodakov/repos/avito-recommendations/service_manger:$PATH
 export PATH
 
 if [ -f /etc/bash_completion ]; then
@@ -97,3 +97,6 @@ export CRMDATA=/var/local/crm/data/
 export ARSPATH=~/repos/avito-recommendations/
 export crmcred=slauncher@analytic-crm
 alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/; bash'"
+
+export PROMPT_DIRTRIM=2
+export PS1="\[\033[38;5;10m\]\u\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;15m\]@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[\033[38;5;6m\][\w]:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
