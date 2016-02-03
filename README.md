@@ -25,6 +25,11 @@ Ubuntu 14.03 building process
 
 
 ```
+# Install skype first!
+sudo dpkg --add-architecture i386
+sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+sudo apt-get update && sudo apt-get install skype
+
 # essentials
 sudo apt-get install vim git terminator zsh openjdk-7-jre openjdk-7-jdk tree screen google-chrome-stable sshfs
 
