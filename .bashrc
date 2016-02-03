@@ -100,3 +100,8 @@ alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/; bash'"
 
 export PROMPT_DIRTRIM=2
 export PS1="\[\033[38;5;10m\]\u\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;15m\]@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[\033[38;5;6m\][\w]:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+
+COREDIR=$HOME
+export ODBCSYSINI=$COREDIR
+export ODBCINI=$COREDIR/odbc.ini
+export VERTICAINI=$COREDIR/odbc.ini

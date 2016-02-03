@@ -100,7 +100,7 @@ alias atrssh="ssh slauncher@avi-training01 -t 'bash'"
 alias launchcrm="cd ~/repos/avito-crm/; ./bin/crm.server -m testing"
 alias ripython="cd ~/repos/pynb; ipython notebook"
 
-ODBCDIR=/var/local/dbconnect
+ODBCDIR=$HOME
 export ODBCSYSINI=$ODBCDIR
 export ODBCINI=$ODBCDIR/odbc.ini
 export VERTICAINI=$ODBCDIR/odbc.ini

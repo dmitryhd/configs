@@ -38,8 +38,10 @@ sudo apt-get install compizconfig-settings-manager compiz-plugins-extra
 sudo add-apt-repository ppa:numix/ppa
 sudo apt-get update
 sudo apt-get install numix-gtk-theme numix-icon-theme numix-icon-theme-circle
+
 # work
 sudo apt-get install network-manager-openvpn-gnome 
+sudo apt-get install ntp mcelog pstack sysstat
 
 # for python build
 sudo apt-get install g++ gcc libssl-dev libsqlite3-dev libbz2-dev zlib1g zlib1g-dev libncurses5-dev libreadline6-dev ncurses-doc``
