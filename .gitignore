@@ -10,3 +10,5 @@ __pycache__
 profile.out
 .vim/ruby/command-t/*.so
 .vim/ruby/command-t/Makefile
+.oh-my-zsh/.oh-my-zsh
+.vim/viminfo
