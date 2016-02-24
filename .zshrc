@@ -95,8 +95,8 @@ export CRMSOURCE=/var/local/crm/avito-crm/
 export CRMDATA=/var/local/crm/data/
 export ARSPATH=~/repos/avito-recommendations/
 export crmcred=slauncher@analytic-crm
-alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
-alias atrssh="ssh slauncher@avi-training01 -t 'bash'"
+alias crmssh="ssh slauncher@analytic-crm.se.avito.ru -t 'cd /var/local/crm/avito-crm/; bash'"
+alias atrssh="ssh slauncher@avi-training01.se.avito.ru -t 'bash'"
 alias launchcrm="cd ~/repos/avito-crm/; ./bin/crm.server -m testing"
 alias ripython="cd ~/repos/pynb; ipython notebook"
 
@@ -109,3 +109,5 @@ PATH=/home/dkhodakov/repos/avito-recommendations/service_manger:$PATH
 export PATH
 alias startvertica="sudo -u dbadmin /opt/vertica/bin/admintools -t start_db -d vert_test"
 alias avito.backup="cd /home/ && tar -czf - ./dkhodakov | (pv -p --timer --rate --bytes > /media/dkhodakov/backup/avito_laptop/dkhodakov-$(date +"%Y.%d.%m-%H.%M").tgz); echo /media/dkhodakov/backup/avito_laptop/dkhodakov-$(date +"%Y.%d.%m-%H.%M").tgz"
+
+export PYTHONSTARTUP=~/.pythonstartup
