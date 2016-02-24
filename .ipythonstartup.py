@@ -3,6 +3,9 @@ import numpy as np
 import pyodbc
 import matplotlib.pyplot as plt
 from IPython.display import display
+import os
+
+# logging
 
 import logging
 import logging.handlers
@@ -40,10 +43,52 @@ def configure_logger(logger_name='root', log_dir='/tmp/', filename='',
         file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
+        print('Log to file {}'.format(log_location))
     logger.info('Logger configured with name {}'.format(logger_name))
     logger.propagate = False
     return logger
 
 import seaborn as sns
+
+import time
+
+def time_measure(func):
+    def wrapper(*args, **kwargs):
+        tbegin = time.time()
+        res = func(*args, **kwargs)
+        print('execution of {} took {:.4f}s'.format(
+                func.__name__, time.time() - tbegin))
+        return res
+    return wrapper
+    
+# Example usage
+"""
+@time_measure
+def long_func(s):
+    time.sleep(s)
+    
+long_func(1)
+# execution of long_func took 1.0011s
+"""
+
+from contextlib import contextmanager
+
+@contextmanager
+def TimeMeasure(name=''):
+    tbegin = time.time()
+    yield
+    print("execution {} took {:.4f}s".format(
+            'of ' + name if name else ' ',
+            time.time() - tbegin))
+
+"""
+# Example usage
+def long_func(s):
+    with TimeMeasure():
+        time.sleep(s)
+    
+long_func(1)
+# execution of long_func took 1.0011s
+"""
 
 #%matplotlib inline
