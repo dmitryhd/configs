@@ -64,6 +64,7 @@ alias zsh-reload="source ~/.zshrc"
 alias nose-full="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --cover-inclusive -v"
 alias nose="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --failed --cover-inclusive -vx tests"
 alias deploy="make deploy"
+alias runipython='ipython3 notebook --notebook-dir="~/repos/notebooks/" --port=9999'
 hash -d usb=/media/usb01
 hash -d data=/media/data_drive/
 hash -d conf=~/repos/configs/
@@ -109,3 +110,8 @@ PATH=/home/dkhodakov/repos/avito-recommendations/service_manger:$PATH
 export PATH
 alias startvertica="sudo -u dbadmin /opt/vertica/bin/admintools -t start_db -d vert_test"
 alias avito.backup="cd /home/ && tar -czf - ./dkhodakov | (pv -p --timer --rate --bytes > /media/dkhodakov/backup/avito_laptop/dkhodakov-$(date +"%Y.%d.%m-%H.%M").tgz); echo /media/dkhodakov/backup/avito_laptop/dkhodakov-$(date +"%Y.%d.%m-%H.%M").tgz"
+
+# for ipython
+export PYTHONSTARTUP=~/.ipythonstartup.py
+export EDITOR=vim
+export GOPATH=$HOME/repos/go

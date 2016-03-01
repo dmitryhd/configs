@@ -1,0 +1,15 @@
+// Settings in here override those in "Default/Preferences.sublime-settings",
+// and are overridden in turn by file type specific settings.
+{
+	"ignored_packages": [],
+	//"font_face": "Terminator\ (TTF)",
+	"font_size": 11,
+	"highlight_line": true,
+	"fade_fold_buttons": false,
+	"bold_folder_labels": true,
+	"rulers": [80],
+	"translate_tabs_to_spaces": true
+	// CTRL-P - goto anything
+	// CTRL-K, CTRL-B (in this order) will toggle the sidebar
+	// CTRL-/ comment
+}
