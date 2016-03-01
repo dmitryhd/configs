@@ -114,3 +114,4 @@ alias avito.backup="cd /home/ && tar -czf - ./dkhodakov | (pv -p --timer --rate 
 # for ipython
 export PYTHONSTARTUP=~/.ipythonstartup.py
 export EDITOR=vim
+export GOPATH=$HOME/repos/go
