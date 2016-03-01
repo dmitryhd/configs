@@ -31,3 +31,10 @@ sudo apt-get -y install ntp mcelog pstack sysstat
 ```
 sudo apt-get -y install g++ gcc libssl-dev libsqlite3-dev libbz2-dev zlib1g zlib1g-dev libncurses5-dev libreadline6-dev ncurses-doc libblas-dev liblapack-dev libatlas-base-dev gfortran pygments unixODBC unixodbc-dev libpq-dev libpng-dev libfreetype6-dev
 ```
+
+# for sublime
+```
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update
+sudo apt-get -y install sublime-text-installer
+```
