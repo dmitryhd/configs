@@ -64,14 +64,14 @@ alias zsh-reload="source ~/.zshrc"
 alias nose-full="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --cover-inclusive -v"
 alias nose="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --failed --cover-inclusive -vx tests"
 alias deploy="make deploy"
-alias runipython='ipython3 notebook --notebook-dir="~/repos/notebooks/" --port=9999'
+alias runipython='ipython3 notebook --notebook-dir="~/repos/" --port=9999'
 hash -d usb=/media/usb01
 hash -d data=/media/data_drive/
 hash -d conf=~/repos/configs/
 
 # projects aliases
 hash -d vac=~/repos/vacancy_analysis
-hash -d nms=~/NMS/
+hash -d uicrm=~/crm/avitocrm/ui/
 hash -d crm=~/repos/avito-crm/
 hash -d crmdir=/var/local/crm/
 hash -d rec=~/repos/avito-recommendations/research
@@ -85,6 +85,9 @@ export PYTHONPATH=/home/dkhodakov/repos/avito-crm/
 
 
 zssh() ssh "$@" -t zsh
+
+PATH=$PATH:/home/dkhodakov/avito-crm/bin/
+export PATH
 
 CRMPATH=/var/local/crm/avito-crm
 alias cdcrm="cd $CRMPATH"
