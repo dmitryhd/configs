@@ -101,6 +101,7 @@ export ARSPATH=~/repos/avito-recommendations/
 export crmcred=slauncher@analytic-crm
 alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
 alias atrssh="ssh slauncher@avi-training01 -t 'bash'"
+alias ctrssh="ssh slauncher@crm-training01 -t 'bash'"
 alias launchcrm="cd ~/repos/avito-crm/; ./bin/crm.server -m testing"
 alias ripython="cd ~/repos/pynb; ipython notebook"
 
