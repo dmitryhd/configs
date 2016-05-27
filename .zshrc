@@ -64,7 +64,7 @@ alias zsh-reload="source ~/.zshrc"
 alias nose-full="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --cover-inclusive -v"
 alias nose="nosetests-3.4 --with-coverage --cover-package=avitocrm --cover-erase --failed --cover-inclusive -vx tests"
 alias deploy="make deploy"
-alias runipython='ipython3 notebook --notebook-dir="~/repos/" --port=9999'
+alias runipython='jupyter notebook --notebook-dir="~/repos/" --port=9999'
 hash -d usb=/media/usb01
 hash -d data=/media/data_drive/
 hash -d conf=~/repos/configs/
@@ -102,6 +102,7 @@ export crmcred=slauncher@analytic-crm
 alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
 alias atrssh="ssh slauncher@avi-training01 -t 'bash'"
 alias ctrssh="ssh slauncher@crm-training01 -t 'bash'"
+alias robotssh="ssh analytic-robots"
 alias launchcrm="cd ~/repos/avito-crm/; ./bin/crm.server -m testing"
 alias ripython="cd ~/repos/pynb; ipython notebook"
 
@@ -119,3 +120,10 @@ alias avito.backup="cd /home/ && tar -czf - ./dkhodakov | (pv -p --timer --rate 
 export PYTHONSTARTUP=~/.ipythonstartup.py
 export EDITOR=vim
 export GOPATH=$HOME/repos/go
+
+
+# For virtualenv wrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/repos
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh

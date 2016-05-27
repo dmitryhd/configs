@@ -1,5 +1,4 @@
 {
-	// ok
 	"bold_folder_labels": true,
 	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
 	"fade_fold_buttons": false,
@@ -12,11 +11,9 @@
 	[
 		80
 	],
+	"save_on_focus_lost": true,
 	"tab_size": 4,
 	"theme": "Soda Dark 3.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"vintage_start_in_command_mode": true,
-	// Set to true to automatically save files when switching to a different file
-    // or application
-    "save_on_focus_lost": true
+	"vintage_start_in_command_mode": true
 }
