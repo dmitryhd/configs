@@ -28,6 +28,7 @@ alias deploy="make deploy"
 # export LANG=en_US.UTF-8
 #
 alias h="history | tail -30"
+alias py="ipython3 --no-banner"
 
 # GIT alias
 alias gitst="git diff --stat"

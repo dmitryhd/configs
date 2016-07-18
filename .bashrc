@@ -20,6 +20,7 @@ unset MAILCHECK        # Don't want my shell to warn me of incoming mail alias r
 alias mkdir='mkdir -p'
 
 alias h='history'
+alias ipy='ipython3'
 alias j='jobs -l'
 alias which='type -a'
 alias ..='cd ..'
