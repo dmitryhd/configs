@@ -107,3 +107,5 @@ COREDIR=$HOME
 export ODBCSYSINI=$COREDIR
 export ODBCINI=$COREDIR/odbc.ini
 export VERTICAINI=$COREDIR/odbc.ini
+
+alias htop='htop -d 3'
