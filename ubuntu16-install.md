@@ -6,6 +6,11 @@ sudo apt-get -y install g++ gcc
 chsh -s /usr/bin/zsh
 ```
 
+Fire up "User Accounts", set "automatic login" to "off". At startup you will be asked your user/password only once; popups like "unlock keyring" will never pester you again.
+sudo visudo
+%admin  ALL=(ALL) NOPASSWD:ALL
+
+
 # Dev
 ```
 sudo apt-get -y install \
