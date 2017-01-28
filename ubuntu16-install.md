@@ -21,6 +21,11 @@ sudo apt-get -y install \
  libssl-dev libsqlite3-dev libbz2-dev zlib1g zlib1g-dev libncurses5-dev libreadline6-dev ncurses-doc libblas-dev liblapack-dev libatlas-base-dev gfortran unixodbc-dev libpq-dev libpng-dev libfreetype6-dev build-essential zlib1g-dev libbz2-dev libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev libgdbm-dev liblzma-dev
 ```
 
+# python
+```
+sudo apt-get -y install virtualenvwrapper
+```
+
 # Fancy desktop
 ```
 sudo add-apt-repository ppa:numix/ppa
@@ -28,6 +33,9 @@ sudo apt-get update
 sudo aptitude install \
   numix-gtk-theme numix-icon-theme numix-icon-theme-circle \
   unity-tweak-tool compizconfig-settings-manager compiz-plugins-extra
+  
+sudo add-apt-repository ppa:peterlevi/ppa
+sudo apt-get update && sudo apt-get install variety
 ```
 
 # Nvidia desktop
