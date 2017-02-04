@@ -17,7 +17,8 @@ sudo apt-get -y install \
   vim git zsh tree screen htop sshfs \
   terminator \  # 
   libgconf2-4 libnss3-1d libxss1 network-manager-openvpn-gnome 
-
+  
+sudo apt-get -y install \
  libssl-dev libsqlite3-dev libbz2-dev zlib1g zlib1g-dev libncurses5-dev libreadline6-dev ncurses-doc libblas-dev liblapack-dev libatlas-base-dev gfortran unixodbc-dev libpq-dev libpng-dev libfreetype6-dev build-essential zlib1g-dev libbz2-dev libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev libgdbm-dev liblzma-dev
 ```
 
