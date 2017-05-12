@@ -1,7 +1,6 @@
 # .bashrc
 [ -z "$PS1" ] && return
 
-
 export PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h:\[\e[0m\]\[\e[00;36m\][\w]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 shopt -s cdspell
 shopt -s cdable_vars
@@ -46,13 +45,12 @@ alias lc='ls -ltcr'        #  Sort by/show change time,most recent last.
 alias lu='ls -ltur'        #  Sort by/show access time,most recent last.
 
 # The ubiquitous 'll': directories first, with alphanumeric sorting:
-alias ll="ls -lv --group-directories-first"
+alias ll="ls -lvG --group-directories-first"
 alias lm='ll |more'        #  Pipe through 'more'
 alias lr='ll -R'           #  Recursive ls.
 alias la='ll -A'           #  Show hidden files.
 alias l='ll -A'           #  Show hidden files.
 alias tree='tree -Csuh'    #  Nice alternative to 'recursive ls' ...
-
 
 #-------------------------------------------------------------
 # Tailoring 'less'
@@ -78,7 +76,6 @@ complete -A directory  mkdir rmdir
 complete -A directory   -o default cd
 
 export HISTSIZE=500000
-PATH=/home/dkhodakov/repos/avito-recommendations/service_manger:$PATH
 export PATH
 
 if [ -f /etc/bash_completion ]; then
@@ -93,12 +90,10 @@ shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Avito files
-
-export CRMSOURCE=/var/local/crm/avito-crm/
-export CRMDATA=/var/local/crm/data/
-export ARSPATH=~/repos/avito-recommendations/
-export crmcred=slauncher@analytic-crm
-alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/; bash'"
+alias ctrssh1="ssh -A slauncher@crm-training01"
+alias ctrssh2="ssh -A slauncher@crm-training02"
+alias ctrssh3="ssh -A slauncher@crm-training03"
+alias ctrssh4="ssh -A slauncher@crm-training04"
 
 export PROMPT_DIRTRIM=2
 export PS1="\[\033[38;5;10m\]\u\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;15m\]@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[\033[38;5;6m\][\w]:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"

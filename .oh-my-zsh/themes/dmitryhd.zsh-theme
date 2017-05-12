@@ -106,7 +106,7 @@ bureau_precmd () {
 }
 
 setopt prompt_subst
-PROMPT='└─→$_LIBERTY '
+PROMPT='└─$LIBERTY '
 RPROMPT='$(bureau_git_prompt)'
 
 autoload -U add-zsh-hook
