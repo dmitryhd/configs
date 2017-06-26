@@ -1,37 +1,56 @@
+# ------------------------------------------
+# ZSH config
+# ------------------------------------------
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="dmitryhd2"
+ZSH_THEME="pyzsh"
+# ZSH_THEME="dimert2"
 
-DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="false"
 ENABLE_CORRECTION="false"
 
+# Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
-
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="yyyy-mm-dd"
 
-plugins=(git command-not-found dirhistory git pip pylint python kubectl)
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+plugins=(git command-not-found dirhistory pip pylint python autopep8 dircycle docker httpie history pyenv redis-cli supervisor)
+
+# kubectl completion zsh > ~/.kubectl-completion; helm completion zsh > ~/.helm-completion;
+# wget https://raw.githubusercontent.com/zchee/go-zsh-completions/master/src/_minikube -O .minikube-completion
+source ~/.kubectl-completion
+# source ~/.minikube-completion
+source ~/.helm-completion
+
+
+# helm completion zsh
+
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#autojump
+# dircycle
+# This is a small zle trick that lets you cycle your directory stack left or right using Ctrl+Shift+Left/Right. This is useful when moving back and forth between directories in development environments, and can be thought of as kind of a nondestructive pushd/popd.
+# history
+# Provides a couple of convenient aliases for using the history command to examine your command line history.
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# ------------------------------------------
+# User config
+# ------------------------------------------
+
+PATH=$PATH:$HOME/.local/bin/
+export PATH
+
+export PYTHONDONTWRITEBYTECODE=1
+export LANG=en_US.UTF-8
+
 # Directory stack enable
 DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
+
 alias dh='dirs -v'
-
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/dkhodakov/.local/bin"
-export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-alias h="history | tail -30"
-alias py="ipython3 --no-banner"
-alias runipython='jupyter notebook --notebook-dir="~/repos/" --port=9999'
-alias runjupyter='jupyter notebook --notebook-dir="~/repos/" --port=9999'
-alias ll="ls -lvGh --group-directories-first"
-alias htop='htop -d 3'
-
+alias gvimr="gvim --remote-tab"
 # GIT alias
 alias gitst="git diff --stat"
 alias gitdi="git diff"
@@ -40,51 +59,52 @@ alias gitcim="git commit -a -m"
 alias gitco="git checkout "
 alias gitlo="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short -40"
 alias gitbr="git branch -v"
-alias githist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+alias gith='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 alias gittags='git tag -n'
-alias gitdiff='git diff'
+alias gitd='git diff'
 
-# SSH alias
-alias crmssh="ssh -A slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
-alias ctrssh="ssh -A slauncher@crm-training01 -t 'bash'"
+alias h="history | tail -30"
+alias ll="ls -lBcghX"
+
+alias py='ipython3 --no-banner'
+alias runipython='jupyter notebook --notebook-dir="~/repos/" --port=9999'
+alias runjupyter='jupyter notebook --notebook-dir="~/repos/" --port=9999'
+alias ll="ls -lvGh --group-directories-first"
+alias htop='htop -d 3'
+
+alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
 alias ctrssh1="ssh -A slauncher@crm-training01 -t 'bash'"
 alias ctrssh2="ssh -A slauncher@crm-training02 -t 'bash'"
 alias ctrssh3="ssh -A slauncher@crm-training03 -t 'bash'"
 alias ctrssh4="ssh -A slauncher@crm-training04 -t 'bash'"
-alias ctrssh5="ssh -A slauncher@crm-training05 j-t 'bash'"
-alias robotssh="ssh -A analytic-robots"
+alias ctrssh5="ssh -A slauncher@crm-training05 -t 'bash'"
+alias gpussh1="ssh -A slauncher@rec-gpu01 -t 'bash'"
 
-# projects aliases
-#hash -d crmdir=/var/local/crm/
-
-export EDITOR=vim
-export GOPATH=$HOME/repos/go
-
-# Work
 ODBCDIR=$HOME
 export ODBCSYSINI=$ODBCDIR
 export ODBCINI=$ODBCDIR/odbc.ini
 export VERTICAINI=$ODBCDIR/odbc.ini
 
+export EDITOR=vim
+# export GOPATH=$HOME/go
+
+# Python specific
+# ------------------------------
+
 ssh-add 2> /dev/null
 
-export PIP_INDEX_URL=http://pypi.msk.avito.ru:8090/pypi/
-export PIP_TRUSTED_HOST=pypi.msk.avito.ru
+#CUDA
+export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export CUDA_HOME=/usr/local/cuda-8.0
 
-#eval $(minikube docker-env)
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+alias update-jupyter-extensions="pip install https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master -U && \
+        jupyter contrib nbextension install --user && \
+        pip install jupyter_nbextensions_configurator -U && \
+        jupyter nbextensions_configurator enable --user"
 
-# Python con
-export PYTHONDONTWRITEBYTECODE=1
 
-# pyenv
-export PATH="/home/dkhodakov/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# virtualenv wrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/repos
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /home/dkhodakov/.local/bin/activate.sh
-
-export PATH=/home/dkhodakov/miniconda3/bin:$PATH
+# Avito
+export PIP_INDEX_URL=http://pypi.k.avito.ru/pypi/
+export PIP_TRUSTED_HOST=pypi.k.avito.ru
