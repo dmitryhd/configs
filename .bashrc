@@ -104,3 +104,8 @@ export ODBCINI=$COREDIR/odbc.ini
 export VERTICAINI=$COREDIR/odbc.ini
 
 alias htop='htop -d 3'
+
+
+ODBCSYSINI=/home/dkhodakov/
+ODBCINI=/home/dkhodakov/odbc.ini
+VERTICAINI=/home/dkhodakov/odbc.ini
