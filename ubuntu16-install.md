@@ -19,7 +19,10 @@ sudo apt -y install \
 
 # python
 ```
-sudo apt -y install virtualenvwrapper
+export CONFIGURE_OPTS="OPT=\"-fPIC\""
+curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+pyenv update
+pyenv install 3.6.1
 ```
 
 # Fancy desktop
