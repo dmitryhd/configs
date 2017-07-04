@@ -23,6 +23,10 @@ export CONFIGURE_OPTS="OPT=\"-fPIC\""
 curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 pyenv update
 pyenv install 3.6.1
+pyenv virtualenv 3.6.1 ds
+pyenv activate 3.6.1/envs/ds
+pip3 install sklearn ipython jupyter numpy pandas xgboost theano tensorflow matplotlib seaborn -U
+pip3 install pytest coverage -U
 ```
 
 # Fancy desktop
