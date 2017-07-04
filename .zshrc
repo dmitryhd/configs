@@ -20,9 +20,9 @@ plugins=(git command-not-found dirhistory pip pylint python autopep8 dircycle do
 
 # kubectl completion zsh > ~/.kubectl-completion; helm completion zsh > ~/.helm-completion;
 # wget https://raw.githubusercontent.com/zchee/go-zsh-completions/master/src/_minikube -O .minikube-completion
-source ~/.kubectl-completion
+#source ~/.kubectl-completion
 # source ~/.minikube-completion
-source ~/.helm-completion
+#source ~/.helm-completion
 
 
 # helm completion zsh
@@ -104,7 +104,9 @@ alias update-jupyter-extensions="pip install https://github.com/ipython-contrib/
         pip install jupyter_nbextensions_configurator -U && \
         jupyter nbextensions_configurator enable --user"
 
+alias update-sci-py="pip3 install sklearn ipython numpy pandas xgboost theano tensorflow -U"
+
 
 # Avito
-export PIP_INDEX_URL=http://pypi.k.avito.ru/pypi/
-export PIP_TRUSTED_HOST=pypi.k.avito.ru
+# export PIP_INDEX_URL=http://pypi.k.avito.ru/pypi/
+# export PIP_TRUSTED_HOST=pypi.k.avito.ru
