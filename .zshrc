@@ -3,8 +3,10 @@
 # ------------------------------------------
 export ZSH=$HOME/.oh-my-zsh
 
+# installed
+# ZSH_THEME="bureau"
+# custom
 ZSH_THEME="pyzsh"
-# ZSH_THEME="dimert2"
 
 DISABLE_AUTO_UPDATE="false"
 ENABLE_CORRECTION="false"
@@ -16,7 +18,9 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git command-not-found dirhistory pip pylint python autopep8 dircycle docker httpie history pyenv redis-cli supervisor)
+# install autoenv
+# git clone https://github.com/horosgrisa/autoenv ~/.oh-my-zsh/custom/plugins/autoenv
+plugins=(git command-not-found dirhistory pip pylint python autopep8 dircycle docker httpie history pyenv redis-cli supervisor autoenv)
 
 # kubectl completion zsh > ~/.kubectl-completion; helm completion zsh > ~/.helm-completion;
 # wget https://raw.githubusercontent.com/zchee/go-zsh-completions/master/src/_minikube -O .minikube-completion
@@ -71,6 +75,7 @@ alias runipython='jupyter notebook --notebook-dir="~/repos/" --port=9999'
 alias runjupyter='jupyter notebook --notebook-dir="~/repos/" --port=9999'
 alias ll="ls -lvGh --group-directories-first"
 alias htop='htop -d 3'
+alias ra='ranger'
 
 alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
 alias ctrssh1="ssh -A slauncher@crm-training01 -t 'bash'"

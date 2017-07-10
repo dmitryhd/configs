@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# cp pyenv-create.sh ~/.local/bin/pyenv-create
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
@@ -32,4 +34,5 @@ echo -e "-> installing ${BLUE}dev-reqirements.txt$NC"
 pip3 install -r dev-requirements.txt 
 
 echo -e "-> updating ${BLUE}.env$NC"
-echo "pyenv activate $DIRNAME 2> /dev/null" > .env
+echo "pyenv deactivate 2> /dev/null" > .env
+echo "pyenv activate $DIRNAME 2> /dev/null" >> .env
