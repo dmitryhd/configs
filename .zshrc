@@ -76,6 +76,7 @@ alias runjupyter='jupyter notebook --notebook-dir="~/repos/" --port=9999'
 alias ll="ls -lvGh --group-directories-first"
 alias htop='htop -d 3'
 alias ra='ranger'
+alias pya='pyenv activate'
 
 alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
 alias ctrssh1="ssh -A slauncher@crm-training01 -t 'bash'"
