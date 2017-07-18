@@ -109,3 +109,6 @@ alias htop='htop -d 3'
 ODBCSYSINI=/home/dkhodakov/
 ODBCINI=/home/dkhodakov/odbc.ini
 VERTICAINI=/home/dkhodakov/odbc.ini
+
+# added by Anaconda3 4.4.0 installer
+export PATH="/home/dkhodakov/anaconda3/bin:$PATH"

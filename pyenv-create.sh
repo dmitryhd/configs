@@ -36,3 +36,4 @@ pip3 install -r dev-requirements.txt
 echo -e "-> updating ${BLUE}.env$NC"
 echo "pyenv deactivate 2> /dev/null" > .env
 echo "pyenv activate $DIRNAME 2> /dev/null" >> .env
+echo "pyenv deactivate> /dev/null" > .out
