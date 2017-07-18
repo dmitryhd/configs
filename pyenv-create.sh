@@ -7,7 +7,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-PY_VERSION=3.6.1
+PY_VERSION=3.6.2
 
 DIRNAME=$(basename "$PWD")
 
@@ -37,3 +37,5 @@ echo -e "-> updating ${BLUE}.env$NC"
 echo "pyenv deactivate 2> /dev/null" > .env
 echo "pyenv activate $DIRNAME 2> /dev/null" >> .env
 echo "pyenv deactivate> /dev/null" > .out
+
+source .env
