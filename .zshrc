@@ -72,7 +72,6 @@ alias ll="ls -lBcghX"
 
 alias py='ipython3 --no-banner'
 alias runipython='jupyter notebook --notebook-dir="~/repos/" --port=9999'
-alias runjupyter='jupyter notebook --notebook-dir="~/repos/" --port=9999'
 alias ll="ls -lvGh --group-directories-first"
 alias htop='htop -d 3'
 alias ra='ranger'
@@ -111,6 +110,17 @@ alias update-jupyter-extensions="pip install https://github.com/ipython-contrib/
         jupyter nbextensions_configurator enable --user"
 
 alias update-sci-py="pip3 install sklearn ipython numpy pandas xgboost theano tensorflow -U"
+
+ds_recreate() {
+    pyenv uninstall -f ds 
+    pyenv virtualenv $1 ds
+    pyenv activate ds
+    pip3 install seaborn sklearn pandas numpy matplotlib keras tensorflow-gpu jupyter
+}
+
+
+alias ju='jupyter notebook --notebook-dir="~/repos/" --port=9999'
+
 
 
 # Avito
