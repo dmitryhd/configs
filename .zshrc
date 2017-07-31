@@ -121,7 +121,17 @@ ds_recreate() {
 
 alias ju='jupyter notebook --notebook-dir="~/repos/" --port=9999'
 
+pyenv-path () {
+    if [[ $# -ne 1 ]];
+    then
+        DIR=$(basename "$PWD")
+    else
+        DIR=$1
+    fi
+    echo "/home/dkhodakov/.pyenv/versions/$DIR/bin/python3"
+}
 
+alias cnd='export PATH="/home/dkhodakov/anaconda3/bin:$PATH"'
 
 # Avito
 # export PIP_INDEX_URL=http://pypi.k.avito.ru/pypi/
