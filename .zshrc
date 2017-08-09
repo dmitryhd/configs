@@ -76,6 +76,7 @@ alias ll="ls -lvGh --group-directories-first"
 alias htop='htop -d 3'
 alias ra='ranger'
 alias pya='pyenv activate'
+alias pyy='pyenv activate ds; ipython3 --no-banner'
 
 alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
 alias ctrssh1="ssh -A slauncher@crm-training01 -t 'bash'"
