@@ -66,6 +66,7 @@ alias gitbr="git branch -v"
 alias gith='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 alias gittags='git tag -n'
 alias gitd='git diff'
+alias gitdel='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
 
 alias h="history | tail -30"
 alias ll="ls -lBcghX"
@@ -77,7 +78,8 @@ alias htop='htop -d 3'
 alias ra='ranger'
 alias pya='pyenv activate'
 alias pyy='pyenv activate ds; ipython3 --no-banner'
-alias juds='pyenv activate ds; jupyter notebook --notebook-dir="~/repos/" --port=9999'
+alias jup='pyenv activate ds; nohup jupyter notebook --notebook-dir="~/repos/" --port=9999 > /tmp/jupyter.out 2> /tmp/jupyter.out &'
+alias jupkill='kill $(pgrep jupyter-notebook)'
 
 alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
 alias ctrssh1="ssh -A slauncher@crm-training01 -t 'bash'"
