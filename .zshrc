@@ -92,7 +92,15 @@ function join_by { local IFS="$1"; shift; echo "$*"; }
 
 hg() {
     # zsh only
-    fc -l 1 | cut -d " " -f 4- | grep $1
+    if [[ "$#" == 1 ]]
+    then
+        fc -l 1 | grep -i $1
+    elif [[ "$#" == 2 ]]
+    then
+        fc -l 1 | grep -i "$1.*$2"
+    else
+        fc -l -40
+    fi
 }
 
 export PATH=$PATH:/usr/local/go/bin
