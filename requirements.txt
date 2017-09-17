@@ -1,0 +1,30 @@
+pip
+pandas>=0.19.0
+redis>=2.10.5
+pyodbc>=3.0.10
+pymorphy2>=0.8
+gensim==0.13.2
+jsonschema==2.5.1
+tables==3.3.0
+# Graphlab-Create==2.0.1
+tornado>=4.2
+requests>=2.11
+jinja2==2.8
+slacker==0.9.28
+statsd==3.2.1
+sklearn
+scipy>=0.17.1
+cython>=0.25.2
+psutil>=5.0.0
+pika>=0.10.0 # pika master
+pyyaml==3.12
+nltk==3.2.1
+colorama
+redlock==1.2.0
+
+# apt-get install libhdf5-dev
+# pip3 install -r ~/build/GraphLab-Create-2.0.1/GraphLab_Create.egg-info/requires.txt
+ipython
+jupyter
+matplotlib
+seaborn
