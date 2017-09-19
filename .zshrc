@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="bureau"
 ZSH_THEME="pyzsh"
 
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
