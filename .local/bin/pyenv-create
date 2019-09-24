@@ -7,12 +7,11 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-PY_VERSION=3.6.2
+PY_VERSION=3.7.4
 
 DIRNAME=$(basename "$PWD")
 
 echo -e "-> creating virtualenv for ${BLUE}${DIRNAME}$NC"
-
 
 eval "$(pyenv init -)"
 
@@ -22,6 +21,8 @@ pyenv activate $DIRNAME
 
 export PIP_INDEX_URL=http://pypi.k.avito.ru/pypi/
 export PIP_TRUSTED_HOST=pypi.k.avito.ru
+
+pip3 install pip -U
 
 echo -e "-> installing ${BLUE}reqirements.txt$NC"
 
@@ -38,4 +39,6 @@ echo "pyenv deactivate 2> /dev/null" > .env
 echo "pyenv activate $DIRNAME 2> /dev/null" >> .env
 echo "pyenv deactivate> /dev/null" > .out
 
+echo "-----------------------------------------"
+echo "source .env"
 source .env

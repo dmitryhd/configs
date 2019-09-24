@@ -89,26 +89,10 @@ HISTIGNORE='ls:bg:fg:history'
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
-# Avito files
-alias ctrssh1="ssh -A slauncher@crm-training01"
-alias ctrssh2="ssh -A slauncher@crm-training02"
-alias ctrssh3="ssh -A slauncher@crm-training03"
-alias ctrssh4="ssh -A slauncher@crm-training04"
-
 export PROMPT_DIRTRIM=2
 export PS1="\[\033[38;5;10m\]\u\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;15m\]@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[\033[38;5;6m\][\w]:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 
 COREDIR=$HOME
-export ODBCSYSINI=$COREDIR
-export ODBCINI=$COREDIR/odbc.ini
-export VERTICAINI=$COREDIR/odbc.ini
 
 alias htop='htop -d 3'
 
-
-ODBCSYSINI=/home/dkhodakov/
-ODBCINI=/home/dkhodakov/odbc.ini
-VERTICAINI=/home/dkhodakov/odbc.ini
-
-# added by Anaconda3 4.4.0 installer
-export PATH="/home/dkhodakov/anaconda3/bin:$PATH"

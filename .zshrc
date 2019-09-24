@@ -13,25 +13,24 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="yyyy-mm-dd"
 
+plugins=(
+    git 
+    pip 
+    python 
+    docker 
+    httpie 
+    history 
+    pyenv 
+    redis-cli 
+    autoenv
+    golang
+)
+
 # install autoenv
 # git clone https://github.com/horosgrisa/autoenv ~/.oh-my-zsh/custom/plugins/autoenv
-plugins=(git pip pylint python docker httpie history pyenv redis-cli supervisor autoenv)
-
-# kubectl completion zsh > ~/.kubectl-completion; helm completion zsh > ~/.helm-completion;
-# wget https://raw.githubusercontent.com/zchee/go-zsh-completions/master/src/_minikube -O .minikube-completion
-#source ~/.kubectl-completion
+# source ~/.kubectl-completion
 # source ~/.minikube-completion
-#source ~/.helm-completion
 
-
-# helm completion zsh
-# https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#autojump
-# dircycle
-# This is a small zle trick that lets you cycle your directory stack left or right using Ctrl+Shift+Left/Right. This is useful when moving back and forth between directories in development environments, and can be thought of as kind of a nondestructive pushd/popd.
-# history
-# Provides a couple of convenient aliases for using the history command to examine your command line history.
-
-export ZSH=/Users/dyukhodakov/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 PATH=$PATH:$HOME/.local/bin/:/usr/local/go/bin
@@ -39,9 +38,53 @@ export PATH
 
 export LANG=en_US.UTF-8
 
-# Directory stack enable
-# DIRSTACKSIZE=8
-# setopt autopushd pushdminus pushdsilent pushdtohome
+alias ll="ls -lvh"
+alias htop='htop -d 3'
+
+export EDITOR=vim
+
+# Short history 
+hg() {
+    # zsh only
+    if [[ "$#" == 1 ]]
+    then
+        fc -l 1 | grep -i $1
+    elif [[ "$#" == 2 ]]
+    then
+        fc -l 1 | grep -i "$1.*$2"
+    else
+        fc -l -40
+    fi
+}
+
+# Python configs
+# ----------------------------------------
+
+export PYTHONDONTWRITEBYTECODE=1
+alias py='ipython3 --no-banner'
+alias pyy='pyenv activate ds; ipython3 --no-banner'
+alias py-update='pip3 install -r requirements.txt -r test-requirements.txt -r dev-requirements.txt pip -U'
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+pyenv-path () {
+    if [[ $# -ne 1 ]];
+    then
+        DIR=$(basename "$PWD")
+    else
+        DIR=$1
+    fi
+    echo "$(pyenv root)/versions/$DIR/bin/python3"
+}
+
+# Golang
+# ----------------------------------
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 alias dh='dirs -v'
 alias gvimr="gvim --remote-tab"
@@ -58,91 +101,5 @@ alias gittags='git tag -n'
 alias gitd='git diff'
 alias gitdel='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
 
-# alias h="history | tail -30"
-alias ll="ls -lvh"
-
-#alias ll="ls -lvGh --group-directories-first"
-alias htop='htop -d 3'
-alias ra='ranger'
-
-alias crmssh="ssh slauncher@analytic-crm -t 'cd /var/local/crm/avito-crm/; bash'"
-alias ctrssh1="ssh -A slauncher@crm-training01 -t 'bash'"
-alias ctrssh2="ssh -A slauncher@crm-training02 -t 'bash'"
-alias ctrssh3="ssh -A slauncher@crm-training03 -t 'bash'"
-alias ctrssh4="ssh -A slauncher@crm-training04 -t 'bash'"
-alias ctrssh5="ssh -A slauncher@crm-training05 -t 'bash'"
-alias gpussh1="ssh -A slauncher@rec-gpu01 -t 'bash'"
-
-# odbc
-ODBCDIR=$HOME/.vertica
-export ODBCSYSINI=$ODBCDIR
-export ODBCINI=$ODBCDIR/odbc.ini
-export VERTICAINI=$ODBCDIR/odbc.ini
-
-export EDITOR=vim
-
-hg() {
-    # zsh only
-    if [[ "$#" == 1 ]]
-    then
-        fc -l 1 | grep -i $1
-    elif [[ "$#" == 2 ]]
-    then
-        fc -l 1 | grep -i "$1.*$2"
-    else
-        fc -l -40
-    fi
-}
-
-
-
-# Python configs
-# ----------------------------------------
-export PYTHONDONTWRITEBYTECODE=1
-alias enable_pip='export PIP_INDEX_URL=http://pypi.k.avito.ru/pypi/; export PIP_TRUSTED_HOST=pypi.k.avito.ru'
-
-alias py='ipython3 --no-banner'
-alias ju='jupyter notebook --notebook-dir="~/repos/" --port=9999'
-alias cnd='export PATH="/home/dkhodakov/anaconda3/bin:$PATH"'
-alias jupkill='kill $(pgrep jupyter-notebook)'
-
-alias update-jupyter-extensions="pip install https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master -U && \
-        jupyter contrib nbextension install --user && \
-        pip install jupyter_nbextensions_configurator -U && \
-        jupyter nbextensions_configurator enable --user"
-
-alias update-sci-py="pip3 install sklearn ipython numpy pandas xgboost theano tensorflow -U"
-
-# pyenv
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
-alias jup='pyenv activate ds; nohup jupyter notebook --notebook-dir="~/repos/" --port=9999 > /tmp/jupyter.out 2> /tmp/jupyter.out &'
-alias pya='pyenv activate'
-alias pyy='pyenv activate ds; ipython3 --no-banner'
-
-pyenv-path () {
-    if [[ $# -ne 1 ]];
-    then
-        DIR=$(basename "$PWD")
-    else
-        DIR=$1
-    fi
-    echo "/usr/local/opt/pyenv/versions/$DIR/bin/python3"
-}
-
-ds_recreate() {
-    pyenv uninstall -f ds 
-    pyenv virtualenv $1 ds
-    pyenv activate ds
-    pip3 install seaborn sklearn pandas numpy matplotlib keras tensorflow-gpu jupyter -U
-}
-
-# export LD_LIBRARY_PATH=$(brew --prefix openssl)/lib
-# export CPATH=$(brew --prefix openssl)/include
-# export PKG_CONFIG_PATH=$(brew --prefix openssl)/lib/pkgconfig
-
-# Run processes
-
 ssh-add 2> /dev/null
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+
